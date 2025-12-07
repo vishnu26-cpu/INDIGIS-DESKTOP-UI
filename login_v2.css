@@ -13,6 +13,7 @@ body {
 
 
 /* FULLSCREEN GIF BACKGROUND */
+
 .bg-video {
   position: fixed;
   inset: 0;
@@ -21,21 +22,21 @@ body {
 }
 
 .bg-video img {
-  width: 120%;
-  height: 120%;
+  width: 160%;              /* MUCH larger planet */
+  height: 160%;
   object-fit: cover;
-  object-position: 120% center; /* pushes globe to extreme right */
-  transform: scale(1.3); /* zoom in the GIF */
-  filter: brightness(0.45);
+  object-position: 140% center;  /* pushes globe off-screen to right */
+  transform: none;
+  filter: brightness(0.9);       /* keep visibility */
 }
 
-/* Dark overlay */
+/* Dark overlay
 .bg-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
     z-index: -2;
-}
+} */
 
 /* === OPTIONAL: RADAR + GLOW (Disable if unwanted) === */
 .left-glow {
