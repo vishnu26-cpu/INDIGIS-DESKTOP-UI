@@ -4,12 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS — Vishnu Signature UI (Prototype)</title>
+
   <link rel="stylesheet" href="styles.css" />
 
   <!-- LOGIN PROTECTION -->
   <script>
+    // If user is NOT logged in → go to login page
     if (localStorage.getItem("indigis_logged_in") !== "true") {
-      window.location.href = "index.html";  // FIXED
+      window.location.href = "index.html";
     }
   </script>
 </head>
@@ -21,6 +23,7 @@
     <header class="top-hud">
       <div class="hud-left">
         <div class="logo">INDIGIS <span class="brand">Prototype</span></div>
+
         <div class="hud-search">
           <input placeholder="Search tools, layers..." />
         </div>
@@ -54,6 +57,8 @@
 
     <!-- MAIN LAYOUT -->
     <div class="main-area">
+
+      <!-- LEFT PANEL -->
       <aside class="left-panel">
         <section class="panel">
           <div class="panel-header">Layers</div>
@@ -78,6 +83,7 @@
         </section>
       </aside>
 
+      <!-- MAP -->
       <main class="map-area">
         <div class="map-toolbar">
           <div>Map View</div>
@@ -92,6 +98,7 @@
         </div>
       </main>
 
+      <!-- RIGHT PANEL -->
       <aside class="right-panel">
         <section class="panel">
           <div class="panel-header">Inspector</div>
@@ -106,7 +113,7 @@
     <footer class="status-ribbon">
       <div class="status-left">
         <span id="coords">Lat: — , Lon: —</span>
-        <span>|</span>
+        <span> | </span>
         <span id="proj">Proj: WebMercator (WGS84)</span>
       </div>
 
@@ -119,14 +126,14 @@
 
   </div>
 
-  <!-- MAIN SCRIPT -->
+  <!-- INTERACTIONS SCRIPT -->
   <script src="interactions.js"></script>
 
-  <!-- LOGOUT SCRIPT -->
+  <!-- LOGOUT -->
   <script>
     document.getElementById("logoutBtn").onclick = () => {
       localStorage.removeItem("indigis_logged_in");
-      window.location.href = "index.html";  // FIXED
+      window.location.href = "index.html";  // back to login
     };
   </script>
 
