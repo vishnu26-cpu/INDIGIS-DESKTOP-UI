@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS Login</title>
+
+  <!-- Login CSS -->
   <link rel="stylesheet" href="login.css" />
 </head>
+
 <body>
 
   <div class="login-wrapper">
@@ -13,8 +17,8 @@
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <!-- Login form -->
-      <form id="loginForm" onsubmit="handleLogin(event)">
+      <!-- LOGIN FORM -->
+      <form onsubmit="handleLogin(event)">
         <div class="input-group">
           <input id="username" type="text" required />
           <label for="username">Username</label>
@@ -28,56 +32,26 @@
         <button type="submit" class="login-btn">Login</button>
       </form>
 
-      <!-- If already logged in, let them continue to workspace (index still first) -->
-      <div id="alreadyLogged" style="display:none; margin-top:14px;">
-        <p style="margin:6px 0; opacity:0.8;">You're already logged in.</p>
-        <button id="toWorkspaceBtn" class="login-btn" style="width:60%; margin:0 auto; display:block;">
-          Continue to workspace
-        </button>
-        <button id="logoutBtn" class="login-btn" style="width:60%; margin:8px auto 0; display:block; background:#666;">
-          Logout
-        </button>
-      </div>
-
-      <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
+      <p class="hint">Demo Login → <b>admin</b> / <b>1234</b></p>
     </div>
   </div>
 
   <script>
-    // show "continue" if already logged in (index still first)
-    document.addEventListener('DOMContentLoaded', () => {
-      const logged = localStorage.getItem('indigis_logged_in') === 'true';
-      if (logged) {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('alreadyLogged').style.display = 'block';
-      }
-    });
-
+    // LOGIN ONLY — no remembering, no redirect on refresh
     function handleLogin(event) {
       event.preventDefault();
+
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value.trim();
+
       if (user === "admin" && pass === "1234") {
-        localStorage.setItem("indigis_logged_in", "true");
-        // after successful login go to workspace (index still displayed first)
-        window.location.href = "workspace.html";
+        // DO NOT set localStorage — you said no remembering login
+        window.location.href = "workspace.html"; // next page
       } else {
         alert("Invalid username or password");
       }
     }
-
-    // continue button and logout
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.id === 'toWorkspaceBtn') {
-        window.location.href = 'workspace.html';
-      }
-      if (e.target && e.target.id === 'logoutBtn') {
-        localStorage.removeItem('indigis_logged_in');
-        localStorage.removeItem('indigis_workspace_created');
-        // reload to show login form
-        location.reload();
-      }
-    });
   </script>
+
 </body>
 </html>
