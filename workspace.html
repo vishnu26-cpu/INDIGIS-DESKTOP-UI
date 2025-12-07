@@ -1,87 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Workspace — INDIGIS</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background: linear-gradient(180deg, #0b1220, #0f2a3a);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            color: white;
-        }
-
-        .workspace-card {
-            width: 420px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            backdrop-filter: blur(12px);
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            background: #007bff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0a84ff;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>INDIGIS — Create Workspace</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* tiny helper just for the workspace demo */
+    .center { max-width:760px; margin:44px auto; background:var(--ui-surface, #fff); padding:22px; border-radius:10px; }
+    label{display:block;margin:8px 0 4px;color:var(--muted,#666)}
+    input, select{width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.08)}
+    .row{display:flex;gap:12px}
+    .row > *{flex:1}
+    .actions{margin-top:14px;display:flex;gap:12px;justify-content:flex-end}
+    button.primary{background:#2979FF;color:white;padding:10px 14px;border-radius:6px;border:none}
+    button.secondary{background:#eee;padding:10px 14px;border-radius:6px;border:none}
+  </style>
 </head>
-
 <body>
+  <div class="center">
+    <h2>Create / Open Workspace</h2>
+    <p style="color:var(--muted,#666)">Set workspace name, default base map and projection. This step is required before opening the main app.</p>
 
-<div class="workspace-card">
-    <h2>Create Workspace</h2>
-    <p>Name your working project to continue.</p>
+    <form id="workspaceForm">
+      <label for="wsName">Workspace name</label>
+      <input id="wsName" required placeholder="My Project X" />
 
-    <input id="wsName" type="text" placeholder="Workspace Name" required />
+      <div class="row" style="margin-top:10px;">
+        <div>
+          <label for="basemap">Base map</label>
+          <select id="basemap">
+            <option value="osm">OpenStreetMap</option>
+            <option value="sat">Satellite</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+        <div>
+          <label for="proj">Projection</label>
+          <select id="proj">
+            <option value="webmercator">WebMercator (WGS84)</option>
+            <option value="epsg4326">EPSG:4326</option>
+          </select>
+        </div>
+      </div>
 
-    <button onclick="createWorkspace()">Continue</button>
-</div>
+      <div class="actions">
+        <button type="button" id="backBtn" class="secondary">Back to Login</button>
+        <button type="submit" class="primary">Create & Open App</button>
+      </div>
+    </form>
+  </div>
 
-<script>
-    // BLOCK THIS PAGE IF NOT LOGGED IN
-    if (localStorage.getItem("indigis_logged_in") !== "true") {
-        window.location.href = "index.html";
+  <script>
+    // if not logged in, force back to index (login)
+    if (localStorage.getItem('indigis_logged_in') !== 'true') {
+      window.location.href = 'index.html';
     }
 
-    function createWorkspace() {
-        const name = document.getElementById("wsName").value.trim();
+    // restore existing workspace values if present
+    document.addEventListener('DOMContentLoaded', () => {
+      const ws = localStorage.getItem('indigis_workspace_data');
+      if (ws) {
+        try {
+          const obj = JSON.parse(ws);
+          document.getElementById('wsName').value = obj.name || '';
+          document.getElementById('basemap').value = obj.basemap || 'osm';
+          document.getElementById('proj').value = obj.proj || 'webmercator';
+        } catch(e) {}
+      }
+    });
 
-        if (!name) {
-            alert("Please enter a workspace name.");
-            return;
-        }
+    // form submit => save workspace and open app
+    document.getElementById('workspaceForm').addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const name = document.getElementById('wsName').value.trim();
+      const basemap = document.getElementById('basemap').value;
+      const proj = document.getElementById('proj').value;
+      if (!name) { alert('Please enter a workspace name'); return; }
 
-        localStorage.setItem("indigis_workspace", name);
-        window.location.href = "app.html";  // Go to main GIS interface
-    }
-</script>
+      const data = { name, basemap, proj, createdAt: new Date().toISOString() };
+      localStorage.setItem('indigis_workspace_data', JSON.stringify(data));
+      localStorage.setItem('indigis_workspace_created', 'true');
 
+      // go to main app
+      window.location.href = 'app.html';
+    });
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+      // allow user to logout or go back to index
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>

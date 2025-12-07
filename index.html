@@ -4,58 +4,80 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS Login</title>
-
-  <!-- Login CSS -->
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="login.css" />
 </head>
-
 <body>
-
-  <!-- If already logged in → go to workspace page -->
-  <script>
-    if (localStorage.getItem("indigis_logged_in") === "true") {
-      window.location.href = "workspace.html";   // ✔ Correct redirect
-    }
-  </script>
 
   <div class="login-wrapper">
     <div class="login-card">
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <form onsubmit="handleLogin(event)">
+      <!-- Login form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
         <div class="input-group">
           <input id="username" type="text" required />
-          <label>Username</label>
+          <label for="username">Username</label>
         </div>
 
         <div class="input-group">
           <input id="password" type="password" required />
-          <label>Password</label>
+          <label for="password">Password</label>
         </div>
 
         <button type="submit" class="login-btn">Login</button>
       </form>
+
+      <!-- If already logged in, let them continue to workspace (index still first) -->
+      <div id="alreadyLogged" style="display:none; margin-top:14px;">
+        <p style="margin:6px 0; opacity:0.8;">You're already logged in.</p>
+        <button id="toWorkspaceBtn" class="login-btn" style="width:60%; margin:0 auto; display:block;">
+          Continue to workspace
+        </button>
+        <button id="logoutBtn" class="login-btn" style="width:60%; margin:8px auto 0; display:block; background:#666;">
+          Logout
+        </button>
+      </div>
 
       <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
     </div>
   </div>
 
   <script>
+    // show "continue" if already logged in (index still first)
+    document.addEventListener('DOMContentLoaded', () => {
+      const logged = localStorage.getItem('indigis_logged_in') === 'true';
+      if (logged) {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('alreadyLogged').style.display = 'block';
+      }
+    });
+
     function handleLogin(event) {
       event.preventDefault();
-
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value.trim();
-
       if (user === "admin" && pass === "1234") {
         localStorage.setItem("indigis_logged_in", "true");
-        window.location.href = "workspace.html";   // ✔ Go to workspace page
+        // after successful login go to workspace (index still displayed first)
+        window.location.href = "workspace.html";
       } else {
         alert("Invalid username or password");
       }
     }
-  </script>
 
+    // continue button and logout
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'toWorkspaceBtn') {
+        window.location.href = 'workspace.html';
+      }
+      if (e.target && e.target.id === 'logoutBtn') {
+        localStorage.removeItem('indigis_logged_in');
+        localStorage.removeItem('indigis_workspace_created');
+        // reload to show login form
+        location.reload();
+      }
+    });
+  </script>
 </body>
 </html>
