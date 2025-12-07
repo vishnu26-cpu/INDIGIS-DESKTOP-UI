@@ -5,31 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
-  <!-- Correct CSS filename -->
+  <!-- Your existing CSS -->
   <link rel="stylesheet" href="login_v2.css" />
-
-  <meta name="robots" content="noindex" />
 </head>
 
 <body>
 
-  <!-- Background animation -->
-  <div class="bg-anim"></div>
+  <!-- MAIN DARK BACKGROUND -->
+  <div class="page-bg"></div>
 
-  <!-- Radar animation -->
-  <div class="radar-wrap">
-    <div class="radar-circle"></div>
-    <div class="radar-sweep"></div>
-  </div>
+  <!-- LEFT SUBTLE RADAR GLOW -->
+  <div class="left-glow"></div>
 
-  <!-- 3D Globe -->
-  <div class="globe-wrap">
-    <img src="assets/globe.gif"
+  <!-- RIGHT HIGH-QUALITY PLANET -->
+  <div class="planet-wrap">
+    <img class="planet" src="assets/globe.gif"
+         alt="Rotating globe"
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- Login Card -->
-  <main class="login-wrapper">
+  <!-- LOGIN CARD -->
+  <main class="login-center">
     <section class="login-card">
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
@@ -37,15 +33,15 @@
       <form onsubmit="handleLogin(event)">
         <div class="input-group">
           <input id="username" type="text" required>
-          <label for="username">Username</label>
+          <label>Username</label>
         </div>
 
         <div class="input-group">
           <input id="password" type="password" required>
-          <label for="password">Password</label>
+          <label>Password</label>
         </div>
 
-        <button class="login-btn" type="submit">Login</button>
+        <button type="submit" class="login-btn">Login</button>
       </form>
 
       <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
@@ -56,10 +52,10 @@
     function handleLogin(event) {
       event.preventDefault();
 
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
+      const u = username.value.trim();
+      const p = password.value.trim();
 
-      if (user === "admin" && pass === "1234") {
+      if (u === "admin" && p === "1234") {
         window.location.href = "workspace.html";
       } else {
         alert("Invalid username or password");

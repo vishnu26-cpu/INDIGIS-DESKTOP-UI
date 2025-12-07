@@ -168,3 +168,50 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+/* NEW — fullscreen dark gradient */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 40% 30%, #0b1220, #05060b 80%);
+  z-index: -3;
+}
+
+/* LEFT radar glow like SpaceX */
+.left-glow {
+  position: fixed;
+  left: -150px;
+  top: 30%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,255,200,0.08), transparent 70%);
+  filter: blur(40px);
+  z-index: -2;
+}
+
+/* RIGHT rotating Earth placement */
+.planet-wrap {
+  position: fixed;
+  right: 80px;
+  bottom: 120px;
+  width: 420px;
+  height: 420px;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: -1;
+}
+
+.planet {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Center login card ALWAYS */
+.login-center {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
