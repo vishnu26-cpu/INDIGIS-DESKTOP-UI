@@ -4,31 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS — App</title>
+
+  <!-- Main UI Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+
+  <!-- LOGIN GUARDS -->
   <script>
-    // guard: must be logged in
+    // Must be logged in
     if (localStorage.getItem('indigis_logged_in') !== 'true') {
       window.location.href = 'index.html';
     }
-    // guard: must have workspace created
+
+    // Must have workspace
     if (localStorage.getItem('indigis_workspace_created') !== 'true') {
       window.location.href = 'workspace.html';
     }
   </script>
 
   <div id="app" class="theme-auto">
-    <!-- top hud simplified -->
+
+    <!-- TOP HUD -->
     <header class="top-hud">
-      <div class="hud-left"><div class="logo">INDIGIS <span class="brand">Prototype</span></div></div>
+      <div class="hud-left">
+        <div class="logo">
+          INDIGIS <span class="brand">Prototype</span>
+        </div>
+      </div>
+
       <div class="hud-right">
-        <button id="logoutBtn" class="icon-btn">🚪</button>
+        <button id="logoutBtn" class="icon-btn" title="Logout">🚪</button>
       </div>
     </header>
 
+    <!-- MAIN LAYOUT -->
     <div class="main-area">
+
+      <!-- LEFT PANEL -->
       <aside class="left-panel">
+
         <div class="panel">
           <div class="panel-header">Layers</div>
           <div class="panel-body">
@@ -39,49 +55,71 @@
             </ul>
           </div>
         </div>
+
       </aside>
 
+      <!-- MAP AREA -->
       <main class="map-area">
-        <div class="map-toolbar"><div>Map View</div></div>
-        <div class="map-canvas"><div class="map-placeholder">Map canvas (OpenLayers / Cesium here)</div></div>
+        <div class="map-toolbar">
+          <div>Map View</div>
+        </div>
+
+        <!-- Placeholder canvas (later replaced with OpenLayers/Cesium) -->
+        <div class="map-canvas">
+          <div class="map-placeholder">
+            Map canvas (OpenLayers / Cesium will load here)
+          </div>
+        </div>
       </main>
 
+      <!-- RIGHT PANEL -->
       <aside class="right-panel">
-        <div class="panel"><div class="panel-header">Inspector</div><div class="panel-body">No selection</div></div>
+        <div class="panel">
+          <div class="panel-header">Inspector</div>
+          <div class="panel-body">No selection</div>
+        </div>
       </aside>
+
     </div>
 
+    <!-- STATUS RIBBON -->
     <footer class="status-ribbon">
       <div class="status-left">
         <span id="coords">Lat: — , Lon: —</span>
-        <span>|</span><span id="proj">Proj: —</span>
+        <span>|</span>
+        <span id="proj">Proj: —</span>
       </div>
-      <div class="status-right"><span>Scale 1: <strong id="scale">—</strong></span></div>
+      <div class="status-right">
+        <span>Scale 1: <strong id="scale">—</strong></span>
+      </div>
     </footer>
+
   </div>
 
+  <!-- APP SCRIPT (Logout + Workspace Info) -->
   <script>
-    // logout
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.id === 'logoutBtn') {
-        localStorage.removeItem('indigis_logged_in');
-        // optionally clear workspace too:
-        // localStorage.removeItem('indigis_workspace_created');
-        // localStorage.removeItem('indigis_workspace_data');
-        window.location.href = 'index.html';
-      }
-    });
-
-    // show workspace info in footer
     document.addEventListener('DOMContentLoaded', () => {
+
+      // LOGOUT
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem('indigis_logged_in');
+          window.location.href = 'index.html';
+        });
+      }
+
+      // Load workspace details
       const data = localStorage.getItem('indigis_workspace_data');
       if (data) {
         try {
           const obj = JSON.parse(data);
-          document.getElementById('proj').textContent = 'Proj: ' + (obj.proj || '—');
-        } catch(e){}
+          document.getElementById('proj').textContent =
+            'Proj: ' + (obj.proj || '—');
+        } catch (e) {}
       }
     });
   </script>
+
 </body>
 </html>
