@@ -77,15 +77,15 @@ html, body {
   font-size: 14px;
 }
 
-/* INPUT GROUP (Fix label overlap) */
+/* INPUTS */
 .input-group {
   position: relative;
-  margin: 18px 0;
+  margin: 16px 0;
 }
 
 .input-group input {
   width: 100%;
-  padding: 14px 12px 6px;  /* extra top padding */
+  padding: 12px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.07);
@@ -96,23 +96,21 @@ html, body {
 
 .input-group label {
   position: absolute;
+  top: 12px;
   left: 12px;
-  top: 14px;        /* keep label slightly higher */
   font-size: 13px;
   color: #bfeaff;
-  transition: .2s ease;
+  transition: .2s;
   pointer-events: none;
 }
 
-/* When input has text or is focused → move label up */
+/* Floating effect */
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label {
-  top: -6px;
+  top: -8px;
   font-size: 11px;
   color: #01eaff;
-  opacity: 1;
 }
-
 
 /* BUTTON */
 .login-btn {
