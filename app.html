@@ -3,48 +3,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>INDIGIS — App</title>
+  <title>INDIGIS — App (2D / 3D)</title>
 
-  <!-- Main UI Styles -->
+  <!-- your existing theme/layout CSS -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- OpenLayers CSS (2D) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+
+  <!-- Cesium CSS (3D) -->
+  <link rel="stylesheet" href="https://unpkg.com/cesium/Build/Cesium/Widgets/widgets.css">
+
+  <style>
+    /* small additions for map containers + toggle */
+    .map-toolbar { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; }
+    /* The 2D and 3D containers */
+    #olMap, #cesiumContainer {
+      width: 100%;
+      height: calc(100vh - var(--hud-height) - var(--status-height) - 32px); /* keep inside your layout */
+      min-height: 420px;
+    }
+
+    /* place cesium above ol in stacking but hidden initially */
+    #cesiumContainer { display:none; position:relative; z-index:2; }
+    #olMap { display:block; position:relative; z-index:1; }
+
+    /* toggle switch */
+    .mode-toggle {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+      font-weight:600;
+    }
+    .switch {
+      display:inline-grid;
+      grid-template-columns: 1fr 1fr;
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      padding: 4px;
+      width: 92px;
+      position:relative;
+      align-items:center;
+    }
+    .switch .label { text-align:center; font-size:13px; color:var(--muted); z-index:2; }
+    .switch .knob {
+      position:absolute;
+      top:4px;
+      bottom:4px;
+      width:44px;
+      border-radius:999px;
+      background: linear-gradient(180deg, #0a84ff, #006fe6);
+      transition: transform .22s cubic-bezier(.2,.9,.3,1);
+      box-shadow: 0 6px 14px rgba(10,132,255,0.18);
+    }
+    /* when 3D active, move knob to right */
+    .switch.mode-3d .knob { transform: translateX(44px); }
+    .switch.mode-3d .label.ThreeD { color: #fff; }
+    .switch.mode-3d .label.TwoD { color: var(--muted); }
+    /* When 2D active (default) reverse colors */
+    .switch:not(.mode-3d) .label.TwoD { color: #fff; }
+  </style>
 </head>
-
 <body>
-
-  <!-- LOGIN GUARDS -->
   <script>
-    // Must be logged in
+    // guard: must be logged in (index.html is the login page)
     if (localStorage.getItem('indigis_logged_in') !== 'true') {
       window.location.href = 'index.html';
     }
-
-    // Must have workspace
+    // guard: must have workspace created
     if (localStorage.getItem('indigis_workspace_created') !== 'true') {
       window.location.href = 'workspace.html';
     }
   </script>
 
   <div id="app" class="theme-auto">
-
-    <!-- TOP HUD -->
+    <!-- top hud simplified -->
     <header class="top-hud">
       <div class="hud-left">
-        <div class="logo">
-          INDIGIS <span class="brand">Prototype</span>
-        </div>
+        <div class="logo">INDIGIS <span class="brand">Prototype</span></div>
       </div>
 
       <div class="hud-right">
+        <!-- map mode toggle (Option B: toggle switch) -->
+        <div class="mode-toggle" title="Switch map view">
+          <div style="font-size:13px; color:var(--muted); margin-right:8px;">View</div>
+          <div id="mapToggle" class="switch" role="switch" aria-checked="false" tabindex="0">
+            <div class="label TwoD">2D</div>
+            <div class="label ThreeD">3D</div>
+            <div class="knob" aria-hidden="true"></div>
+          </div>
+        </div>
+
         <button id="logoutBtn" class="icon-btn" title="Logout">🚪</button>
       </div>
     </header>
 
-    <!-- MAIN LAYOUT -->
     <div class="main-area">
-
-      <!-- LEFT PANEL -->
       <aside class="left-panel">
-
         <div class="panel">
           <div class="panel-header">Layers</div>
           <div class="panel-body">
@@ -55,71 +111,203 @@
             </ul>
           </div>
         </div>
-
       </aside>
 
-      <!-- MAP AREA -->
       <main class="map-area">
         <div class="map-toolbar">
           <div>Map View</div>
+          <div id="mapInfo" style="color:var(--muted)">—</div>
         </div>
 
-        <!-- Placeholder canvas (later replaced with OpenLayers/Cesium) -->
-        <div class="map-canvas">
-          <div class="map-placeholder">
-            Map canvas (OpenLayers / Cesium will load here)
-          </div>
-        </div>
+        <!-- OPENLAYERS 2D container -->
+        <div id="olMap"></div>
+
+        <!-- CESIUM 3D container (hidden by default) -->
+        <div id="cesiumContainer"></div>
       </main>
 
-      <!-- RIGHT PANEL -->
       <aside class="right-panel">
         <div class="panel">
           <div class="panel-header">Inspector</div>
           <div class="panel-body">No selection</div>
         </div>
       </aside>
-
     </div>
 
-    <!-- STATUS RIBBON -->
     <footer class="status-ribbon">
       <div class="status-left">
         <span id="coords">Lat: — , Lon: —</span>
-        <span>|</span>
-        <span id="proj">Proj: —</span>
+        <span>|</span><span id="proj">Proj: WebMercator (WGS84)</span>
       </div>
-      <div class="status-right">
-        <span>Scale 1: <strong id="scale">—</strong></span>
-      </div>
+      <div class="status-right"><span>Scale / Height: <strong id="scale">—</strong></span></div>
     </footer>
-
   </div>
 
-  <!-- APP SCRIPT (Logout + Workspace Info) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <!-- OpenLayers (2D) -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
 
-      // LOGOUT
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-          localStorage.removeItem('indigis_logged_in');
-          window.location.href = 'index.html';
+  <!-- Cesium (3D) -->
+  <script src="https://unpkg.com/cesium/Build/Cesium/Cesium.js"></script>
+
+  <script>
+    (function () {
+      // DOM elements
+      const olEl = document.getElementById('olMap');
+      const cesiumEl = document.getElementById('cesiumContainer');
+      const coordsEl = document.getElementById('coords');
+      const scaleEl = document.getElementById('scale');
+      const mapInfo = document.getElementById('mapInfo');
+      const toggle = document.getElementById('mapToggle');
+
+      // state
+      let is3D = false;
+      let olMap, cesiumViewer;
+
+      // --- OpenLayers (2D) init ---
+      function initOL() {
+        // transform helper
+        const fromLonLat = ol.proj.fromLonLat;
+        olMap = new ol.Map({
+          target: 'olMap',
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM()
+            })
+          ],
+          view: new ol.View({
+            center: fromLonLat([78.9629, 20.5937]), // India default
+            zoom: 3
+          }),
+          controls: ol.control.defaults({ attribution: false, rotate: false })
+        });
+
+        // pointer move -> display coords
+        olMap.on('pointermove', function (evt) {
+          const coord = ol.proj.toLonLat(evt.coordinate);
+          coordsEl.textContent = `Lat: ${coord[1].toFixed(5)} , Lon: ${coord[0].toFixed(5)}`;
+        });
+
+        // update zoom/scale
+        olMap.getView().on('change:resolution', () => {
+          const zoom = olMap.getView().getZoom();
+          scaleEl.textContent = `zoom ${zoom.toFixed(2)}`;
+          mapInfo.textContent = `Mode: 2D · Zoom ${zoom.toFixed(2)}`;
         });
       }
 
-      // Load workspace details
-      const data = localStorage.getItem('indigis_workspace_data');
-      if (data) {
-        try {
-          const obj = JSON.parse(data);
-          document.getElementById('proj').textContent =
-            'Proj: ' + (obj.proj || '—');
-        } catch (e) {}
-      }
-    });
-  </script>
+      // --- Cesium (3D) init (Ion-free: using OSM tiles) ---
+      function initCesium() {
+        // prevent duplicate viewer
+        if (cesiumViewer) return;
 
+        // Cesium options with a simple OSM imagery provider (no Ion token)
+        const imageryProvider = new Cesium.UrlTemplateImageryProvider({
+          url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          credit: '© OpenStreetMap contributors'
+        });
+
+        cesiumViewer = new Cesium.Viewer('cesiumContainer', {
+          imageryProvider,
+          selectionIndicator: false,
+          timeline: false,
+          animation: false,
+          baseLayerPicker: false,
+          geocoder: false,
+          homeButton: true,
+          sceneModePicker: false,
+          navigationHelpButton: false,
+          infoBox: false,
+          fullscreenButton: false,
+          shouldAnimate: true
+        });
+
+        // set an initial camera view (lat, lon, height)
+        const initialLon = 78.9629, initialLat = 20.5937, initialHeight = 2.4e7;
+        cesiumViewer.scene.camera.setView({
+          destination: Cesium.Cartesian3.fromDegrees(initialLon, initialLat, initialHeight)
+        });
+
+        // update coords using screen center picking every 250ms
+        setInterval(() => {
+          try {
+            const canvas = cesiumViewer.scene.canvas;
+            const center = new Cesium.Cartesian2(canvas.clientWidth / 2, canvas.clientHeight / 2);
+            const cartesian = cesiumViewer.camera.pickEllipsoid(center, cesiumViewer.scene.globe.ellipsoid);
+            if (cartesian) {
+              const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian);
+              const lon = Cesium.Math.toDegrees(cartographic.longitude).toFixed(5);
+              const lat = Cesium.Math.toDegrees(cartographic.latitude).toFixed(5);
+              coordsEl.textContent = `Lat: ${lat} , Lon: ${lon}`;
+            } else {
+              // fallback to camera position
+              const posCartographic = Cesium.Cartographic.fromCartesian(cesiumViewer.camera.position);
+              if (posCartographic) {
+                coordsEl.textContent = `Lat: ${Cesium.Math.toDegrees(posCartographic.latitude).toFixed(5)} , Lon: ${Cesium.Math.toDegrees(posCartographic.longitude).toFixed(5)}`;
+              }
+            }
+            // show camera height as "scale"
+            const h = cesiumViewer.camera.positionCartographic.height;
+            scaleEl.textContent = `${Math.round(h).toLocaleString()} m`;
+            mapInfo.textContent = `Mode: 3D · Height ${Math.round(h).toLocaleString()} m`;
+          } catch (err) {
+            // ignore transient errors while camera initializing
+          }
+        }, 300);
+      }
+
+      // --- Mode switching ---
+      function show2D() {
+        is3D = false;
+        toggle.classList.remove('mode-3d');
+        toggle.setAttribute('aria-checked', 'false');
+        cesiumEl.style.display = 'none';
+        olEl.style.display = 'block';
+        if (olMap) { olMap.updateSize(); }
+        mapInfo.textContent = 'Mode: 2D';
+      }
+
+      function show3D() {
+        is3D = true;
+        toggle.classList.add('mode-3d');
+        toggle.setAttribute('aria-checked', 'true');
+        olEl.style.display = 'none';
+        cesiumEl.style.display = 'block';
+        initCesium(); // lazy init
+        // force a Cesium resize (in case container changed)
+        setTimeout(() => {
+          if (cesiumViewer) cesiumViewer.resize();
+        }, 200);
+        mapInfo.textContent = 'Mode: 3D';
+      }
+
+      // toggle click / keyboard
+      toggle.addEventListener('click', () => {
+        if (is3D) show2D(); else show3D();
+      });
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+
+      // initialize OL immediately
+      initOL();
+
+      // ensure correct sizing when window resizes
+      window.addEventListener('resize', () => {
+        if (olMap) olMap.updateSize();
+        if (cesiumViewer) cesiumViewer.resize();
+      });
+
+      // LOGOUT handler (keeps behaviour consistent)
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'logoutBtn') {
+          localStorage.removeItem('indigis_logged_in');
+          window.location.href = 'index.html';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
