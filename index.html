@@ -4,23 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS Login</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
 
-  <!-- Login page CSS -->
-  <link rel="stylesheet" href="login_v2.css" />
-
-  <!-- Prevent GitHub indexing -->
-  <meta name="robots" content="noindex" />
+  <!-- Login CSS -->
+  <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
 
-  <!-- IF ALREADY LOGGED IN → GO TO APP -->
+  <!-- If already logged in → go to workspace page -->
   <script>
     if (localStorage.getItem("indigis_logged_in") === "true") {
-      window.location.href = "workspace.html";
+      window.location.href = "workspace.html";   // ✔ Correct redirect
     }
   </script>
 
@@ -32,32 +26,31 @@
       <form onsubmit="handleLogin(event)">
         <div class="input-group">
           <input id="username" type="text" required />
-          <label for="username">Username</label>
+          <label>Username</label>
         </div>
 
         <div class="input-group">
           <input id="password" type="password" required />
-          <label for="password">Password</label>
+          <label>Password</label>
         </div>
 
         <button type="submit" class="login-btn">Login</button>
       </form>
 
-      <p class="hint">Demo Login → <b>admin</b> / <b>1234</b></p>
+      <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
     </div>
   </div>
 
-  <!-- LOGIN SCRIPT -->
   <script>
     function handleLogin(event) {
       event.preventDefault();
 
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
 
-      if (u === "admin" && p === "1234") {
+      if (user === "admin" && pass === "1234") {
         localStorage.setItem("indigis_logged_in", "true");
-        window.location.href = "workspace.html";  // GO TO MAIN APP
+        window.location.href = "workspace.html";   // ✔ Go to workspace page
       } else {
         alert("Invalid username or password");
       }
