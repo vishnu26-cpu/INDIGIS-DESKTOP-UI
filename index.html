@@ -4,30 +4,31 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS Login</title>
-  <link rel="stylesheet" href="login.css">
-  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="login.css" />
 </head>
+
 <body>
-  <!-- if already logged in, go to app -->
+
+  <!-- REDIRECT IF ALREADY LOGGED IN -->
   <script>
-    if (localStorage.getItem('indigis_logged_in') === 'true') {
-      window.location.href = 'index.html';
+    if (localStorage.getItem("indigis_logged_in") === "true") {
+      window.location.href = "app.html";  // FIXED
     }
   </script>
 
   <div class="login-wrapper">
-    <div class="login-card" role="region" aria-label="Login">
+    <div class="login-card">
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <form onsubmit="handleLogin(event)" autocomplete="off">
+      <form onsubmit="handleLogin(event)">
         <div class="input-group">
-          <input id="username" name="username" type="text" required autocomplete="username" />
+          <input id="username" type="text" required />
           <label for="username">Username</label>
         </div>
 
         <div class="input-group">
-          <input id="password" name="password" type="password" required autocomplete="current-password" />
+          <input id="password" type="password" required />
           <label for="password">Password</label>
         </div>
 
@@ -41,16 +42,18 @@
   <script>
     function handleLogin(event) {
       event.preventDefault();
-      const user = document.getElementById('username').value.trim();
-      const pass = document.getElementById('password').value.trim();
 
-      if (user === 'admin' && pass === '1234') {
-        localStorage.setItem('indigis_logged_in', 'true');
-        window.location.href = 'app.html';
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
+
+      if (u === "admin" && p === "1234") {
+        localStorage.setItem("indigis_logged_in", "true");
+        window.location.href = "app.html";   // FIXED
       } else {
-        alert('Invalid username or password');
+        alert("Invalid username or password");
       }
     }
   </script>
+
 </body>
 </html>
