@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
-  <!-- Your existing login CSS -->
-  <link rel="stylesheet" href="login_v2.css" />
+  <!-- Load your login CSS -->
+  <link rel="stylesheet" href="login_v2.css?v=2" />
 </head>
 
 <body>
@@ -14,26 +14,29 @@
   <!-- FULLSCREEN EARTH GIF BACKGROUND -->
   <div class="bg-video">
     <img src="assets/globe.gif"
+         alt="Earth Animation"
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- DARK OVERLAY for better clarity -->
+  <!-- DARK OVERLAY -->
   <div class="bg-overlay"></div>
 
-  <!-- CENTERED LOGIN CARD -->
+  <!-- CENTER LOG-IN CARD -->
   <main class="login-center">
     <section class="login-card">
+      
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
       <form onsubmit="handleLogin(event)">
+        
         <div class="input-group">
-          <input id="username" type="text" required>
+          <input id="username" type="text" required placeholder=" ">
           <label>Username</label>
         </div>
 
         <div class="input-group">
-          <input id="password" type="password" required>
+          <input id="password" type="password" required placeholder=" ">
           <label>Password</label>
         </div>
 
@@ -41,14 +44,17 @@
       </form>
 
       <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
+
     </section>
   </main>
 
+  <!-- LOGIN SCRIPT -->
   <script>
     function handleLogin(event) {
       event.preventDefault();
-      const u = username.value.trim();
-      const p = password.value.trim();
+
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
 
       if (u === "admin" && p === "1234") {
         window.location.href = "workspace.html";
