@@ -2,29 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
-  <!-- Your existing CSS -->
+  <!-- Your existing login CSS -->
   <link rel="stylesheet" href="login_v2.css" />
 </head>
 
 <body>
 
-  <!-- MAIN DARK BACKGROUND -->
-  <div class="page-bg"></div>
-
-  <!-- LEFT SUBTLE RADAR GLOW -->
-  <div class="left-glow"></div>
-
-  <!-- RIGHT HIGH-QUALITY PLANET -->
-  <div class="planet-wrap">
-    <img class="planet" src="assets/globe.gif"
-         alt="Rotating globe"
+  <!-- FULLSCREEN EARTH GIF BACKGROUND -->
+  <div class="bg-video">
+    <img src="assets/globe.gif"
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- LOGIN CARD -->
+  <!-- DARK OVERLAY for better clarity -->
+  <div class="bg-overlay"></div>
+
+  <!-- CENTERED LOGIN CARD -->
   <main class="login-center">
     <section class="login-card">
       <h1 class="brand">INDIGIS</h1>
@@ -51,7 +47,6 @@
   <script>
     function handleLogin(event) {
       event.preventDefault();
-
       const u = username.value.trim();
       const p = password.value.trim();
 
