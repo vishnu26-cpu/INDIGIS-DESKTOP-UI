@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
-  <!-- Load your login CSS -->
   <link rel="stylesheet" href="login_v2.css" />
 </head>
 
@@ -18,10 +17,7 @@
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- DARK OVERLAY -->
-  <div class="bg-overlay"></div>
-
-  <!-- CENTER LOG-IN CARD -->
+  <!-- CENTER LOGIN CARD -->
   <main class="login-center">
     <section class="login-card">
       
@@ -48,13 +44,12 @@
     </section>
   </main>
 
-  <!-- LOGIN SCRIPT -->
   <script>
     function handleLogin(event) {
       event.preventDefault();
 
-      const u = document.getElementById("username").value.trim();
-      const p = document.getElementById("password").value.trim();
+      const u = username.value.trim();
+      const p = password.value.trim();
 
       if (u === "admin" && p === "1234") {
         window.location.href = "workspace.html";
