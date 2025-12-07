@@ -5,59 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
+  <!-- Make sure this filename matches your file exactly -->
   <link rel="stylesheet" href="login_v2.css" />
+  <meta name="robots" content="noindex" />
 </head>
 
 <body>
-
   <!-- FULLSCREEN EARTH GIF BACKGROUND -->
-  <div class="bg-video">
+  <div class="bg-video" aria-hidden="true">
     <img src="assets/globe.gif"
-         alt="Earth Animation"
+         alt="Rotating globe"
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- CENTER LOGIN CARD -->
-  <main class="login-center">
-    <section class="login-card">
-      
-      <h1 class="brand">INDIGIS</h1>
+  <!-- subtle dark overlay (keeps text readable but not opaque) -->
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <!-- CENTERED LOGIN CARD -->
+  <main class="login-center" role="main">
+    <section class="login-card" aria-labelledby="loginTitle">
+      <h1 id="loginTitle" class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <form onsubmit="handleLogin(event)">
-        
+      <form class="login-form" onsubmit="handleLogin(event)" novalidate>
         <div class="input-group">
-          <input id="username" type="text" required placeholder=" ">
-          <label>Username</label>
+          <input id="username" type="text" required placeholder=" " autocomplete="username" />
+          <label for="username">Username</label>
         </div>
 
         <div class="input-group">
-          <input id="password" type="password" required placeholder=" ">
-          <label>Password</label>
+          <input id="password" type="password" required placeholder=" " autocomplete="current-password" />
+          <label for="password">Password</label>
         </div>
 
-        <button type="submit" class="login-btn">Login</button>
+        <button type="submit" class="login-btn" aria-label="Login">Login</button>
       </form>
 
-      <p class="hint">Demo → <b>admin</b> / <b>1234</b></p>
-
+      <div class="hint">Demo → <strong>admin</strong> / <strong>1234</strong></div>
     </section>
   </main>
 
   <script>
-    function handleLogin(event) {
-      event.preventDefault();
-
-      const u = username.value.trim();
-      const p = password.value.trim();
-
-      if (u === "admin" && p === "1234") {
-        window.location.href = "workspace.html";
+    // simple login (no persistence)
+    function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      if (u === 'admin' && p === '1234') {
+        window.location.href = 'workspace.html';
       } else {
-        alert("Invalid username or password");
+        alert('Invalid username or password');
       }
     }
   </script>
-
 </body>
 </html>
