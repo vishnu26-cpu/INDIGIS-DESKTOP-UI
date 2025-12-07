@@ -1,7 +1,7 @@
 /* ============================
    login_v2.css (FULL)
    ============================ */
-
+body { background: red !important; }
 /* Global reset + page background */
 * { box-sizing: border-box; }
 html,body { height: 100%; margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #fff; }
