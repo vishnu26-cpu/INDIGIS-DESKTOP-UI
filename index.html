@@ -4,15 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS Login</title>
+
+  <!-- Login page CSS -->
   <link rel="stylesheet" href="login.css" />
+
+  <!-- Prevent GitHub indexing -->
+  <meta name="robots" content="noindex" />
 </head>
 
 <body>
 
-  <!-- REDIRECT IF ALREADY LOGGED IN -->
+  <!-- IF ALREADY LOGGED IN → GO TO APP -->
   <script>
     if (localStorage.getItem("indigis_logged_in") === "true") {
-      // User already logged in → go to main UI
       window.location.href = "app.html";
     }
   </script>
@@ -22,4 +26,40 @@
       <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <form onsubmit="
+      <form onsubmit="handleLogin(event)">
+        <div class="input-group">
+          <input id="username" type="text" required />
+          <label for="username">Username</label>
+        </div>
+
+        <div class="input-group">
+          <input id="password" type="password" required />
+          <label for="password">Password</label>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+
+      <p class="hint">Demo Login → <b>admin</b> / <b>1234</b></p>
+    </div>
+  </div>
+
+  <!-- LOGIN SCRIPT -->
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
+
+      if (u === "admin" && p === "1234") {
+        localStorage.setItem("indigis_logged_in", "true");
+        window.location.href = "app.html";  // GO TO MAIN APP
+      } else {
+        alert("Invalid username or password");
+      }
+    }
+  </script>
+
+</body>
+</html>
