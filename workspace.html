@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Workspace — INDIGIS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #0b1220, #0f2a3a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            color: white;
+        }
+
+        .workspace-card {
+            width: 420px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0a84ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="workspace-card">
+    <h2>Create Workspace</h2>
+    <p>Name your working project to continue.</p>
+
+    <input id="wsName" type="text" placeholder="Workspace Name" required />
+
+    <button onclick="createWorkspace()">Continue</button>
+</div>
+
+<script>
+    // BLOCK THIS PAGE IF NOT LOGGED IN
+    if (localStorage.getItem("indigis_logged_in") !== "true") {
+        window.location.href = "index.html";
+    }
+
+    function createWorkspace() {
+        const name = document.getElementById("wsName").value.trim();
+
+        if (!name) {
+            alert("Please enter a workspace name.");
+            return;
+        }
+
+        localStorage.setItem("indigis_workspace", name);
+        window.location.href = "app.html";  // Go to main GIS interface
+    }
+</script>
+
+</body>
+</html>
