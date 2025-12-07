@@ -26,17 +26,16 @@
     <section class="login-card" aria-labelledby="loginTitle">
       <h1 id="loginTitle" class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
+<div class="input-group">
+  <label for="username">Username</label>
+  <input id="username" type="text" required autocomplete="username" />
+</div>
 
-      <form class="login-form" onsubmit="handleLogin(event)" novalidate>
-        <div class="input-group">
-          <input id="username" type="text" required placeholder=" " autocomplete="username" />
-          <label for="username">Username</label>
-        </div>
+<div class="input-group">
+  <label for="password">Password</label>
+  <input id="password" type="password" required autocomplete="current-password" />
+</div>
 
-        <div class="input-group">
-          <input id="password" type="password" required placeholder=" " autocomplete="current-password" />
-          <label for="password">Password</label>
-        </div>
 
         <button type="submit" class="login-btn" aria-label="Login">Login</button>
       </form>
