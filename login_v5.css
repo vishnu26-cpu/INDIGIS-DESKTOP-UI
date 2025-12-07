@@ -1,8 +1,8 @@
 /* ============================
-   login_v4.css — FINAL CLEAN
+   login_v5.css — FINAL FIXED
    ============================ */
 
-/* Global Reset */
+/* Reset */
 * { box-sizing: border-box; }
 
 html, body {
@@ -26,7 +26,7 @@ html, body {
 .bg-video img {
   position: absolute;
   top: 50%;
-  right: -25%;              /* shows only right half of globe */
+  right: -25%;
   transform: translateY(-50%);
   height: 120%;
   width: auto;
@@ -57,7 +57,7 @@ html, body {
   width: 360px;
   padding: 34px;
   border-radius: 14px;
-  background: rgba(10, 12, 16, 0.55);
+  background: rgba(10,12,16,0.55);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   text-align: center;
@@ -82,17 +82,14 @@ html, body {
   text-align: left;
 }
 
-/* LABEL */
 .input-group label {
   display: block;
   font-size: 15px;
   font-weight: 600;
   color: rgba(255,255,255,0.92);
   margin-bottom: 6px;
-  letter-spacing: .3px;
 }
 
-/* INPUT BOX */
 .input-group input {
   width: 100%;
   padding: 14px 12px;
@@ -102,52 +99,46 @@ html, body {
   background: rgba(255,255,255,0.12);
   color: #fff;
   outline: none;
-  transition: 0.25s ease-in-out;
+  transition: 0.25s ease;
 }
 
-/* Focus glow */
 .input-group input:focus {
   border-color: #0aefff;
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 8px rgba(0,240,255,0.6);
 }
 
 /* LOGIN BUTTON */
 .login-btn {
   width: 100%;
-  margin-top: 10px;
   padding: 14px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #0a84ff, #006fe6);
-  border: none;
+  margin-top: 10px;
+  background: linear-gradient(180deg,#0a84ff,#006fe6);
   color: white;
+  border: none;
+  border-radius: 8px;
   font-size: 17px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.25s ease;
-  font-weight: 600;
   box-shadow: 0 6px 18px rgba(10,132,255,0.25);
 }
 
 .login-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 20px rgba(10,132,255,0.35);
 }
 
-/* Demo hint text */
+/* HINT TEXT */
 .hint {
   margin-top: 14px;
-  opacity: 0.85;
+  opacity: .85;
   font-size: 13px;
 }
 
-/* MOBILE RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 740px) {
   .bg-video img {
     right: -45%;
     height: 150%;
-  }
-  .login-card {
-    width: 90%;
-    padding: 26px;
   }
 }
