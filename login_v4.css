@@ -92,48 +92,41 @@ html, body {
   margin-bottom: 6px; /* space between label & box */
 }
 
+//* Input wrapper */
+.input-group {
+  margin: 20px 0;
+  text-align: left;
+}
+
+/* Clean, readable, bright label */
+.input-group label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);  /* MUCH BRIGHTER */
+  margin-bottom: 6px; 
+  letter-spacing: .3px;
+}
+
 /* Input box */
 .input-group input {
   width: 100%;
   padding: 14px 12px;
-  font-size: 15px;
+  font-size: 16px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
   color: white;
   outline: none;
-  transition: border-color .2s ease;
+  transition: 0.2s ease;
 }
 
-/* Focus effect */
+/* Better focus style */
 .input-group input:focus {
-  border-color: #00eaff;
+  border-color: #0aefff;  
+  box-shadow: 0 0 6px rgba(0, 238, 255, 0.4);
 }
 
-/* Floating effect */
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  top: -8px;
-  font-size: 11px;
-  color: #01eaff;
-}
-
-/* BUTTON */
-.login-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  background: linear-gradient(180deg,#0a84ff,#006fe6);
-  color: white;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.login-btn:hover {
-  filter: brightness(1.05);
-}
 
 .hint {
   margin-top: 14px;
