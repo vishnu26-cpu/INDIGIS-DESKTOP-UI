@@ -1,0 +1,17 @@
+<script>
+    // simple login check
+    function handleLogin(event) {
+        event.preventDefault();
+
+        const user = document.getElementById("username").value.trim();
+        const pass = document.getElementById("password").value.trim();
+
+        // TEMPORARY demo credentials (you can change)
+        if(user === "admin" && pass === "1234") {
+            localStorage.setItem("indigis_logged_in", "true");
+            window.location.href = "index.html"; // go to your main UI
+        } else {
+            alert("Invalid username or password");
+        }
+    }
+</script>
