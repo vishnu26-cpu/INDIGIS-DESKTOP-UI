@@ -1,27 +1,23 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <script>
-    // block index.html access if not logged in
-    if(localStorage.getItem("indigis_logged_in") !== "true") {
-        window.location.href = "login.html";
-    }
-</script>
-<button id="logoutBtn" class="logout-btn">Logout</button>
-<script>
-    document.getElementById("logoutBtn").onclick = () => {
-        localStorage.removeItem("indigis_logged_in");
-        window.location.href = "login.html";
-    };
-</script>
 
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INDIGIS — Vishnu Signature UI (Prototype)</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- LOGIN PROTECTION -->
+  <script>
+    if (localStorage.getItem("indigis_logged_in") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
+
 <body>
   <div id="app" class="theme-auto">
+
     <!-- TOP HUD -->
     <header class="top-hud" role="banner">
       <div class="hud-left">
@@ -50,13 +46,16 @@
 
         <div class="hud-controls">
           <button id="themeToggle" class="icon-btn" aria-pressed="false" title="Toggle theme">🌓</button>
-          <button class="icon-btn" title="User menu">👤</button>
+
+          <!-- LOGOUT BUTTON (correct position) -->
+          <button id="logoutBtn" class="icon-btn" title="Logout">🚪</button>
         </div>
       </div>
     </header>
 
     <!-- MAIN LAYOUT -->
     <div class="main-area">
+
       <!-- LEFT DOCK -->
       <aside class="left-panel" aria-label="Left tools">
         <section class="panel">
@@ -82,7 +81,7 @@
         </section>
       </aside>
 
-      <!-- MAP + RIGHT PANELS -->
+      <!-- MAP SECTION -->
       <main class="map-area" id="map" aria-label="Map view">
         <div class="map-toolbar">
           <div class="map-toolbar-left">Map View</div>
@@ -93,11 +92,11 @@
         </div>
 
         <div class="map-canvas">
-          <!-- Placeholder - replace with actual map (OpenLayers/Cesium/etc.) -->
           <div class="map-placeholder">Map canvas (plug in OpenLayers / Cesium here)</div>
         </div>
       </main>
 
+      <!-- RIGHT PANEL -->
       <aside class="right-panel">
         <section class="panel">
           <div class="panel-header">Inspector</div>
@@ -108,7 +107,7 @@
       </aside>
     </div>
 
-    <!-- BOTTOM STATUS RIBBON -->
+    <!-- STATUS BAR -->
     <footer class="status-ribbon" role="contentinfo">
       <div class="status-left">
         <span id="coords">Lat: — , Lon: —</span>
@@ -122,8 +121,18 @@
         <button class="small">Redo</button>
       </div>
     </footer>
+
   </div>
 
+  <!-- LOGOUT SCRIPT -->
+  <script>
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.removeItem("indigis_logged_in");
+      window.location.href = "login.html";
+    };
+  </script>
+
   <script src="app.js"></script>
+
 </body>
 </html>
