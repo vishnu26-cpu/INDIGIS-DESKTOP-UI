@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>INDIGIS — Secure Login</title>
 
-  <!-- Make sure this filename matches your file exactly -->
+  <!-- Correct CSS file -->
   <link rel="stylesheet" href="login_v4.css" />
   <meta name="robots" content="noindex" />
 </head>
 
 <body>
+
   <!-- FULLSCREEN EARTH GIF BACKGROUND -->
   <div class="bg-video" aria-hidden="true">
     <img src="assets/globe1.gif"
@@ -18,44 +19,45 @@
          onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
   </div>
 
-  <!-- subtle dark overlay (keeps text readable but not opaque) -->
+  <!-- DARK OVERLAY -->
   <div class="bg-overlay" aria-hidden="true"></div>
 
-  <!-- CENTERED LOGIN CARD -->
+  <!-- CENTER LOGIN CARD -->
   <main class="login-center" role="main">
     <section class="login-card" aria-labelledby="loginTitle">
+
       <h1 id="loginTitle" class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
-<form class="login-form" onsubmit="handleLogin(event)">
-  
-  <div class="input-group">
-    <label for="username">Username</label>
-    <input id="username" type="text" required autocomplete="username" />
-  </div>
 
-  <div class="input-group">
-    <label for="password">Password</label>
-    <input id="password" type="password" required autocomplete="current-password" />
-  </div>
+      <!-- ✅ FIXED LOGIN FORM -->
+      <form class="login-form" onsubmit="handleLogin(event)">
 
-  <button type="submit" class="login-btn" aria-label="Login">Login</button>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" required autocomplete="username" />
+        </div>
 
-</form>
-
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" required autocomplete="current-password" />
+        </div>
 
         <button type="submit" class="login-btn" aria-label="Login">Login</button>
       </form>
 
       <div class="hint">Demo → <strong>admin</strong> / <strong>1234</strong></div>
+
     </section>
   </main>
 
+  <!-- LOGIN SCRIPT -->
   <script>
-    // simple login (no persistence)
     function handleLogin(e) {
       e.preventDefault();
+
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value.trim();
+
       if (u === 'admin' && p === '1234') {
         window.location.href = 'workspace.html';
       } else {
@@ -63,5 +65,6 @@
       }
     }
   </script>
+
 </body>
 </html>

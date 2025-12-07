@@ -1,21 +1,20 @@
 /* ============================
-   login_v2.css  — FINAL FIXED
+   login_v4.css — FINAL CLEAN
    ============================ */
 
-/* Remove the red test background */
-body { background: #000 !important; }
-
-/* Reset */
+/* Global Reset */
 * { box-sizing: border-box; }
+
 html, body {
   margin: 0;
   height: 100%;
   font-family: "Segoe UI", Arial, sans-serif;
   color: white;
   overflow: hidden;
+  background: #000;
 }
 
-/* FULLSCREEN GIF */
+/* FULLSCREEN GIF BACKGROUND */
 .bg-video {
   position: fixed;
   inset: 0;
@@ -27,30 +26,30 @@ html, body {
 .bg-video img {
   position: absolute;
   top: 50%;
-  right: -25%;               /* pushes globe so only half is seen */
+  right: -25%;              /* shows only right half of globe */
   transform: translateY(-50%);
-  height: 120%;              /* FULL height (no zoom distortion) */
-  width: auto;               /* auto width keeps proportions correct */
+  height: 120%;
+  width: auto;
   object-fit: cover;
   filter: brightness(0.45) saturate(1.1);
 }
 
-/* DARK overlay */
+/* DARK OVERLAY */
 .bg-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0,0,0,0.35);
   z-index: -2;
 }
 
-/* LOGIN CENTER */
+/* CENTER LAYOUT */
 .login-center {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   z-index: 10;
+  position: relative;
 }
 
 /* LOGIN CARD */
@@ -77,38 +76,23 @@ html, body {
   font-size: 14px;
 }
 
-/* Input wrapper */
-.input-group {
-  margin: 18px 0;
-  text-align: left;
-}
-
-/* Label stays at top ALWAYS */
-.input-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.85);
-  margin-bottom: 6px; /* space between label & box */
-}
-
-/* Input wrapper */
+/* INPUT GROUP */
 .input-group {
   margin: 20px 0;
   text-align: left;
 }
 
-/* Clean, readable, bright label */
+/* LABEL */
 .input-group label {
   display: block;
   font-size: 15px;
   font-weight: 600;
-  color: rgba(255,255,255,0.92);  /* MUCH BRIGHTER */
-  margin-bottom: 6px; 
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 6px;
   letter-spacing: .3px;
 }
 
-/* Input box */
+/* INPUT BOX */
 .input-group input {
   width: 100%;
   padding: 14px 12px;
@@ -116,31 +100,54 @@ html, body {
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.12);
-  color: white;
+  color: #fff;
   outline: none;
-  transition: 0.2s ease;
+  transition: 0.25s ease-in-out;
 }
 
-/* Better focus style */
+/* Focus glow */
 .input-group input:focus {
-  border-color: #0aefff;  
-  box-shadow: 0 0 6px rgba(0, 238, 255, 0.4);
+  border-color: #0aefff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
 }
 
+/* LOGIN BUTTON */
+.login-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0a84ff, #006fe6);
+  border: none;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(10,132,255,0.25);
+}
 
+.login-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 20px rgba(10,132,255,0.35);
+}
+
+/* Demo hint text */
 .hint {
   margin-top: 14px;
-  opacity: .8;
+  opacity: 0.85;
   font-size: 13px;
 }
 
-/* MOBILE FIXES */
+/* MOBILE RESPONSIVE */
 @media (max-width: 740px) {
   .bg-video img {
-    right: -40%;
-    height: 140%;
+    right: -45%;
+    height: 150%;
   }
   .login-card {
     width: 90%;
+    padding: 26px;
   }
 }
