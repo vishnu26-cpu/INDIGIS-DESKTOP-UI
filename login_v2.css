@@ -1,4 +1,4 @@
-/* Global reset */
+/* === GLOBAL RESET === */
 body {
     margin: 0;
     height: 100vh;
@@ -11,85 +11,57 @@ body {
     background: #05060b;
 }
 
-/* Dark gradient animated BG */
-.bg-anim {
+/* === FULLSCREEN GLOBE BACKGROUND === */
+.bg-video {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #0b1220, #05060b 70%);
-    animation: bgFade 12s ease-in-out infinite alternate;
+    overflow: hidden;
     z-index: -3;
 }
 
-@keyframes bgFade {
-    0% { opacity: 0.85; }
-    100% { opacity: 1; }
+.bg-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45);
 }
 
-/* Radar */
-.radar-wrap {
+/* Dark overlay */
+.bg-overlay {
     position: fixed;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 260px;
-    height: 260px;
-    opacity: 0.25;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
     z-index: -2;
 }
 
-.radar-circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid rgba(0, 255, 255, 0.25);
-}
-
-.radar-sweep {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: conic-gradient(
-        rgba(0,255,255,0.4), 
-        transparent 55%
-    );
-    animation: sweep 3s linear infinite;
-}
-
-@keyframes sweep {
-    100% { transform: rotate(360deg); }
-}
-
-/* Globe */
-.globe-wrap {
+/* === OPTIONAL: RADAR + GLOW (Disable if unwanted) === */
+.left-glow {
     position: fixed;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 350px;
-    height: auto;
+    left: -150px;
+    top: 30%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0,255,200,0.09), transparent 70%);
+    filter: blur(40px);
     z-index: -1;
-    opacity: 0.9;
 }
 
-.globe-wrap img {
-    width: 100%;
-    border-radius: 50%;
-}
-
-/* Login Card */
-.login-wrapper {
+/* === CENTERED LOGIN CONTAINER === */
+.login-center {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    position: relative;
+    z-index: 5;
 }
 
+/* === LOGIN CARD === */
 .login-card {
     width: 350px;
     padding: 35px;
     border-radius: 16px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
     text-align: center;
     animation: fadeIn 0.8s ease;
@@ -108,7 +80,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Floating Inputs */
+/* === INPUTS === */
 .input-group {
     position: relative;
     margin: 20px 0;
@@ -132,7 +104,6 @@ body {
     transform: translateY(-50%);
     color: #aaa;
     transition: 0.2s ease;
-    pointer-events: none;
 }
 
 .input-group input:focus + label,
@@ -142,7 +113,7 @@ body {
     color: cyan;
 }
 
-/* Button */
+/* === BUTTON === */
 .login-btn {
     width: 100%;
     padding: 12px;
@@ -163,87 +134,8 @@ body {
     margin-top: 12px;
 }
 
-/* Fade animation */
+/* === ANIMATION === */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
-}
-/* NEW — fullscreen dark gradient */
-.page-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 40% 30%, #0b1220, #05060b 80%);
-  z-index: -3;
-}
-
-/* LEFT radar glow like SpaceX */
-.left-glow {
-  position: fixed;
-  left: -150px;
-  top: 30%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0,255,200,0.08), transparent 70%);
-  filter: blur(40px);
-  z-index: -2;
-}
-
-/* RIGHT rotating Earth placement */
-.planet-wrap {
-  position: fixed;
-  right: 80px;
-  bottom: 120px;
-  width: 420px;
-  height: 420px;
-  pointer-events: none;
-  opacity: 0.85;
-  z-index: -1;
-}
-
-.planet {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Center login card ALWAYS */
-.login-center {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/* Fullscreen background GIF */
-.bg-video {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: -3;
-}
-
-.bg-video img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* makes GIF fill entire page */
-  filter: brightness(0.45); /* cinematic darkening */
-}
-
-/* Dark overlay on top of GIF */
-.bg-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: -2;
-}
-
-/* Center login box */
-.login-center {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 5;
 }
