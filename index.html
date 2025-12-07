@@ -29,24 +29,22 @@
       <h1 id="loginTitle" class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
-      <!-- ✅ FIXED LOGIN FORM -->
-     <form class="login-form" onsubmit="handleLogin(event)">
-  
-  <div class="input-group">
-    <label for="username">Username</label>
-    <input id="username" type="text" required autocomplete="username" />
-  </div>
+      <!-- LOGIN FORM -->
+      <form class="login-form" onsubmit="handleLogin(event)">
 
-  <div class="input-group">
-    <label for="password">Password</label>
-    <input id="password" type="password" required autocomplete="current-password" />
-  </div>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" required autocomplete="username" />
+        </div>
 
-  <!-- Correct login button -->
-  <button type="submit" class="login-btn">Login</button>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" required autocomplete="current-password" />
+        </div>
 
-</form>
+        <button type="submit" class="login-btn">Login</button>
 
+      </form>
 
       <div class="hint">Demo → <strong>admin</strong> / <strong>1234</strong></div>
 
@@ -61,10 +59,16 @@
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value.trim();
 
-      if (u === 'admin' && p === '1234') {
-        window.location.href = 'workspace.html';
+      if (u === "admin" && p === "1234") {
+
+        // ✅ REQUIRED FOR THE APP TO OPEN
+        localStorage.setItem("indigis_logged_in", "true");
+        localStorage.setItem("indigis_workspace_created", "true");  
+        // (Otherwise app.html will keep redirecting!)
+
+        window.location.href = "workspace.html";
       } else {
-        alert('Invalid username or password');
+        alert("Invalid username or password");
       }
     }
   </script>
