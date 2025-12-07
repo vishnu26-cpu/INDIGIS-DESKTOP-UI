@@ -30,20 +30,23 @@
       <p class="tagline">Secure Access Portal</p>
 
       <!-- ✅ FIXED LOGIN FORM -->
-      <form class="login-form" onsubmit="handleLogin(event)">
+     <form class="login-form" onsubmit="handleLogin(event)">
+  
+  <div class="input-group">
+    <label for="username">Username</label>
+    <input id="username" type="text" required autocomplete="username" />
+  </div>
 
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input id="username" type="text" required autocomplete="username" />
-        </div>
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input id="password" type="password" required autocomplete="current-password" />
+  </div>
 
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" required autocomplete="current-password" />
-        </div>
+  <!-- Correct login button -->
+  <button type="submit" class="login-btn">Login</button>
 
-        <button type="submit" class="login-btn" aria-label="Login">Login</button>
-      </form>
+</form>
+
 
       <div class="hint">Demo → <strong>admin</strong> / <strong>1234</strong></div>
 
