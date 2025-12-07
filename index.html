@@ -1,57 +1,77 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>INDIGIS Login</title>
+  <title>INDIGIS — Secure Login</title>
 
-  <!-- Login CSS -->
   <link rel="stylesheet" href="login_v2.css" />
+  <meta name="robots" content="noindex">
 </head>
-
 <body>
+  <div class="bg-anim" aria-hidden="true"></div>
 
-  <div class="login-wrapper">
-    <div class="login-card">
-      <h1 class="brand">INDIGIS</h1>
-      <p class="tagline">Secure Access Portal</p>
-
-      <!-- LOGIN FORM -->
-      <form onsubmit="handleLogin(event)">
-        <div class="input-group">
-          <input id="username" type="text" required />
-          <label for="username">Username</label>
-        </div>
-
-        <div class="input-group">
-          <input id="password" type="password" required />
-          <label for="password">Password</label>
-        </div>
-
-        <button type="submit" class="login-btn">Login</button>
-      </form>
-
-      <p class="hint">Demo Login → <b>admin</b> / <b>1234</b></p>
-    </div>
+  <!-- radar sweep overlay -->
+  <div class="radar-wrap" aria-hidden="true">
+    <div class="radar-circle"></div>
+    <div class="radar-sweep"></div>
   </div>
 
+  <!-- globe on the right -->
+  <div class="globe-wrap" aria-hidden="true">
+    <!-- prefer a local file at assets/globe.gif. If missing, remote fallback is used -->
+    <img id="globe" src="assets/globe.gif"
+         onerror="this.onerror=null; this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';"
+         alt="Rotating globe (decorative)">
+  </div>
+
+  <!-- login card -->
+  <main class="login-wrapper" role="main">
+    <section class="login-card" aria-labelledby="loginTitle">
+      <h1 id="loginTitle" class="brand">INDIGIS</h1>
+      <p class="tagline">Secure Access Portal</p>
+
+      <form class="login-form" onsubmit="handleLogin(event)" novalidate>
+        <label class="field">
+          <input id="username" type="text" required autocomplete="username" />
+          <span class="label">Username</span>
+        </label>
+
+        <label class="field">
+          <input id="password" type="password" required autocomplete="current-password" />
+          <span class="label">Password</span>
+        </label>
+
+        <button type="submit" class="login-btn" aria-label="Login to INDIGIS">Login</button>
+      </form>
+
+      <div class="demo-note">Demo: <strong>admin</strong> / <strong>1234</strong></div>
+    </section>
+  </main>
+
   <script>
-    // LOGIN ONLY — no remembering, no redirect on refresh
-    function handleLogin(event) {
-      event.preventDefault();
+    // Respect reduced-motion user preference
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
+    // Login handler — NO persistent storage (so refresh always shows login)
+    function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
 
-      if (user === "admin" && pass === "1234") {
-        // DO NOT set localStorage — you said no remembering login
-        window.location.href = "workspace.html"; // next page
+      if (u === 'admin' && p === '1234') {
+        // direct to workspace as requested
+        window.location.href = 'workspace.html';
       } else {
-        alert("Invalid username or password");
+        alert('Invalid username or password');
       }
     }
-  </script>
 
+    // small enhancement: pressing Enter in password submits naturally from the form
+    // nothing else required
+    if (prefersReduced) {
+      document.documentElement.classList.add('reduced-motion');
+    }
+  </script>
 </body>
 </html>
