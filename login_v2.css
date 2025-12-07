@@ -19,9 +19,9 @@ html,body { height: 100%; margin: 0; font-family: "Segoe UI", Arial, sans-serif;
 .bg-video img {
   position: absolute;
   top: 50%;
-  right: -10%;                 /* push globe to the right so only half shows */
+  right: 40%;                 /* push globe to the right so only half shows */
   transform: translateY(-50%);
-  width: 160%;                 /* make globe larger than viewport */
+  width: 100%;                 /* make globe larger than viewport */
   height: auto;
   object-fit: cover;
   filter: brightness(1) saturate(1.05);
