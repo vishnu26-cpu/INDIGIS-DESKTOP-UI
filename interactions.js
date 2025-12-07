@@ -57,7 +57,7 @@
     if (logoutBtn) {
       logoutBtn.addEventListener('click', function () {
         localStorage.removeItem('indigis_logged_in');
-        window.location.href = 'index.html';
+        window.location.href = 'login_v2.html';
       });
     }
 
