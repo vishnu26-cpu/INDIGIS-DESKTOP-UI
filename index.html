@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -55,7 +54,6 @@
 
     <!-- MAIN LAYOUT -->
     <div class="main-area">
-
       <!-- LEFT DOCK -->
       <aside class="left-panel" aria-label="Left tools">
         <section class="panel">
@@ -124,15 +122,7 @@
 
   </div>
 
-  <!-- LOGOUT SCRIPT -->
-  <script>
-    document.getElementById("logoutBtn").onclick = () => {
-      localStorage.removeItem("indigis_logged_in");
-      window.location.href = "login.html";
-    };
-  </script>
-
-  <script src="app.js"></script>
-
+  <!-- load the main interactions script (ensure filename interactions.js) -->
+  <script src="interactions.js"></script>
 </body>
 </html>
