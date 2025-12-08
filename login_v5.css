@@ -15,7 +15,7 @@ html, body {
 }
 
 /* FULLSCREEN GIF BACKGROUND */
-.bg-video {
+.bg-image {
   position: fixed;
   inset: 0;
   z-index: -3;
