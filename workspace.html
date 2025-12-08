@@ -88,17 +88,24 @@
       gap: 10px;
       z-index: 6;
     }
-    .brand-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(123,97,255,0.22), rgba(41,121,255,0.18));
-      display:flex;align-items:center;justify-content:center;
-      box-shadow: 0 6px 18px rgba(41,121,255,0.06), inset 0 -8px 20px rgba(0,0,0,0.2);
-      font-weight:700;color:rgba(255,255,255,0.9);
-      font-family: "Segoe UI", Arial, sans-serif;
-      letter-spacing: 1px;
-    }
+   .brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: none !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
     .brand-title { font-size: 15px; font-weight:700 }
     .brand-sub { font-size: 12px; color:var(--muted); margin-top:2px }
 
@@ -232,8 +239,10 @@
 
   <!-- small top brand -->
   <div class="brand-header" aria-hidden="true">
-    <div class="brand-mark">ID</div>
-    <div>
+   <div class="brand-mark">
+  <img src="assets/logo.png" alt="INDIGIS logo">
+</div>
+
       <div class="brand-title">INDIGIS</div>
       <div class="brand-sub">Geospatial Intelligence Platform</div>
     </div>
