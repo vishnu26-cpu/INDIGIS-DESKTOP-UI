@@ -42,6 +42,19 @@ html, body {
   cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease;
 }
+/* === INDIGIS LOGO (Clean Hover Glow Only) === */
+.indigis-logo {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  background: rgba(255,255,255,0.02);
+}
 
 .indigis-logo img {
   width: 100%;
@@ -49,6 +62,14 @@ html, body {
   object-fit: contain;
   transition: transform .25s ease;
 }
+
+/* Hover glow only (NO breathing, NO particles) */
+.indigis-logo:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 0 18px rgba(41,121,255,0.55),
+              0 0 30px rgba(123,97,255,0.40);
+}
+
 .login-logo-container {
   display: flex;
   justify-content: center;
