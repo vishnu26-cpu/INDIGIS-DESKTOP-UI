@@ -24,7 +24,7 @@ html, body {
   right: 0;
   width: 70vw;        /* Planet fills right portion */
   height: 100vh;
-  background-image: url("assets/earth_hd.jpg"); /* <-- Change name to your file */
+  background-image: url("assets/Earth.jpg"); /* <-- Change name to your file */
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
@@ -146,12 +146,4 @@ html, body {
 /* RESPONSIVE */
 @media (max-width: 740px) {
 
- .planet-bg {
-  background: red !important;
-  border: 5px solid yellow !important;
-}
-
-  .planet-overlay {
-    background: rgba(0,0,0,0.8);
-  }
 }
