@@ -28,8 +28,8 @@ html, body {
   top: 50%;
   right: -25%;
   transform: translateY(-50%);
-  height: 120%;
-  width: auto;
+  height: 50%;
+  width: 50;
   object-fit: cover;
   filter: brightness(0.45) saturate(1.1);
 }
