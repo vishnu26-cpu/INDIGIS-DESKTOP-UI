@@ -13,8 +13,62 @@
 
   <!-- Cesium CSS -->
   <link rel="stylesheet" href="https://unpkg.com/cesium/Build/Cesium/Widgets/widgets.css">
+<header class="top-hud">
+
+  <!-- LEFT: LOGO -->
+  <div class="hud-left app-logo-box">
+    <img src="assets/logo.png" class="app-logo" alt="INDIGIS Logo">
+    <div class="app-logo-text">
+      <span class="title">INDIGIS</span>
+      <span class="sub">Prototype</span>
+    </div>
+  </div>
+
+  <!-- CENTER MENUS -->
+  <div class="hud-center">
+
+    <!-- WORKSPACE MENU -->
+    <div class="menu-box">
+      <button class="menu-btn" id="workspaceMenuBtn">Workspace ▾</button>
+      <div class="menu-dropdown" id="workspaceMenu">
+        <div class="menu-item">💾 Save Workspace</div>
+        <div class="menu-item">📝 Save As…</div>
+        <div class="menu-item">📂 Open Recent</div>
+        <div class="menu-item danger">✖ Close Workspace</div>
+      </div>
+    </div>
+
+    <!-- USER MODE MENU -->
+    <div class="menu-box">
+      <button class="menu-btn" id="modeMenuBtn">User Mode ▾</button>
+      <div class="menu-dropdown" id="modeMenu">
+        <div class="menu-item">🟢 Basic</div>
+        <div class="menu-item">🔵 Intermediate</div>
+        <div class="menu-item">🟣 Advanced</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE: VIEW + LOGOUT -->
+  <div class="hud-right">
+    <div class="mode-toggle" title="Switch map view">
+      <span style="font-size:13px;color:var(--muted)">View</span>
+
+      <div id="mapToggle" class="switch" role="switch" aria-checked="false" tabindex="0">
+        <div class="label TwoD">2D</div>
+        <div class="label ThreeD">3D</div>
+        <div class="knob"></div>
+      </div>
+    </div>
+
+    <button id="logoutBtn" class="icon-btn" title="Logout">🚪</button>
+  </div>
+
+</header>
 
   <style>
+    
     /* -----------------------------------------
        MAP AREA
     ------------------------------------------*/
@@ -121,6 +175,72 @@
     .switch.mode-3d .knob { transform:translateX(48px); }
     .switch.mode-3d .label.ThreeD { color:#fff; }
     .switch:not(.mode-3d) .label.TwoD { color:#fff; }
+/* ---- Hybrid Glass + Glow Dropdown ---- */
+.hud-center {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.menu-box {
+  position: relative;
+}
+
+.menu-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: 0.25s ease;
+}
+
+.menu-btn:hover {
+  background: rgba(41,121,255,0.15);
+  box-shadow: 0 0 12px rgba(41,121,255,0.28);
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  width: 180px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  padding: 6px 0;
+  display: none;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  animation: fadeDown 0.22s ease;
+  z-index: 50;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-item {
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.menu-item:hover {
+  background: rgba(41,121,255,0.20);
+  color: white;
+  box-shadow: inset 0 0 12px rgba(41,121,255,0.28);
+}
+
+.menu-item.danger:hover {
+  background: rgba(255,80,80,0.18);
+  color: #ffb8b8;
+}
 
   </style>
 </head>
@@ -355,6 +475,23 @@
   });
 
 })();
+// Dropdown Menus
+function toggleMenu(menuId) {
+  const menu = document.getElementById(menuId);
+  const isOpen = menu.style.display === "block";
+  document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
+  menu.style.display = isOpen ? "none" : "block";
+}
+
+document.getElementById("workspaceMenuBtn").onclick = () => toggleMenu("workspaceMenu");
+document.getElementById("modeMenuBtn").onclick = () => toggleMenu("modeMenu");
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".menu-box")) {
+    document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
+  }
+});
+
 </script>
 
 </body>
