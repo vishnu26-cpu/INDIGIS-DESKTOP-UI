@@ -146,11 +146,10 @@ html, body {
 /* RESPONSIVE */
 @media (max-width: 740px) {
 
-  .planet-bg {
-    width: 100vw;
-    background-position: center;
-    opacity: 0.35; /* Make softer on mobile */
-  }
+ .planet-bg {
+  background: red !important;
+  border: 5px solid yellow !important;
+}
 
   .planet-overlay {
     background: rgba(0,0,0,0.8);
