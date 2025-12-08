@@ -215,6 +215,27 @@
       box-shadow:0 6px 14px rgba(10,132,255,0.38);
       transition:transform .24s cubic-bezier(.2,.9,.3,1);
     }
+/* Ensure dropdowns show properly when placed near logo */
+.hud-left-menus {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow: visible !important;
+}
+
+.menu-box {
+  position: relative;
+  overflow: visible;
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  overflow: visible;
+  z-index: 9999;
+}
 
     .switch.mode-3d .knob { transform:translateX(48px); }
     .switch.mode-3d .label.ThreeD { color:#fff; }
