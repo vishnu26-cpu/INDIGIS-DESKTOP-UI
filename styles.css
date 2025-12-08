@@ -20,6 +20,24 @@
     box-shadow: 0 22px 48px rgba(0,0,0,0.55);
     animation: slideUp 0.6s ease-out;
   }
+/* Fix dropdown visibility (dark theme compatible) */
+select {
+  background-color: rgba(255,255,255,0.08) !important;
+  color: var(--text) !important;
+}
+
+/* Force dropdown list (options) to dark theme */
+select option {
+  background-color: #1a1d23 !important;
+  color: var(--text) !important;
+  padding: 8px;
+}
+
+/* Hover effect for dropdown items */
+select option:hover {
+  background-color: #2a2f38 !important;
+  cursor: pointer;
+}
 
   .workspace-card h2 {
     font-size: 28px;
