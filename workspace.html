@@ -31,6 +31,7 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
+    /* decorative faint stars/particles using CSS repeating-radial */
     .cinema-bg {
       position: fixed;
       inset: 0;
@@ -53,6 +54,7 @@
       to { transform: translateY(0px) }
     }
 
+    /* watermark / subtle brand glyph */
     .watermark {
       position: fixed;
       right: 18px;
@@ -65,6 +67,7 @@
       letter-spacing: 1px;
     }
 
+    /* container centers content, sits above decoration */
     .workspace-screen {
       position: relative;
       z-index: 2;
@@ -75,6 +78,7 @@
       padding: 36px;
     }
 
+    /* top header branding (small, elegant) */
     .brand-header {
       position: absolute;
       top: 18px;
@@ -84,83 +88,56 @@
       gap: 10px;
       z-index: 6;
     }
+ 
+   /* Hover Glow for INDIGIS Logo */
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  transition: box-shadow .25s ease, transform .25s ease;
+  cursor: pointer;
+}
 
-    /* Hover Glow for INDIGIS Logo */
-    .brand-mark {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      overflow: hidden;
-      background: transparent !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      transition: box-shadow .25s ease, transform .25s ease;
-      cursor: pointer;
-    }
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+  transition: transform .25s ease;
+}
 
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 4px;
-      transition: transform .25s ease;
-    }
+/* HOVER EFFECT */
+.brand-mark:hover {
+  box-shadow: 0 0 16px rgba(41,121,255,0.55), 
+              0 0 28px rgba(123,97,255,0.45);
+  transform: translateY(-2px) scale(1.05);
+}
 
-    .brand-mark:hover {
-      box-shadow: 0 0 16px rgba(41,121,255,0.55), 
-                  0 0 28px rgba(123,97,255,0.45);
-      transform: translateY(-2px) scale(1.05);
-    }
+.brand-mark:hover img {
+  transform: scale(1.08);
+}
 
-    .brand-mark:hover img {
-      transform: scale(1.08);
-    }
 
     .brand-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: -1px;
-    }
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: -1px;
+}
 
-    .brand-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-      letter-spacing: 0.2px;
-    }
+   .brand-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 0.2px;
+}
 
-    /* ⭐ NEW: Workspace Menu Row */
-    .workspace-menu {
-      position: absolute;
-      top: 78px;
-      left: 22px;
-      display: flex;
-      gap: 10px;
-      z-index: 7;
-    }
-
-    .menu-btn {
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 600;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      color: var(--text);
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .menu-btn:hover {
-      background: rgba(41,121,255,0.18);
-      border-color: var(--vector);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(41,121,255,0.25);
-    }
-
-    /* CARD */
+    /* THE CARD */
     .workspace-card {
       width: 820px;
       max-width: calc(100% - 64px);
@@ -170,6 +147,7 @@
       border: 1px solid rgba(255,255,255,0.04);
       box-shadow: 0 30px 80px rgba(2,6,12,0.6), 0 8px 24px rgba(41,121,255,0.02);
       backdrop-filter: blur(14px) saturate(1.1);
+      transform-origin: center;
       animation: reveal 520ms cubic-bezier(.2,.9,.2,1);
       position: relative;
       z-index: 3;
@@ -181,10 +159,7 @@
     }
 
     .workspace-card .top {
-      display:flex;
-      align-items:flex-start;
-      gap:18px;
-      margin-bottom:6px;
+      display:flex;align-items:flex-start;gap:18px;margin-bottom:6px;
     }
     .workspace-card h2 {
       margin:0;
@@ -192,13 +167,11 @@
       letter-spacing:0.2px;
     }
     .workspace-card p.lead {
-      margin:8px 0 18px;
-      color:var(--muted);
-      max-width:66%;
-      line-height:1.5;
-      font-size:15px;
+      margin:8px 0 18px;color:var(--muted);max-width:66%;
+      line-height:1.5;font-size:15px;
     }
 
+    /* layout of form - left column wide, right column controls */
     .ws-form {
       display:grid;
       grid-template-columns: 1fr 360px;
@@ -206,9 +179,12 @@
       align-items:start;
     }
 
+    /* left: form fields stacked */
     .form-stack { display:flex;flex-direction:column;gap:14px; }
 
-    .field { display:flex;flex-direction:column;gap:6px; }
+    .field {
+      display:flex;flex-direction:column;gap:6px;
+    }
     .field label { font-weight:600; color:var(--muted); font-size:13px; }
     .field input, .field select {
       padding: 12px 14px;
@@ -227,8 +203,10 @@
       transform: translateY(-1px);
     }
 
+    /* small helper info */
     .meta { font-size:13px;color:var(--muted); margin-top:8px }
 
+    /* right column: preview & quick options */
     .panel {
       background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
       border-radius: 10px;
@@ -239,19 +217,16 @@
       align-items:stretch;
     }
     .panel h3 { margin:0;font-size:14px }
-
     .panel .preview {
-      height:100px;
-      border-radius:8px;
-      background:linear-gradient(180deg,#07121b, #0b2430);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--muted);
-      font-size:14px;
+      height:100px;border-radius:8px;background:linear-gradient(180deg,#07121b, #0b2430);
+      display:flex;align-items:center;justify-content:center;color:var(--muted); font-size:14px;
       border:1px dashed rgba(255,255,255,0.02);
     }
 
+    /* actions */
+    .actions {
+      display:flex;gap:12px;justify-content:flex-end;margin-top:8px;
+    }
     .btn {
       border:0;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;
     }
@@ -264,16 +239,14 @@
       background: linear-gradient(180deg,var(--vector), #005ed6);
       color: #fff;
       box-shadow: 0 14px 30px rgba(41,121,255,0.20);
+      transform-style: preserve-3d;
     }
-
     .btn:hover { transform: translateY(-3px) }
 
-    .note {
-      color:var(--muted);
-      font-size:13px;
-      margin-top:10px
-    }
+    /* subtle helper row under actions */
+    .note { color:var(--muted); font-size:13px; margin-top:10px }
 
+    /* responsive */
     @media (max-width: 980px) {
       .ws-form { grid-template-columns: 1fr; }
       .workspace-card { padding: 22px; width: calc(100% - 40px) }
@@ -284,6 +257,133 @@
     @media (prefers-reduced-motion: reduce) {
       .workspace-card, .cinema-bg { animation: none; transition: none !important; }
     }
+    /* --------------------------
+   CINEMATIC MODAL SYSTEM
+---------------------------*/
+
+.ws-actions {
+  display:flex;
+  gap:12px;
+  margin:16px 0 26px 0;
+}
+
+.ws-btn {
+  padding:10px 18px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:var(--text);
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  transition:0.25s ease;
+  box-shadow:0 4px 14px rgba(0,0,0,0.35);
+}
+
+.ws-btn:hover {
+  background:rgba(41,121,255,0.12);
+  transform:translateY(-2px);
+}
+
+/* Backdrop */
+.indigis-modal-backdrop {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  animation:fadeIn .4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+/* Modal box */
+.indigis-modal {
+  width:420px;
+  background:rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:34px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 20px 60px rgba(0,0,0,0.55);
+  transform:scale(0.85) translateY(20px);
+  opacity:0;
+  animation:popUp .45s cubic-bezier(.15,.9,.2,1) forwards;
+}
+
+@keyframes popUp {
+  to {
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+/* Icon area */
+.modal-icon {
+  position:relative;
+  width:82px;
+  height:82px;
+  margin:0 auto 12px;
+}
+
+.modal-icon span {
+  font-size:38px;
+  position:relative;
+  z-index:2;
+}
+
+/* Glow Pulse */
+.pulse {
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(41,121,255,0.45), rgba(123,97,255,0.25));
+  animation:pulse 2.4s infinite ease-in-out;
+  filter:blur(4px);
+}
+
+@keyframes pulse {
+  0% { transform:scale(0.9); opacity:0.5; }
+  50% { transform:scale(1.15); opacity:0.9; }
+  100% { transform:scale(0.9); opacity:0.5; }
+}
+
+.indigis-modal h2 {
+  margin-top:6px;
+  font-size:22px;
+}
+
+.indigis-modal p {
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+  line-height:1.5;
+}
+
+/* Close button */
+.modal-close {
+  margin-top:20px;
+  padding:10px 24px;
+  border:0;
+  border-radius:10px;
+  font-weight:700;
+  background:linear-gradient(180deg,var(--vector),#005ed6);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(41,121,255,0.28);
+  transition:0.25s ease;
+}
+
+.modal-close:hover {
+  transform:translateY(-2px);
+}
+
   </style>
 </head>
 
@@ -294,19 +394,13 @@
 
   <!-- small top brand -->
   <div class="brand-header" aria-hidden="true">
-    <div class="brand-mark">
-      <img src="assets/logo.png" alt="INDIGIS logo">
+   <div class="brand-mark">
+  <img src="assets/logo.png" alt="INDIGIS logo">
+</div>
+
+      <div class="brand-title">INDIGIS</div>
+      <div class="brand-sub">Geospatial Intelligence Platform</div>
     </div>
-
-    <div class="brand-title">INDIGIS</div>
-    <div class="brand-sub">Geospatial Intelligence Platform</div>
-  </div>
-
-  <!-- ⭐ NEW: WORKSPACE MENU -->
-  <div class="workspace-menu">
-    <button class="menu-btn" id="newWS">New Workspace</button>
-    <button class="menu-btn" id="openWS">Open Workspace</button>
-    <button class="menu-btn" id="recentWS">Recent Workspace</button>
   </div>
 
   <div class="workspace-screen" role="main">
@@ -315,15 +409,20 @@
       <div class="top">
         <div style="flex:1">
           <h2 id="wsTitle">Create / Open Workspace</h2>
-          <p class="lead">
-            Set workspace name, default base map and projection. This step is required before opening the main application. 
-            You can change these later in the app settings.
-          </p>
+          <p class="lead">Set workspace name, default base map and projection. This step is required before opening the main application. You can change these later in the app settings.</p>
+          <div class="ws-actions">
+            <button type="button" class="ws-btn" id="newWsBtn">🪄 New Workspace</button>
+            <button type="button" class="ws-btn" id="openWsBtn">📂 Open Workspace</button>
+            <button type="button" class="ws-btn" id="recentWsBtn">🕘 Recent Workspace</button>
+</div>
+
         </div>
       </div>
 
       <form id="workspaceForm" class="ws-form" autocomplete="on" novalidate>
-        <div class="form-stack">
+        <!-- LEFT: fields -->
+        <div class="form-stack" aria-hidden="false">
+
           <div class="field">
             <label for="wsName">Workspace name</label>
             <input id="wsName" name="wsName" placeholder="My Project X" required aria-required="true" />
@@ -353,13 +452,14 @@
           <div class="meta">Tip: use a short descriptive name (e.g. "LULC_2025").</div>
         </div>
 
-        <aside class="panel">
+        <!-- RIGHT: preview / quick actions -->
+        <aside class="panel" aria-label="Quick preview and options">
           <h3>Workspace Preview</h3>
           <div class="preview" id="wsPreview">Preview: OpenStreetMap • EPSG:3857</div>
 
           <div style="display:flex;gap:8px;margin-top:8px">
-            <button type="button" class="btn secondary" id="importBtn">Import</button>
-            <button type="button" class="btn secondary" id="templatesBtn">Templates</button>
+            <button type="button" class="btn secondary" id="importBtn" title="Import settings">Import</button>
+            <button type="button" class="btn secondary" id="templatesBtn" title="Load template">Templates</button>
           </div>
 
           <div style="margin-top:auto">
@@ -377,25 +477,75 @@
   </div>
 
   <script>
+    // --- preserve original app logic, updated to match new structure ---
     if (localStorage.getItem('indigis_logged_in') !== 'true') {
+      // not logged in -> go back
       window.location.href = 'index.html';
     }
+// Modal elements
+const modalBackdrop = document.getElementById("modalBackdrop");
+const modal = document.getElementById("indigisModal");
+const modalEmoji = document.getElementById("modalEmoji");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const closeModalBtn = document.getElementById("closeModalBtn");
 
+// function to open cinematic modal
+function openDemo(emoji, title, desc) {
+  modalEmoji.textContent = emoji;
+  modalTitle.textContent = title;
+  modalDesc.textContent = desc;
+
+  modalBackdrop.style.display = "flex";
+}
+
+// close modal
+closeModalBtn.onclick = () => {
+  modalBackdrop.style.display = "none";
+};
+
+modalBackdrop.onclick = (e) => {
+  if (e.target === modalBackdrop) modalBackdrop.style.display = "none";
+};
+
+// attach button actions
+document.getElementById("newWsBtn").onclick = () =>
+  openDemo(
+    "🪄",
+    "Create New Workspace",
+    "Start a fresh workspace. Choose basemap, projection and workflow mode."
+  );
+
+document.getElementById("openWsBtn").onclick = () =>
+  openDemo(
+    "📂",
+    "Open Existing Workspace",
+    "Browse your saved INDIGIS workspaces and resume your project."
+  );
+
+document.getElementById("recentWsBtn").onclick = () =>
+  openDemo(
+    "🕘",
+    "Recent Workspaces",
+    "Quickly access the most recently used workspace sessions."
+  );
+
+    // helpers
     const wsName = document.getElementById('wsName');
     const basemap = document.getElementById('basemap');
     const proj = document.getElementById('proj');
     const preview = document.getElementById('wsPreview');
 
     function updatePreview() {
-      const bm =
-        basemap.value === 'osm' ? 'OpenStreetMap' :
-        basemap.value === 'sat' ? 'Satellite' :
-        basemap.value === 'dark' ? 'Dark' :
-        'Terrain';
-
-      preview.textContent = `Preview: ${bm} • ${proj.value}`;
+      const bm = basemap.value === 'osm' ? 'OpenStreetMap' :
+                 basemap.value === 'sat' ? 'Satellite' :
+                 basemap.value === 'dark' ? 'Dark' :
+                 basemap.value === 'terrain' ? 'Terrain' : basemap.value;
+      const pr = proj.value;
+      preview.textContent = `Preview: ${bm} • ${pr}`;
     }
 
+    // restore existing workspace values if present
     document.addEventListener('DOMContentLoaded', () => {
       const ws = localStorage.getItem('indigis_workspace_data');
       if (ws) {
@@ -404,66 +554,66 @@
           wsName.value = obj.name || '';
           basemap.value = obj.basemap || 'osm';
           proj.value = obj.proj || 'webmercator';
-        } catch {}
+        } catch(e) { /* ignore */ }
       }
       updatePreview();
-
+      // keyboard: Enter in name -> create
       wsName.addEventListener('keydown', (ev) => {
         if (ev.key === 'Enter') document.getElementById('createBtn').click();
       });
     });
 
+    // live preview updates
     basemap.addEventListener('change', updatePreview);
     proj.addEventListener('change', updatePreview);
 
-    document.getElementById('createBtn').addEventListener('click', () => {
+    // create action (same behavior)
+    document.getElementById('createBtn').addEventListener('click', (ev) => {
       const name = wsName.value.trim();
       if (!name) {
         wsName.focus();
-        const old = preview.textContent;
-        preview.textContent = 'Please enter a workspace name';
-        preview.style.color = '#FFB6B6';
-        setTimeout(() => {
-          preview.textContent = old;
-          preview.style.color = '';
-        }, 1800);
+        // small inline friendly message instead of alert
+        const prev = preview;
+        const old = prev.textContent;
+        prev.textContent = 'Please enter a workspace name';
+        prev.style.color = '#FFB6B6';
+        setTimeout(()=>{ prev.textContent = old; prev.style.color = ''; }, 1800);
         return;
       }
-
-      const data = {
-        name,
-        basemap: basemap.value,
-        proj: proj.value,
-        createdAt: new Date().toISOString()
-      };
-
+      const data = { name, basemap: basemap.value, proj: proj.value, createdAt: new Date().toISOString() };
       localStorage.setItem('indigis_workspace_data', JSON.stringify(data));
       localStorage.setItem('indigis_workspace_created', 'true');
+      // go to main app
       window.location.href = 'app.html';
     });
 
+    // back button
     document.getElementById('backBtn').addEventListener('click', () => {
       window.location.href = 'index.html';
     });
 
-    document.getElementById('importBtn').onclick = () => alert('Import settings (coming soon)');
-    document.getElementById('templatesBtn').onclick = () => alert('Workspace templates (coming soon)');
+    // optional quick actions (placeholders for future)
+    document.getElementById('importBtn').addEventListener('click', () => {
+      alert('Import settings (coming soon)');
+    });
+    document.getElementById('templatesBtn').addEventListener('click', () => {
+      alert('Workspace templates (coming soon)');
+    });
+    <!-- Animated Cinematic Modal -->
+<div class="indigis-modal-backdrop" id="modalBackdrop">
+  <div class="indigis-modal" id="indigisModal">
+    <div class="modal-icon">
+      <div class="pulse"></div>
+      <span id="modalEmoji">✨</span>
+    </div>
 
-    // ⭐ NEW BUTTON ACTIONS
-    document.getElementById("newWS").onclick = () => {
-      localStorage.removeItem("indigis_workspace_data");
-      wsName.value = "";
-      updatePreview();
-      alert("New Workspace started.");
-    };
+    <h2 id="modalTitle">Title</h2>
+    <p id="modalDesc">Description text goes here.</p>
 
-    document.getElementById("openWS").onclick = () => {
-      alert("Open Workspace (coming soon)");
-    };
+    <button class="modal-close" id="closeModalBtn">Close</button>
+  </div>
+</div>
 
-    document.getElementById("recentWS").onclick = () => {
-      alert("Recent Workspace (coming soon)");
-    };
   </script>
 </body>
 </html>
