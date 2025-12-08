@@ -1,0 +1,116 @@
+/* ------------------------------
+   GLOBAL
+--------------------------------*/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #0d0f14;
+  color: #ffffff;
+}
+
+/* Center container */
+.workspace-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Beautiful card */
+.workspace-card {
+  width: 750px;
+  padding: 40px;
+  background: rgba(20, 24, 32, 0.65);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Header styling */
+.workspace-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.workspace-card p {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 30px;
+}
+
+/* Form layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 30px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+/* Input styles */
+input, select {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #0aefff;
+  box-shadow: 0 0 8px rgba(0,240,255,0.4);
+}
+
+/* Buttons */
+.btn-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+button {
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.25s ease;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: #e0e5ea;
+  color: #111;
+}
+
+.btn-secondary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #0a84ff, #006fe6);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(10,132,255,0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

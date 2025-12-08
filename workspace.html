@@ -1,95 +1,44 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>INDIGIS — Create Workspace</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* tiny helper just for the workspace demo */
-    .center { max-width:760px; margin:44px auto; background:var(--ui-surface, #fff); padding:22px; border-radius:10px; }
-    label{display:block;margin:8px 0 4px;color:var(--muted,#666)}
-    input, select{width:100%;padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.08)}
-    .row{display:flex;gap:12px}
-    .row > *{flex:1}
-    .actions{margin-top:14px;display:flex;gap:12px;justify-content:flex-end}
-    button.primary{background:#2979FF;color:white;padding:10px 14px;border-radius:6px;border:none}
-    button.secondary{background:#eee;padding:10px 14px;border-radius:6px;border:none}
-  </style>
-</head>
 <body>
-  <div class="center">
+
+<div class="workspace-wrapper">
+  <div class="workspace-card">
+
     <h2>Create / Open Workspace</h2>
-    <p style="color:var(--muted,#666)">Set workspace name, default base map and projection. This step is required before opening the main app.</p>
+    <p>Set workspace name, default base map and projection. This step is required before opening the main app.</p>
 
-    <form id="workspaceForm">
-      <label for="wsName">Workspace name</label>
-      <input id="wsName" required placeholder="My Project X" />
+    <div class="form-grid">
 
-      <div class="row" style="margin-top:10px;">
-        <div>
-          <label for="basemap">Base map</label>
-          <select id="basemap">
-            <option value="osm">OpenStreetMap</option>
-            <option value="sat">Satellite</option>
-            <option value="dark">Dark</option>
-          </select>
-        </div>
-        <div>
-          <label for="proj">Projection</label>
-          <select id="proj">
-            <option value="webmercator">WebMercator (WGS84)</option>
-            <option value="epsg4326">EPSG:4326</option>
-          </select>
-        </div>
+      <div class="full-width">
+        <label>Workspace name</label>
+        <input id="workspaceName" type="text">
       </div>
 
-      <div class="actions">
-        <button type="button" id="backBtn" class="secondary">Back to Login</button>
-        <button type="submit" class="primary">Create & Open App</button>
+      <div>
+        <label>Base map</label>
+        <select id="baseMap">
+          <option>OpenStreetMap</option>
+          <option>Satellite</option>
+          <option>Dark Matter</option>
+          <option>Terrain</option>
+        </select>
       </div>
-    </form>
+
+      <div>
+        <label>Projection</label>
+        <select id="projection">
+          <option>EPSG:4326</option>
+          <option>EPSG:3857</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goToLogin()">Back to Login</button>
+      <button class="btn-primary" onclick="openApp()">Create & Open App</button>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    // if not logged in, force back to index (login)
-    if (localStorage.getItem('indigis_logged_in') !== 'true') {
-      window.location.href = 'index.html';
-    }
-
-    // restore existing workspace values if present
-    document.addEventListener('DOMContentLoaded', () => {
-      const ws = localStorage.getItem('indigis_workspace_data');
-      if (ws) {
-        try {
-          const obj = JSON.parse(ws);
-          document.getElementById('wsName').value = obj.name || '';
-          document.getElementById('basemap').value = obj.basemap || 'osm';
-          document.getElementById('proj').value = obj.proj || 'webmercator';
-        } catch(e) {}
-      }
-    });
-
-    // form submit => save workspace and open app
-    document.getElementById('workspaceForm').addEventListener('submit', (ev) => {
-      ev.preventDefault();
-      const name = document.getElementById('wsName').value.trim();
-      const basemap = document.getElementById('basemap').value;
-      const proj = document.getElementById('proj').value;
-      if (!name) { alert('Please enter a workspace name'); return; }
-
-      const data = { name, basemap, proj, createdAt: new Date().toISOString() };
-      localStorage.setItem('indigis_workspace_data', JSON.stringify(data));
-      localStorage.setItem('indigis_workspace_created', 'true');
-
-      // go to main app
-      window.location.href = 'app.html';
-    });
-
-    document.getElementById('backBtn').addEventListener('click', () => {
-      // allow user to logout or go back to index
-      window.location.href = 'index.html';
-    });
-  </script>
 </body>
-</html>
