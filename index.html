@@ -1,42 +1,36 @@
 <!doctype html>
 <html lang="en">
-<head><link rel="icon" type="image/png" href="assets/favicon.png">
-
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
- <div class="login-logo-container">
-  <div class="indigis-logo">
-    <img src="assets/logo.png" alt="INDIGIS Logo">
-  </div>
-</div>
+  <title>INDIGIS — Secure Login</title>
 
-<h1 id="loginTitle" class="brand">INDIGIS</h1>
+  <!-- Favicon with cache buster -->
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=3">
 
-
-  <!-- Correct CSS file -->
+  <!-- Login CSS -->
   <link rel="stylesheet" href="login_v5.css" />
-  <meta name="robots" content="noindex" />
 </head>
 
 <body>
-<div class="planet-bg"></div>
-<div class="planet-overlay"></div>
 
-  <!-- FULLSCREEN EARTH GIF BACKGROUND -->
-  <div class="bg-image" aria-hidden="true">
-    <img src="assets/Earth.jpg"
-         alt="Earth"
-         onerror="this.src='https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif';">
+  <!-- TOP CENTERED LOGO (correct position) -->
+  <div class="login-logo-container">
+    <img class="login-logo" src="assets/logo.png" alt="INDIGIS Logo">
   </div>
 
-  <!-- DARK OVERLAY -->
-  <div class="bg-overlay" aria-hidden="true"></div>
+  <!-- FULLSCREEN EARTH BG -->
+  <div class="bg-image" aria-hidden="true">
+    <img src="assets/Earth.jpg" alt="Earth">
+  </div>
 
-  <!-- CENTER LOGIN CARD -->
-  <main class="login-center" role="main">
-    <section class="login-card" aria-labelledby="loginTitle">
+  <div class="bg-overlay"></div>
 
-      <h1 id="loginTitle" class="brand">INDIGIS</h1>
+  <!-- LOGIN CARD -->
+  <main class="login-center">
+    <section class="login-card">
+
+      <h1 class="brand">INDIGIS</h1>
       <p class="tagline">Secure Access Portal</p>
 
       <!-- LOGIN FORM -->
