@@ -1,5 +1,5 @@
 /* ============================
-   login_v5.css — FINAL FIXED
+   login_v5.css — FINAL (EARTH STYLE)
    ============================ */
 
 /* Reset */
@@ -14,33 +14,41 @@ html, body {
   background: #000;
 }
 
-/* FULLSCREEN GIF BACKGROUND */
-.bg-image {
+/* =========================================================
+   SPACEX-STYLE PLANET BACKGROUND (RIGHT SIDE)
+   ========================================================= */
+
+.planet-bg {
   position: fixed;
-  inset: 0;
-  z-index: 5;
-  overflow: hidden;
-  pointer-events: none;
+  top: 0;
+  right: 0;
+  width: 70vw;        /* Planet fills right portion */
+  height: 100vh;
+  background-image: url("assets/earth_hd.jpg"); /* <-- Change name to your file */
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  z-index: -3;
 }
 
-.bg-video img {
-  position: absolute;
-  top: 50%;
-  right: -25%;
-  transform: translateY(-50%);
-  height: 50%;
-  width: 50;
-  object-fit: cover;
-  filter: brightness(0.45) saturate(1.1);
-}
-
-/* DARK OVERLAY */
-.bg-overlay {
+/* Fade from black → transparent → show planet */
+.planet-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0.95) 20%,
+    rgba(0,0,0,0.75) 40%,
+    rgba(0,0,0,0.0) 70%
+  );
   z-index: -2;
 }
+
+/* =========================================================
+   (OLD BACKGROUND BLOCK REMOVED — NO GIF NEEDED)
+   ========================================================= */
+
 
 /* CENTER LAYOUT */
 .login-center {
@@ -137,8 +145,14 @@ html, body {
 
 /* RESPONSIVE */
 @media (max-width: 740px) {
-  .bg-video img {
-    right: -45%;
-    height: 150%;
+
+  .planet-bg {
+    width: 100vw;
+    background-position: center;
+    opacity: 0.35; /* Make softer on mobile */
+  }
+
+  .planet-overlay {
+    background: rgba(0,0,0,0.8);
   }
 }
