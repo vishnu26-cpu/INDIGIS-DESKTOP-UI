@@ -88,7 +88,8 @@
       gap: 10px;
       z-index: 6;
     }
-   .brand-mark {
+   /* Hover Glow for INDIGIS Logo */
+.brand-mark {
   width: 48px;
   height: 48px;
   display: flex;
@@ -98,13 +99,27 @@
   overflow: hidden;
   background: transparent !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  transition: box-shadow .25s ease, transform .25s ease;
+  cursor: pointer;
 }
 
 .brand-mark img {
   width: 100%;
   height: 100%;
-  object-fit: contain;   /* FIXES distortion */
-  padding: 4px;          /* adds breathing space */
+  object-fit: contain;
+  padding: 4px;
+  transition: transform .25s ease;
+}
+
+/* HOVER EFFECT */
+.brand-mark:hover {
+  box-shadow: 0 0 16px rgba(41,121,255,0.55), 
+              0 0 28px rgba(123,97,255,0.45);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.brand-mark:hover img {
+  transform: scale(1.08);
 }
 
 
