@@ -479,50 +479,64 @@
   <script>
     // ===== cinematic modal demo (attach only once) =====
 (function() {
-  const modalBackdrop = document.getElementById("modalBackdrop");
-  const modalEmoji = document.getElementById("modalEmoji");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDesc = document.getElementById("modalDesc");
-  const closeModalBtn = document.getElementById("closeModalBtn");
+  // Modal elements (will be present in DOM after page load)
+  // We use getElementById below; ensure modal HTML is placed before </body> (it is)
+  function qs(id) { return document.getElementById(id); }
 
-  function openDemo(icon, title, desc) {
-    if (!modalBackdrop) return;
-    modalEmoji.textContent = icon;
-    modalTitle.textContent = title;
-    modalDesc.textContent = desc;
-    modalBackdrop.style.display = "flex";
+  const newBtn = qs("newWsBtn");
+  const openBtn = qs("openWsBtn");
+  const recentBtn = qs("recentWsBtn");
+
+  // openDemo will be defined later after modal exists in DOM; we will connect handlers once DOMContentLoaded
+  function attachHandlers() {
+    const modalBackdrop = qs("modalBackdrop");
+    const modalEmoji = qs("modalEmoji");
+    const modalTitle = qs("modalTitle");
+    const modalDesc = qs("modalDesc");
+    const closeModalBtn = qs("closeModalBtn");
+
+    function openDemo(icon, title, desc) {
+      if (!modalBackdrop) return;
+      if (modalEmoji) modalEmoji.textContent = icon;
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalDesc) modalDesc.textContent = desc;
+      modalBackdrop.style.display = "flex";
+    }
+
+    function closeDemo() {
+      if (modalBackdrop) modalBackdrop.style.display = "none";
+    }
+
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeDemo);
+    if (modalBackdrop) modalBackdrop.addEventListener("click", function(e){
+      if (e.target === modalBackdrop) closeDemo();
+    });
+
+    if (newBtn) newBtn.addEventListener("click", function() {
+      openDemo("🪄",
+        "New Workspace — Demo",
+        "1️⃣ Enter workspace name\n2️⃣ Select basemap & projection\n3️⃣ Click Create Workspace");
+    });
+
+    if (openBtn) openBtn.addEventListener("click", function() {
+      openDemo("📂",
+        "Open Workspace — Demo",
+        "1️⃣ Shows list of saved workspaces\n2️⃣ User selects workspace\n3️⃣ Workspace loads with previous settings");
+    });
+
+    if (recentBtn) recentBtn.addEventListener("click", function() {
+      openDemo("🕘",
+        "Recent Workspaces — Demo",
+        "1️⃣ Displays last 5 workspaces\n2️⃣ User picks one\n3️⃣ App resumes immediately");
+    });
   }
 
-  function closeDemo() { if (modalBackdrop) modalBackdrop.style.display = "none"; }
-
-  // wire up close controls
-  if (closeModalBtn) closeModalBtn.addEventListener("click", closeDemo);
-  if (modalBackdrop) modalBackdrop.addEventListener("click", function(e){
-    if (e.target === modalBackdrop) closeDemo();
-  });
-
-  // buttons — these IDs must exist in your HTML (you showed them earlier)
-  const newBtn = document.getElementById("newWsBtn");
-  const openBtn = document.getElementById("openWsBtn");
-  const recentBtn = document.getElementById("recentWsBtn");
-
-  if (newBtn) newBtn.addEventListener("click", function() {
-    openDemo("🪄",
-      "New Workspace — Demo",
-      "1️⃣ Enter workspace name\n2️⃣ Select basemap & projection\n3️⃣ Click Create Workspace");
-  });
-
-  if (openBtn) openBtn.addEventListener("click", function() {
-    openDemo("📂",
-      "Open Workspace — Demo",
-      "1️⃣ Shows list of saved workspaces\n2️⃣ User selects workspace\n3️⃣ Workspace loads with previous settings");
-  });
-
-  if (recentBtn) recentBtn.addEventListener("click", function() {
-    openDemo("🕘",
-      "Recent Workspaces — Demo",
-      "1️⃣ Displays last 5 workspaces\n2️⃣ User picks one\n3️⃣ App resumes immediately");
-  });
+  // ensure modal elements exist - wait for DOM content
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", attachHandlers);
+  } else {
+    attachHandlers();
+  }
 })();
 
     // --- preserve original app logic, updated to match new structure ---
@@ -530,53 +544,6 @@
       // not logged in -> go back
       window.location.href = 'index.html';
     }
-// Modal elements
-const modalBackdrop = document.getElementById("modalBackdrop");
-const modal = document.getElementById("indigisModal");
-const modalEmoji = document.getElementById("modalEmoji");
-const modalTitle = document.getElementById("modalTitle");
-const modalDesc = document.getElementById("modalDesc");
-const closeModalBtn = document.getElementById("closeModalBtn");
-
-// function to open cinematic modal
-function openDemo(emoji, title, desc) {
-  modalEmoji.textContent = emoji;
-  modalTitle.textContent = title;
-  modalDesc.textContent = desc;
-
-  modalBackdrop.style.display = "flex";
-}
-
-// close modal
-closeModalBtn.onclick = () => {
-  modalBackdrop.style.display = "none";
-};
-
-modalBackdrop.onclick = (e) => {
-  if (e.target === modalBackdrop) modalBackdrop.style.display = "none";
-};
-
-// attach button actions
-document.getElementById("newWsBtn").onclick = () =>
-  openDemo(
-    "🪄",
-    "Create New Workspace",
-    "Start a fresh workspace. Choose basemap, projection and workflow mode."
-  );
-
-document.getElementById("openWsBtn").onclick = () =>
-  openDemo(
-    "📂",
-    "Open Existing Workspace",
-    "Browse your saved INDIGIS workspaces and resume your project."
-  );
-
-document.getElementById("recentWsBtn").onclick = () =>
-  openDemo(
-    "🕘",
-    "Recent Workspaces",
-    "Quickly access the most recently used workspace sessions."
-  );
 
     // helpers
     const wsName = document.getElementById('wsName');
@@ -647,22 +614,22 @@ document.getElementById("recentWsBtn").onclick = () =>
     document.getElementById('templatesBtn').addEventListener('click', () => {
       alert('Workspace templates (coming soon)');
     });
-<!-- CINEMATIC MODAL (place this BEFORE </body>) -->
-<div class="indigis-modal-backdrop" id="modalBackdrop">
-  <div class="indigis-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-icon" aria-hidden="true">
-      <div class="pulse" aria-hidden="true"></div>
-      <span id="modalEmoji">✨</span>
-    </div>
-
-    <h2 id="modalTitle">Title</h2>
-    <p id="modalDesc">Description goes here.</p>
-
-    <button class="modal-close" id="closeModalBtn" type="button">Close</button>
-  </div>
-</div>
-
-
   </script>
+
+  <!-- CINEMATIC MODAL (placed outside script, before </body>) -->
+  <div class="indigis-modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="indigis-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-icon" aria-hidden="true">
+        <div class="pulse" aria-hidden="true"></div>
+        <span id="modalEmoji">✨</span>
+      </div>
+
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalDesc">Description goes here.</p>
+
+      <button class="modal-close" id="closeModalBtn" type="button">Close</button>
+    </div>
+  </div>
+
 </body>
 </html>
