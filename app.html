@@ -256,62 +256,60 @@
   <!-- -----------------------------------------
        HEADER
   ------------------------------------------ -->
-  <header class="top-hud">
+ <header class="top-hud">
 
-    <!-- LEFT: logo -->
-    <div class="hud-left app-logo-box">
-      <img src="assets/logo.png" class="app-logo" alt="INDIGIS Logo">
-      <div class="app-logo-text">
-        <span class="title">INDIGIS</span>
-        <span class="sub">Prototype</span>
-      </div>
+  <!-- LEFT: LOGO + MENUS -->
+  <div class="hud-left app-logo-box" style="display:flex; align-items:center; gap:24px;">
+
+    <!-- Logo -->
+    <img src="assets/logo.png" class="app-logo" alt="INDIGIS Logo">
+    <div class="app-logo-text">
+      <span class="title">INDIGIS</span>
+      <span class="sub">Prototype</span>
     </div>
 
-    <!-- CENTER: menus -->
-    <div class="hud-center" role="navigation" aria-label="Top menus">
-      <!-- Workspace menu -->
+    <!-- Menus placed correctly next to logo -->
+    <div class="hud-left-menus" style="display:flex; align-items:center; gap:18px;">
+
+      <!-- Workspace Menu -->
       <div class="menu-box">
-        <button id="workspaceMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false">
-          <span>Workspace</span>
-          <span aria-hidden="true">▾</span>
-        </button>
-        <div id="workspaceMenu" class="menu-dropdown" role="menu" aria-label="Workspace menu">
-          <div class="menu-item" role="menuitem" id="saveWorkspaceBtn">💾 Save Workspace</div>
-          <div class="menu-item" role="menuitem" id="saveAsWorkspaceBtn">📝 Save As…</div>
-          <div class="menu-item" role="menuitem" id="openRecentBtn">📂 Open Recent</div>
-          <div class="menu-item danger" role="menuitem" id="closeWorkspaceBtn">✖ Close Workspace</div>
+        <button class="menu-btn" id="workspaceMenuBtn">Workspace ▾</button>
+        <div class="menu-dropdown" id="workspaceMenu">
+          <div class="menu-item">💾 Save Workspace</div>
+          <div class="menu-item">📝 Save As…</div>
+          <div class="menu-item">📂 Open Recent</div>
+          <div class="menu-item danger">✖ Close Workspace</div>
         </div>
       </div>
 
-      <!-- User Mode menu -->
+      <!-- User Mode Menu -->
       <div class="menu-box">
-        <button id="modeMenuBtn" class="menu-btn" aria-haspopup="true" aria-expanded="false">
-          <span>User Mode</span>
-          <span aria-hidden="true">▾</span>
-        </button>
-        <div id="modeMenu" class="menu-dropdown" role="menu" aria-label="User mode menu">
-          <div class="menu-item small" role="menuitem" data-mode="basic">🟢 Basic</div>
-          <div class="menu-item small" role="menuitem" data-mode="intermediate">🔵 Intermediate</div>
-          <div class="menu-item small" role="menuitem" data-mode="advanced">🟣 Advanced</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: view toggle + logout -->
-    <div class="hud-right">
-      <div class="mode-toggle" title="Switch map view">
-        <span style="font-size:13px;color:var(--muted); margin-right:6px;">View</span>
-
-        <div id="mapToggle" class="switch" role="switch" aria-checked="false" tabindex="0" aria-label="Map view toggle">
-          <div class="label TwoD">2D</div>
-          <div class="label ThreeD">3D</div>
-          <div class="knob" aria-hidden="true"></div>
+        <button class="menu-btn" id="modeMenuBtn">User Mode ▾</button>
+        <div class="menu-dropdown" id="modeMenu">
+          <div class="menu-item">🟢 Basic</div>
+          <div class="menu-item">🔵 Intermediate</div>
+          <div class="menu-item">🟣 Advanced</div>
         </div>
       </div>
 
-      <button id="logoutBtn" class="icon-btn" title="Logout" aria-label="Logout">🚪</button>
     </div>
-  </header>
+  </div>
+
+  <!-- RIGHT SIDE: VIEW TOGGLE + LOGOUT -->
+  <div class="hud-right">
+    <div class="mode-toggle">
+      <span style="font-size:13px;color:var(--muted)">View</span>
+      <div id="mapToggle" class="switch">
+        <div class="label TwoD">2D</div>
+        <div class="label ThreeD">3D</div>
+        <div class="knob"></div>
+      </div>
+    </div>
+    <button id="logoutBtn" class="icon-btn">🚪</button>
+  </div>
+
+</header>
+
 
   <!-- -----------------------------------------
        MAIN AREA
