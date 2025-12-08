@@ -15,18 +15,12 @@
   <link rel="stylesheet" href="https://unpkg.com/cesium/Build/Cesium/Widgets/widgets.css">
 
   <style>
-    /* small layout safety in case theme vars missing */
-    :root {
-      --hud-height: 56px;
-      --status-height: 36px;
-      --muted: #9aa6b2;
-      --text: #e6eef8;
-      --vector: #2979FF;
+    /* --------- layout + map containers --------- */
+    :root{
+      --hud-height:56px;
+      --status-height:36px;
     }
-
-    /* -----------------------------------------
-       MAP AREA
-    ------------------------------------------*/
+    html,body{height:100%;margin:0;font-family:Inter,system-ui, -apple-system, "Segoe UI", Roboto, Arial;color:var(--text)}
     #olMap, #cesiumContainer {
       width: 100%;
       height: calc(100vh - var(--hud-height) - var(--status-height) - 32px);
@@ -42,75 +36,46 @@
       padding:10px 12px;
     }
 
-    /* -----------------------------------------
-       PREMIUM LOGO
-    ------------------------------------------*/
-    .app-logo-box {
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .app-logo {
-      width:44px;
-      height:44px;
-      object-fit:contain;
-      border-radius:12px;
-      padding:4px;
-      background:rgba(255,255,255,0.04);
-      box-shadow:
-        0 0 10px rgba(41,121,255,0.45),
-        0 0 18px rgba(123,97,255,0.35);
-    }
-
-    .app-logo-text .title {
-      font-size:18px;
-      font-weight:700;
-      letter-spacing:0.4px;
-      color:var(--text);
-    }
-    .app-logo-text .sub {
-      font-size:12px;
-      margin-top:2px;
-      color:var(--muted);
-    }
-
-    /* -----------------------------------------
-       PREMIUM HEADER GLASS EFFECT
-    ------------------------------------------*/
+    /* --------- header/logo/menu styles --------- */
     .top-hud {
       height: var(--hud-height);
       display:flex;
       align-items:center;
       justify-content:space-between;
+      padding:6px 14px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.18));
+      backdrop-filter: blur(12px) saturate(1.4);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 6px 20px rgba(0,0,0,0.45);
       gap:12px;
-      padding:8px 14px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12));
-      backdrop-filter:blur(12px) saturate(1.4);
-      border-bottom:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 6px 20px rgba(0,0,0,0.35);
-      z-index: 50;
     }
 
-    /* -----------------------------------------
-       HUD CENTER (menus)
-    ------------------------------------------*/
-    .hud-center {
+    /* left cluster: logo + menus */
+    .hud-left {
       display:flex;
       align-items:center;
-      gap:18px;
-      margin: 0 auto;
+      gap:16px;
     }
 
-    /* ---- Hybrid Glass + Glow Dropdown ---- */
-    .menu-box {
-      position: relative;
-      display:inline-block;
+    .app-logo-box { display:flex; align-items:center; gap:12px; }
+    .app-logo { width:44px; height:44px; object-fit:contain; border-radius:12px; padding:4px; background:rgba(255,255,255,0.04); box-shadow:0 0 10px rgba(41,121,255,0.45),0 0 18px rgba(123,97,255,0.35); }
+    .app-logo-text .title { font-size:18px; font-weight:700; letter-spacing:0.4px; }
+    .app-logo-text .sub { font-size:12px; color:var(--muted); margin-top:2px; }
+
+    /* hud-left-menus holds the dropdowns — overflow visible to avoid clipping */
+    .hud-left-menus {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      overflow:visible; /* allow dropdowns to show */
     }
+
+    .menu-box { position: relative; overflow: visible; }
 
     .menu-btn {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       padding: 8px 14px;
       border-radius: 10px;
       color: var(--text);
@@ -118,152 +83,67 @@
       cursor: pointer;
       backdrop-filter: blur(6px);
       transition: 0.18s ease;
-      display:flex;
-      align-items:center;
-      gap:8px;
     }
-
-    .menu-btn:focus { outline: 2px solid rgba(41,121,255,0.18); }
-
-    .menu-btn:hover {
-      background: rgba(41,121,255,0.12);
-      box-shadow: 0 6px 18px rgba(41,121,255,0.12);
-    }
+    .menu-btn:hover { background: rgba(41,121,255,0.12); box-shadow: 0 0 12px rgba(41,121,255,0.20); }
 
     .menu-dropdown {
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      width: 220px;
-      background: rgba(8,12,18,0.8);
-      border: 1px solid rgba(255,255,255,0.05);
+      min-width: 180px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
       border-radius: 10px;
-      backdrop-filter: blur(10px) saturate(1.05);
-      padding: 6px 4px;
+      backdrop-filter: blur(8px);
+      padding: 6px 0;
       display: none;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-      animation: fadeDown 0.22s ease;
-      z-index: 120;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+      z-index: 9999;
+      animation: dropdownPop .18s cubic-bezier(.2,.9,.2,1);
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes dropdownPop {
+      from { opacity:0; transform: translateY(-6px); }
+      to   { opacity:1; transform: translateY(0); }
     }
 
-    .menu-item {
-      padding: 10px 14px;
-      font-size: 14px;
-      cursor: pointer;
-      color: var(--text);
-      border-radius: 8px;
-      transition: 0.16s ease;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+    .menu-item { padding:10px 14px; font-size:14px; cursor:pointer; transition:0.15s; color:var(--text); }
+    .menu-item:hover { background: rgba(41,121,255,0.16); color:#fff; }
+    .menu-item.danger { color:#ffbdbd; }
+    .menu-item.danger:hover { background: rgba(255,80,80,0.18); }
 
-    .menu-item:hover {
-      background: rgba(41,121,255,0.14);
-      color: #fff;
-      box-shadow: inset 0 0 18px rgba(41,121,255,0.06);
-    }
+    /* center area placeholder (keeps header balanced) */
+    .hud-center { flex:1; display:flex; justify-content:center; align-items:center; pointer-events:none; }
 
-    .menu-item.danger { color: #ffb6b6; }
-    .menu-item.small { font-size:13px; color:var(--muted); gap:8px; }
+    /* right cluster */
+    .hud-right { display:flex; align-items:center; gap:12px; }
 
-    /* -----------------------------------------
-       PREMIUM TOGGLE SWITCH
-    ------------------------------------------*/
-    .mode-toggle {
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      user-select:none;
-      font-weight:600;
-      margin-right:8px;
-    }
-
-    .switch {
-      display:inline-grid;
-      grid-template-columns:1fr 1fr;
-      background:rgba(255,255,255,0.04);
-      padding:4px;
-      border-radius:999px;
-      width:100px;
-      position:relative;
-      cursor:pointer;
-      backdrop-filter:blur(4px);
-    }
-
-    .switch .label {
-      text-align:center;
-      font-size:13px;
-      font-weight:600;
-      z-index:2;
-      color:var(--muted);
-    }
-
-    .switch .knob {
-      position:absolute;
-      top:4px;
-      left:4px;
-      height:calc(100% - 8px);
-      width:44px;
-      border-radius:999px;
-      background:linear-gradient(180deg, #0a84ff, #006fe6);
-      box-shadow:0 6px 14px rgba(10,132,255,0.38);
-      transition:transform .24s cubic-bezier(.2,.9,.3,1);
-    }
-/* Ensure dropdowns show properly when placed near logo */
-.hud-left-menus {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  overflow: visible !important;
-}
-
-.menu-box {
-  position: relative;
-  overflow: visible;
-}
-
-.menu-dropdown {
-  position: absolute;
-  top: 42px;
-  left: 0;
-  overflow: visible;
-  z-index: 9999;
-}
-
-    .switch.mode-3d .knob { transform:translateX(48px); }
+    /* toggle + knob */
+    .mode-toggle { display:inline-flex; align-items:center; gap:8px; user-select:none; font-weight:600; }
+    .switch { display:inline-grid; grid-template-columns:1fr 1fr; background:rgba(255,255,255,0.06); padding:4px; border-radius:999px; width:92px; position:relative; cursor:pointer; }
+    .switch .label { text-align:center; font-size:13px; color:var(--muted); z-index:2; }
+    .switch .knob { position:absolute; top:4px; bottom:4px; left:4px; width:44px; border-radius:999px; background: linear-gradient(180deg,#0a84ff,#006fe6); transition: transform .22s; box-shadow:0 6px 14px rgba(10,132,255,0.18); }
+    .switch.mode-3d .knob { transform: translateX(44px); }
     .switch.mode-3d .label.ThreeD { color:#fff; }
     .switch:not(.mode-3d) .label.TwoD { color:#fff; }
 
-    /* small icon-button */
-    .icon-btn {
-      margin-left:10px;
-      background:transparent;
-      border:0;
-      padding:8px;
-      border-radius:8px;
-      cursor:pointer;
-      color:var(--text);
-      font-size:16px;
-    }
-    .icon-btn:hover { background: rgba(255,255,255,0.03); }
+    /* small icon button */
+    .icon-btn { background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;font-size:18px; }
+    .icon-btn:hover { background: rgba(255,255,255,0.02); }
 
-    /* keep layout responsive */
-    @media (max-width: 980px) {
-      .hud-center { display:none; }
-      .app-logo-text .title { display:none; }
-    }
+    /* main area / panels (your styles are in styles.css — keep this minimal) */
+    .main-area{display:flex;gap:12px;padding:14px;flex:1;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .left-panel{width:260px;min-width:260px}
+    .right-panel{width:340px;min-width:340px}
+    .map-area{flex:1;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.35);background:var(--ui-surface)}
+
+    /* footer/status */
+    .status-ribbon{height:var(--status-height);display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-top:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(0,0,0,0.06), transparent)}
   </style>
 </head>
+
 <body>
 <script>
-  // simple guard checks
   if (localStorage.getItem('indigis_logged_in') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -274,68 +154,60 @@
 
 <div id="app" class="theme-auto">
 
-  <!-- -----------------------------------------
-       HEADER
-  ------------------------------------------ -->
- <header class="top-hud">
-
-  <!-- LEFT: LOGO + MENUS -->
-  <div class="hud-left app-logo-box" style="display:flex; align-items:center; gap:24px;">
-
-    <!-- Logo -->
-    <img src="assets/logo.png" class="app-logo" alt="INDIGIS Logo">
-    <div class="app-logo-text">
-      <span class="title">INDIGIS</span>
-      <span class="sub">Prototype</span>
-    </div>
-
-    <!-- Menus placed correctly next to logo -->
-    <div class="hud-left-menus" style="display:flex; align-items:center; gap:18px;">
-
-      <!-- Workspace Menu -->
-      <div class="menu-box">
-        <button class="menu-btn" id="workspaceMenuBtn">Workspace ▾</button>
-        <div class="menu-dropdown" id="workspaceMenu">
-          <div class="menu-item">💾 Save Workspace</div>
-          <div class="menu-item">📝 Save As…</div>
-          <div class="menu-item">📂 Open Recent</div>
-          <div class="menu-item danger">✖ Close Workspace</div>
+  <!-- -------- HEADER -------- -->
+  <header class="top-hud">
+    <div class="hud-left">
+      <div class="app-logo-box">
+        <img src="assets/logo.png" class="app-logo" alt="INDIGIS Logo">
+        <div class="app-logo-text">
+          <span class="title">INDIGIS</span>
+          <span class="sub">Prototype</span>
         </div>
       </div>
 
-      <!-- User Mode Menu -->
-      <div class="menu-box">
-        <button class="menu-btn" id="modeMenuBtn">User Mode ▾</button>
-        <div class="menu-dropdown" id="modeMenu">
-          <div class="menu-item">🟢 Basic</div>
-          <div class="menu-item">🔵 Intermediate</div>
-          <div class="menu-item">🟣 Advanced</div>
+      <!-- menus (next to logo) -->
+      <div class="hud-left-menus" aria-hidden="false">
+        <div class="menu-box">
+          <button class="menu-btn" id="workspaceMenuBtn" type="button">Workspace ▾</button>
+          <div class="menu-dropdown" id="workspaceMenu" role="menu" aria-hidden="true">
+            <div class="menu-item" id="saveWorkspace">💾 Save Workspace</div>
+            <div class="menu-item" id="saveAsWorkspace">📝 Save As…</div>
+            <div class="menu-item" id="openRecent">📂 Open Recent</div>
+            <div class="menu-item danger" id="closeWorkspace">✖ Close Workspace</div>
+          </div>
+        </div>
+
+        <div class="menu-box">
+          <button class="menu-btn" id="modeMenuBtn" type="button">User Mode ▾</button>
+          <div class="menu-dropdown" id="modeMenu" role="menu" aria-hidden="true">
+            <div class="menu-item" data-mode="basic">🟢 Basic</div>
+            <div class="menu-item" data-mode="intermediate">🔵 Intermediate</div>
+            <div class="menu-item" data-mode="advanced">🟣 Advanced</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- center spacer so menus stay left -->
+    <div class="hud-center"></div>
+
+    <div class="hud-right">
+      <div class="mode-toggle" title="Switch map view">
+        <span style="font-size:13px;color:var(--muted);margin-right:6px">View</span>
+        <div id="mapToggle" class="switch" role="switch" aria-checked="false" tabindex="0">
+          <div class="label TwoD">2D</div>
+          <div class="label ThreeD">3D</div>
+          <div class="knob" aria-hidden="true"></div>
         </div>
       </div>
 
+      <button id="logoutBtn" class="icon-btn" title="Logout">🚪</button>
     </div>
-  </div>
+  </header>
 
-  <!-- RIGHT SIDE: VIEW TOGGLE + LOGOUT -->
-  <div class="hud-right">
-    <div class="mode-toggle">
-      <span style="font-size:13px;color:var(--muted)">View</span>
-      <div id="mapToggle" class="switch">
-        <div class="label TwoD">2D</div>
-        <div class="label ThreeD">3D</div>
-        <div class="knob"></div>
-      </div>
-    </div>
-    <button id="logoutBtn" class="icon-btn">🚪</button>
-  </div>
-
-</header>
-
-
-  <!-- -----------------------------------------
-       MAIN AREA
-  ------------------------------------------ -->
+  <!-- -------- MAIN AREA -------- -->
   <div class="main-area">
+
     <aside class="left-panel">
       <div class="panel">
         <div class="panel-header">Layers</div>
@@ -367,9 +239,7 @@
     </aside>
   </div>
 
-  <!-- -----------------------------------------
-       FOOTER
-  ------------------------------------------ -->
+  <!-- -------- FOOTER -------- -->
   <footer class="status-ribbon">
     <div class="status-left">
       <span id="coords">Lat: — , Lon: —</span>
@@ -382,17 +252,15 @@
   </footer>
 </div>
 
-<!-- -----------------------------------------
-     SCRIPTS
------------------------------------------- -->
+<!-- libs -->
 <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
 <script src="https://unpkg.com/cesium/Build/Cesium/Cesium.js"></script>
 
 <script>
+/* ------------------------------
+   Map (OL / Cesium) logic (unchanged)
+   ------------------------------ */
 (function () {
-  /* ------------------------------
-     Map initialization (OpenLayers + Cesium)
-     ------------------------------ */
   const olEl = document.getElementById('olMap');
   const cesiumEl = document.getElementById('cesiumContainer');
   const coordsEl = document.getElementById('coords');
@@ -461,16 +329,13 @@
         const canvas = cesiumViewer.scene.canvas;
         const center = new Cesium.Cartesian2(canvas.clientWidth/2, canvas.clientHeight/2);
         const cart = cesiumViewer.camera.pickEllipsoid(center);
-
         if (cart) {
           const c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cart);
           coordsEl.textContent = `Lat: ${Cesium.Math.toDegrees(c.latitude).toFixed(5)} , Lon: ${Cesium.Math.toDegrees(c.longitude).toFixed(5)}`;
         }
-
-        const height = cesiumViewer.camera.positionCartographic.height || 0;
-        scaleEl.textContent = `${Math.round(height).toLocaleString()} m`;
-        mapInfo.textContent = `Mode: 3D · Height ${Math.round(height).toLocaleString()} m`;
-      } catch (e) { /* ignore transient errors */ }
+        scaleEl.textContent = `${Math.round(cesiumViewer.camera.positionCartographic.height).toLocaleString()} m`;
+        mapInfo.textContent = `Mode: 3D · Height ${Math.round(cesiumViewer.camera.positionCartographic.height).toLocaleString()} m`;
+      } catch (e) { /* ignore */ }
     }, 300);
   }
 
@@ -495,113 +360,74 @@
     mapInfo.textContent = "Mode: 3D";
   }
 
-  toggle.addEventListener('click', () => {
-    is3D ? show2D() : show3D();
-  });
-
-  toggle.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggle.click();
-    }
-  });
+  toggle.addEventListener('click', () => { is3D ? show2D() : show3D(); });
+  toggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle.click(); } });
 
   initOL();
-
-  window.addEventListener('resize', () => {
-    if (olMap) olMap.updateSize();
-    if (cesiumViewer) cesiumViewer.resize();
-  });
+  window.addEventListener('resize', () => { if (olMap) olMap.updateSize(); if (cesiumViewer) cesiumViewer.resize(); });
 
   document.getElementById('logoutBtn').addEventListener('click', () => {
     localStorage.removeItem('indigis_logged_in');
     window.location.href = "index.html";
   });
 
-  /* ------------------------------
-     Dropdown menu behavior & actions
-     ------------------------------ */
-  function toggleMenu(menuBtn, menuEl) {
-    const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    // close all
-    document.querySelectorAll('.menu-dropdown').forEach(d => d.style.display = 'none');
-    document.querySelectorAll('.menu-box > .menu-btn').forEach(b => b.setAttribute('aria-expanded','false'));
-    // toggle requested
-    if (!expanded) {
-      menuEl.style.display = 'block';
-      menuBtn.setAttribute('aria-expanded','true');
-    } else {
-      menuEl.style.display = 'none';
-      menuBtn.setAttribute('aria-expanded','false');
-    }
+})();
+
+/* ------------------------------
+   Dropdown menu toggles (WORKING)
+   ------------------------------ */
+function toggleMenu(menuId, btn) {
+  const menu = document.getElementById(menuId);
+  const wasOpen = menu.style.display === "block";
+  // close all
+  document.querySelectorAll(".menu-dropdown").forEach(m => {
+    m.style.display = "none";
+    m.setAttribute('aria-hidden','true');
+  });
+  // open if was closed
+  if (!wasOpen) {
+    menu.style.display = "block";
+    menu.setAttribute('aria-hidden','false');
   }
+}
 
-  // attach menu buttons
-  const workspaceMenuBtn = document.getElementById('workspaceMenuBtn');
-  const workspaceMenu = document.getElementById('workspaceMenu');
-  const modeMenuBtn = document.getElementById('modeMenuBtn');
-  const modeMenu = document.getElementById('modeMenu');
+// attach buttons
+document.getElementById("workspaceMenuBtn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu("workspaceMenu");
+});
+document.getElementById("modeMenuBtn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu("modeMenu");
+});
 
-  if (workspaceMenuBtn && workspaceMenu) {
-    workspaceMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu(workspaceMenuBtn, workspaceMenu);
-    });
+// close when clicking outside
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".menu-box")) {
+    document.querySelectorAll(".menu-dropdown").forEach(m => { m.style.display = "none"; m.setAttribute('aria-hidden','true'); });
   }
-  if (modeMenuBtn && modeMenu) {
-    modeMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu(modeMenuBtn, modeMenu);
-    });
+});
+
+// simple menu item handlers (placeholders — wire into your app logic)
+document.getElementById("saveWorkspace").addEventListener("click", () => alert("Save workspace (placeholder)"));
+document.getElementById("saveAsWorkspace").addEventListener("click", () => alert("Save As… (placeholder)"));
+document.getElementById("openRecent").addEventListener("click", () => alert("Open Recent (placeholder)"));
+document.getElementById("closeWorkspace").addEventListener("click", () => {
+  // clear workspace created flag (example)
+  if (confirm("Close workspace?")) {
+    localStorage.removeItem('indigis_workspace_created');
+    window.location.href = "workspace.html";
   }
+});
 
-  // close menus on outside click
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.menu-box')) {
-      document.querySelectorAll('.menu-dropdown').forEach(d => d.style.display = 'none');
-      document.querySelectorAll('.menu-box > .menu-btn').forEach(b => b.setAttribute('aria-expanded','false'));
-    }
+// user mode selection
+document.querySelectorAll("#modeMenu .menu-item").forEach(item => {
+  item.addEventListener("click", () => {
+    const m = item.dataset.mode || item.textContent;
+    alert("User mode set to: " + m);
+    document.querySelectorAll(".menu-dropdown").forEach(mn => mn.style.display = "none");
   });
-
-  // Workspace menu actions (placeholders: hook to real features later)
-  const saveWorkspaceBtn = document.getElementById('saveWorkspaceBtn');
-  const saveAsWorkspaceBtn = document.getElementById('saveAsWorkspaceBtn');
-  const openRecentBtn = document.getElementById('openRecentBtn');
-  const closeWorkspaceBtn = document.getElementById('closeWorkspaceBtn');
-
-  if (saveWorkspaceBtn) saveWorkspaceBtn.addEventListener('click', () => {
-    // simple demo feedback
-    alert('Save Workspace — demo placeholder (implement save logic).');
-  });
-  if (saveAsWorkspaceBtn) saveAsWorkspaceBtn.addEventListener('click', () => {
-    alert('Save As… — demo placeholder (implement Save As workflow).');
-  });
-  if (openRecentBtn) openRecentBtn.addEventListener('click', () => {
-    alert('Open Recent — demo placeholder (show recent list).');
-  });
-  if (closeWorkspaceBtn) closeWorkspaceBtn.addEventListener('click', () => {
-    const ok = confirm('Close workspace? This will keep you on login screen.');
-    if (ok) {
-      localStorage.removeItem('indigis_workspace_created');
-      window.location.href = 'index.html';
-    }
-  });
-
-  // User mode selection
-  document.querySelectorAll('#modeMenu .menu-item').forEach(it => {
-    it.addEventListener('click', () => {
-      const mode = it.getAttribute('data-mode');
-      // store chosen mode; you can react to this elsewhere in app
-      localStorage.setItem('indigis_user_mode', mode);
-      // visual feedback
-      alert(`User mode set to: ${mode}`);
-      // close menu
-      modeMenu.style.display = 'none';
-      modeMenuBtn.setAttribute('aria-expanded','false');
-    });
-  });
-
-})(); // end IIFE
+});
 </script>
 
 </body>
