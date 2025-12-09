@@ -464,6 +464,76 @@ document.querySelectorAll(".tool-section").forEach(section => {
 
 }
 </script>
+<script>
+/* ============================================================
+   RIGHT PANEL — TAB SWITCHING
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+
+  const tabs = document.querySelectorAll(".rp-tab");
+  const views = document.querySelectorAll(".rp-view");
+
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+      tabs.forEach(t => t.classList.remove("active"));
+      views.forEach(v => v.classList.add("hidden"));
+
+      tab.classList.add("active");
+
+      const panelId = "rp-" + tab.dataset.tab;
+      document.getElementById(panelId).classList.remove("hidden");
+    });
+  });
+
+});
+</script>
+
+
+<script>
+/* ============================================================
+   CINEMATIC TOOLTIP ENGINE — (data-tip)
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+
+  let tooltip;
+
+  document.querySelectorAll("[data-tip]").forEach(el => {
+
+    el.addEventListener("mouseenter", () => {
+      const text = el.dataset.tip;
+
+      tooltip = document.createElement("div");
+      tooltip.className = "indigis-tooltip";
+      tooltip.innerText = text;
+
+      document.body.appendChild(tooltip);
+
+      const rect = el.getBoundingClientRect();
+      tooltip.style.left = rect.left + rect.width / 2 + "px";
+      tooltip.style.top = rect.top - 12 + "px";
+
+      requestAnimationFrame(() => tooltip.classList.add("show"));
+    });
+
+    el.addEventListener("mousemove", (e) => {
+      if (!tooltip) return;
+      tooltip.style.left = e.pageX + 12 + "px";
+      tooltip.style.top = e.pageY + 12 + "px";
+    });
+
+    el.addEventListener("mouseleave", () => {
+      if (!tooltip) return;
+      tooltip.classList.remove("show");
+      setTimeout(() => tooltip?.remove(), 200);
+    });
+
+  });
+
+});
+</script>
 
 </body>
 </html>

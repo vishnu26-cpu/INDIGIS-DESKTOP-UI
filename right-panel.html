@@ -1,23 +1,34 @@
 <aside class="right-panel">
 
-  <button class="rp-tab active" data-tab="inspector"
-        data-tip="View & edit visual styling of the selected layer or feature.">
-  Inspector
-</button>
+  <!-- ===========================
+       TOP TABS
+  ============================ -->
+  <div class="rp-tabs">
+    <button class="rp-tab active"
+            data-tab="inspector"
+            data-tip="View & edit visual styling of the selected layer or feature.">
+      Inspector
+    </button>
 
-<button class="rp-tab" data-tab="metadata"
-        data-tip="View dataset information like source, CRS, extent, and description.">
-  Metadata
-</button>
+    <button class="rp-tab"
+            data-tab="metadata"
+            data-tip="View dataset information like source, CRS, extent, and description.">
+      Metadata
+    </button>
 
-<button class="rp-tab" data-tab="attributes"
-        data-tip="View attribute table for selected features.">
-  Attributes
-</button>
+    <button class="rp-tab"
+            data-tab="attributes"
+            data-tip="View attribute table for selected features.">
+      Attributes
+    </button>
+  </div>
 
 
-  <!-- ==== INSPECTOR ==== -->
+  <!-- ===========================
+       INSPECTOR VIEW
+  ============================ -->
   <div class="rp-view" id="rp-inspector">
+
     <h3 class="rp-title">Inspector</h3>
 
     <div class="rp-field">
@@ -46,10 +57,15 @@
     </div>
 
     <button class="rp-apply">Apply Style</button>
+
   </div>
 
-  <!-- ==== METADATA ==== -->
+
+  <!-- ===========================
+       METADATA VIEW
+  ============================ -->
   <div class="rp-view hidden" id="rp-metadata">
+
     <h3 class="rp-title">Metadata</h3>
 
     <div class="rp-field">
@@ -66,10 +82,15 @@
       <label>Extent</label>
       <input placeholder="Bounding box…" />
     </div>
+
   </div>
 
-  <!-- ==== ATTRIBUTES ==== -->
+
+  <!-- ===========================
+       ATTRIBUTES VIEW
+  ============================ -->
   <div class="rp-view hidden" id="rp-attributes">
+
     <h3 class="rp-title">Attributes</h3>
 
     <table class="rp-attr-table">
@@ -82,49 +103,6 @@
         <tr><td>Type</td><td>—</td></tr>
       </tbody>
     </table>
-    <script>
-/* =====================================================
-   INDIGIS CUSTOM TOOLTIP ENGINE
-===================================================== */
-
-let tooltip;
-document.querySelectorAll("[data-tip]").forEach(element => {
-
-  element.addEventListener("mouseenter", (e) => {
-    const text = element.dataset.tip;
-
-    // Create tooltip
-    tooltip = document.createElement("div");
-    tooltip.className = "indigis-tooltip";
-    tooltip.innerText = text;
-    document.body.appendChild(tooltip);
-
-    // Position
-    const rect = element.getBoundingClientRect();
-    tooltip.style.left = rect.left + rect.width/2 + "px";
-    tooltip.style.top = rect.top - 10 + "px";
-
-    requestAnimationFrame(() => {
-      tooltip.classList.add("show");
-    });
-  });
-
-  element.addEventListener("mousemove", (e) => {
-    if (tooltip) {
-      tooltip.style.left = e.pageX + 12 + "px";
-      tooltip.style.top = e.pageY + 12 + "px";
-    }
-  });
-
-  element.addEventListener("mouseleave", () => {
-    if (tooltip) {
-      tooltip.classList.remove("show");
-      setTimeout(() => tooltip?.remove(), 200);
-    }
-  });
-
-});
-</script>
 
   </div>
 
