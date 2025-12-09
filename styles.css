@@ -335,18 +335,3 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
 .modal-close:hover { transform: translateY(-2px); }
 /* === FIX DROPDOWN MENU VISIBILITY === */
 
-.top-hud,
-.hud-left,
-.hud-left-menus,
-.menu-box {
-    overflow: visible !important;
-    position: relative !important;
-    z-index: 9999 !important;
-}
-
-.menu-dropdown {
-    position: absolute !important;
-    z-index: 999999 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
