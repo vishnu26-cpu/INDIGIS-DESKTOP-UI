@@ -369,8 +369,18 @@ function initLeftPanel() {
       });
     });
   }
+document.querySelectorAll(".tool-section").forEach(section => {
+  const header = section.querySelector(".section-header");
+  const list = section.querySelector(".tool-list");
+
+  header.addEventListener("click", () => {
+    const isOpen = list.getAttribute("aria-hidden") === "false";
+    list.setAttribute("aria-hidden", isOpen ? "true" : "false");
+  });
+});
 
   console.log("LEFT PANEL READY ✔️");
+
 }
 </script>
 

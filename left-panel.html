@@ -1,130 +1,106 @@
-<div id="leftPanel" class="left-panel">
+<div class="left-panel">
 
-  <!-- SEARCH -->
+  <!-- Search -->
   <div class="lp-search-wrap">
     <input id="lpSearch" class="lp-search" placeholder="Search tools…">
   </div>
 
-  <!-- 1. MAP TOOLS -->
+  <!-- MAP TOOLS -->
   <div class="tool-section">
-    <div class="section-header grad-vector">
-      <span>Map Tools</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="map-intro">Map Intro</button></li>
-      <li><button class="tool-btn" data-tool="open-map">Open Map</button></li>
-      <li><button class="tool-btn" data-tool="close-map">Close Map</button></li>
-      <li><button class="tool-btn" data-tool="import-map">Import Map</button></li>
-      <li><button class="tool-btn" data-tool="export-map">Export Map</button></li>
-      <li><button class="tool-btn" data-tool="inset-map">Inset Map</button></li>
-      <li><button class="tool-btn" data-tool="overview-map">Overview Map</button></li>
-      <li><button class="tool-btn" data-tool="3d-view">3D View</button></li>
+    <div class="section-header" style="background: var(--clr-maptools);">Map Tools</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn map-1">Map Intro</button></li>
+      <li><button class="tool-btn map-2">Open Map</button></li>
+      <li><button class="tool-btn map-3">Close Map</button></li>
+      <li><button class="tool-btn map-4">Import / Export Map</button></li>
     </ul>
   </div>
 
-  <!-- 2. LAYER MANAGEMENT -->
+  <!-- LAYER MANAGEMENT -->
   <div class="tool-section">
-    <div class="section-header grad-vector">
-      <span>Layer Management</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="add-layer">Add Layer</button></li>
-      <li><button class="tool-btn" data-tool="remove-layer">Remove Layer</button></li>
-      <li><button class="tool-btn" data-tool="layer-style">Layer Style</button></li>
-      <li><button class="tool-btn" data-tool="reorder-layer">Reorder Layers</button></li>
+    <div class="section-header" style="background: var(--clr-vector);">Layer Management</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn vector-1">Add Layer</button></li>
+      <li><button class="tool-btn vector-2">Remove Layer</button></li>
+      <li><button class="tool-btn vector-3">Layer Style</button></li>
+      <li><button class="tool-btn vector-4">Reorder Layers</button></li>
     </ul>
   </div>
 
-  <!-- 3. DIGITIZATION -->
+  <!-- DIGITIZATION -->
   <div class="tool-section">
-    <div class="section-header grad-vector">
-      <span>Digitization</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="draw-point">Draw Point</button></li>
-      <li><button class="tool-btn" data-tool="draw-line">Draw Line</button></li>
-      <li><button class="tool-btn" data-tool="draw-polygon">Draw Polygon</button></li>
-      <li><button class="tool-btn" data-tool="freehand">Freehand</button></li>
-      <li><button class="tool-btn" data-tool="topology">Topology Tools</button></li>
+    <div class="section-header" style="background: var(--clr-digitize);">Digitization</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn digitize-1">Draw Point</button></li>
+      <li><button class="tool-btn digitize-2">Draw Line</button></li>
+      <li><button class="tool-btn digitize-3">Draw Polygon</button></li>
+      <li><button class="tool-btn digitize-4">Freehand</button></li>
     </ul>
   </div>
 
-  <!-- 4. VECTOR PROCESSING -->
+  <!-- VECTOR PROCESSING -->
   <div class="tool-section">
-    <div class="section-header grad-vector">
-      <span>Vector Processing</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="buffer">Buffer</button></li>
-      <li><button class="tool-btn" data-tool="clip">Clip</button></li>
-      <li><button class="tool-btn" data-tool="intersection">Intersection</button></li>
-      <li><button class="tool-btn" data-tool="union">Union</button></li>
-      <li><button class="tool-btn" data-tool="difference">Difference</button></li>
+    <div class="section-header" style="background: var(--clr-vector);">Vector Processing</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn vector-1">Buffer</button></li>
+      <li><button class="tool-btn vector-2">Clip</button></li>
+      <li><button class="tool-btn vector-3">Intersection</button></li>
+      <li><button class="tool-btn vector-4">Union</button></li>
     </ul>
   </div>
 
-  <!-- 5. RASTER PROCESSING -->
+  <!-- RASTER PROCESSING -->
   <div class="tool-section">
-    <div class="section-header grad-raster">
-      <span>Raster Processing</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="raster-clip">Raster Clip</button></li>
-      <li><button class="tool-btn" data-tool="merge">Merge Rasters</button></li>
-      <li><button class="tool-btn" data-tool="raster-calc">Raster Calculator</button></li>
-      <li><button class="tool-btn" data-tool="interpolation">Interpolation</button></li>
+    <div class="section-header" style="background: var(--clr-raster);">Raster Processing</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn raster-1">Raster Clip</button></li>
+      <li><button class="tool-btn raster-2">Merge Rasters</button></li>
+      <li><button class="tool-btn raster-3">Raster Calculator</button></li>
+      <li><button class="tool-btn raster-4">Interpolation</button></li>
     </ul>
   </div>
 
-  <!-- 6. TERRAIN -->
+  <!-- TERRAIN -->
   <div class="tool-section">
-    <div class="section-header grad-terrain">
-      <span>Terrain</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="slope">Slope</button></li>
-      <li><button class="tool-btn" data-tool="aspect">Aspect</button></li>
-      <li><button class="tool-btn" data-tool="hillshade">Hillshade</button></li>
-      <li><button class="tool-btn" data-tool="elev-profile">Elevation Profile</button></li>
+    <div class="section-header" style="background: var(--clr-terrain);">Terrain</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn terrain-1">Slope</button></li>
+      <li><button class="tool-btn terrain-2">Aspect</button></li>
+      <li><button class="tool-btn terrain-3">Hillshade</button></li>
+      <li><button class="tool-btn terrain-4">Elevation Profile</button></li>
     </ul>
   </div>
 
-  <!-- 7. ANALYSIS & QUERIES -->
+  <!-- ANALYSIS -->
   <div class="tool-section">
-    <div class="section-header grad-vector">
-      <span>Analysis & Queries</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="measure-distance">Measure Distance</button></li>
-      <li><button class="tool-btn" data-tool="measure-area">Measure Area</button></li>
-      <li><button class="tool-btn" data-tool="identify">Identify</button></li>
-      <li><button class="tool-btn" data-tool="spatial-query">Spatial Query</button></li>
+    <div class="section-header" style="background: var(--clr-analysis);">Analysis & Queries</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn analysis-1">Measure Distance</button></li>
+      <li><button class="tool-btn analysis-2">Measure Area</button></li>
+      <li><button class="tool-btn analysis-3">Identify</button></li>
+      <li><button class="tool-btn analysis-4">Spatial Query</button></li>
     </ul>
   </div>
 
-  <!-- 8. COMMUNICATION -->
+  <!-- DEFENSE -->
   <div class="tool-section">
-    <div class="section-header grad-defense">
-      <span>Communication Tools</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="radar">Radar Coverage</button></li>
-      <li><button class="tool-btn" data-tool="radio-los">Radio LOS</button></li>
-      <li><button class="tool-btn" data-tool="gps-sim">GPS Simulation</button></li>
-      <li><button class="tool-btn" data-tool="trajectory">Missile Trajectory</button></li>
+    <div class="section-header" style="background: var(--clr-defense);">Communication / Defense</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn defense-1">Radar Coverage</button></li>
+      <li><button class="tool-btn defense-2">Radio LOS</button></li>
+      <li><button class="tool-btn defense-3">GPS Simulation</button></li>
+      <li><button class="tool-btn defense-4">Trajectory</button></li>
     </ul>
   </div>
 
-  <!-- 9. UAV -->
+  <!-- UAV -->
   <div class="tool-section">
-    <div class="section-header grad-uav">
-      <span>UAV Tools</span>
-    </div>
-    <ul class="tool-list">
-      <li><button class="tool-btn" data-tool="uav-stream">UAV Live Stream</button></li>
-      <li><button class="tool-btn" data-tool="uav-playback">Video Playback</button></li>
-      <li><button class="tool-btn" data-tool="uav-telemetry">Telemetry</button></li>
-      <li><button class="tool-btn" data-tool="uav-object-track">Object Tracking</button></li>
+    <div class="section-header" style="background: var(--clr-uav);">UAV Tools</div>
+    <ul class="tool-list" aria-hidden="true">
+      <li><button class="tool-btn uav-1">UAV Live Stream</button></li>
+      <li><button class="tool-btn uav-2">Video Playback</button></li>
+      <li><button class="tool-btn uav-3">Telemetry Overlay</button></li>
+      <li><button class="tool-btn uav-4">Object Tracking</button></li>
     </ul>
   </div>
 

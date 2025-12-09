@@ -70,7 +70,7 @@ html, body {
 }
 
 /* ============================================================
-   3. TOP HUD (MERGED + CINEMATIC VERSION)
+   3. TOP HUD (CINEMATIC VERSION)
    ============================================================ */
 .top-hud {
   height: var(--hud-height);
@@ -92,7 +92,6 @@ html, body {
   z-index: 9999999 !important;
 }
 
-/* HUD sides */
 .hud-left {
   display: flex;
   align-items: center;
@@ -142,7 +141,7 @@ html, body {
 }
 
 /* ============================================================
-   5. HUD MENUS + DROPDOWNS (MERGED)
+   5. HUD MENUS + DROPDOWNS
    ============================================================ */
 .hud-left-menus {
   display: flex;
@@ -157,7 +156,7 @@ html, body {
   overflow: visible !important;
 }
 
-/* menu button */
+/* Menu button */
 .menu-btn {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.08);
@@ -177,7 +176,7 @@ html, body {
   box-shadow: 0 0 12px rgba(41,121,255,0.20);
 }
 
-/* dropdown container */
+/* Dropdown */
 .menu-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -204,7 +203,6 @@ html, body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* dropdown item */
 .menu-item {
   padding: 10px 14px;
   font-size: 14px;
@@ -224,7 +222,7 @@ html, body {
 }
 
 /* ============================================================
-   6. 2D / 3D VIEW SWITCH
+   6. 2D / 3D SWITCH
    ============================================================ */
 .mode-toggle {
   display: inline-flex;
@@ -270,9 +268,7 @@ html, body {
   transition: transform .22s;
 }
 
-.switch.mode-3d .knob {
-  transform: translateX(44px);
-}
+.switch.mode-3d .knob { transform: translateX(44px); }
 .switch.mode-3d .label.ThreeD { color:#fff; }
 .switch:not(.mode-3d) .label.TwoD { color:#fff; }
 
@@ -290,7 +286,7 @@ html, body {
 }
 
 /* ============================================================
-   7. MAIN AREA — PANELS + MAP AREA
+   7. MAIN AREA
    ============================================================ */
 .main-area {
   display: flex;
@@ -328,7 +324,7 @@ html, body {
 }
 
 /* ============================================================
-   8. MAP TOOLBAR + MAP CONTAINERS (OL + CESIUM)
+   8. MAP TOOLBAR + MAPS
    ============================================================ */
 .map-toolbar {
   display: flex;
@@ -351,7 +347,7 @@ html, body {
 #cesiumContainer { display: none; z-index: 2; }
 
 /* ============================================================
-   9. LEFT PANEL SECTIONS (Tools, Layers)
+   9. LEFT PANEL BASE STYLING
    ============================================================ */
 .left-panel .panel-header {
   display:flex;
@@ -375,80 +371,133 @@ html, body {
   color: var(--text);
   font-size:13px;
 }
+/* ============================================================
+   9B. SECTION HEADERS + TOOL LISTS
+   ============================================================ */
 
-/* Section headers */
-.tool-section { margin-top:6px; border-radius:8px; overflow:visible; }
-.section-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 12px;
-  cursor:pointer;
-  user-select:none;
-  gap:8px;
+.tool-section {
+  margin-top: 6px;
+  border-radius: 8px;
+  overflow: visible;
 }
 
-/* Tool buttons */
-.tool-btn {
-  display:flex;
-  align-items:center;
-  width:100%;
-  gap:10px;
-  padding:8px 10px;
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
 
-  border-radius:8px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* FULL-WIDTH GRADIENT HEADERS */
+.grad-vector {
+  background: linear-gradient(90deg, #2979FF, #00E5FF);
+}
+
+.grad-raster {
+  background: linear-gradient(90deg, #FF8C42, #FFD65B);
+}
+
+.grad-terrain {
+  background: linear-gradient(90deg, #2ECC71, #A6FF4D);
+}
+
+.grad-imagery {
+  background: linear-gradient(90deg, #7B61FF, #FF4DFF);
+}
+
+.grad-defense {
+  background: linear-gradient(90deg, #FF3B30, #FF4DD2);
+}
+
+.grad-uav {
+  background: linear-gradient(90deg, #00D4FF, #66FFE5);
+}
+
+/* Tool list — hidden until expanded */
+.tool-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 10px 12px;
+  display: none;
+}
+
+.tool-list[aria-hidden="false"] {
+  display: block;
+}
+
+.tool-list[aria-hidden="true"] {
+  display: none;
+}
+
+/* Tool button style */
+.tool-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: 8px 10px;
+
+  border-radius: 8px;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.02);
 
   color: var(--text);
-  font-weight:600;
-  cursor:pointer;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
 }
+
 .tool-btn:hover {
-  background: linear-gradient(90deg, rgba(41,121,255,0.06), rgba(123,97,255,0.03));
+  background: linear-gradient(90deg, rgba(41,121,255,0.12), rgba(123,97,255,0.06));
   color: #fff;
   transform: translateY(-1px);
 }
+
 .tool-btn.active {
-  background: linear-gradient(180deg, rgba(41,121,255,0.12), rgba(41,121,255,0.06));
-  border-color: rgba(41,121,255,0.22);
-  box-shadow: 0 8px 30px rgba(41,121,255,0.06);
+  background: linear-gradient(180deg, rgba(41,121,255,0.22), rgba(41,121,255,0.12));
+  border-color: rgba(41,121,255,0.40);
+  box-shadow: 0 8px 30px rgba(41,121,255,0.22);
 }
 
-/* tool list */
-.tool-list {
-  list-style:none;
-  margin:0;
-  padding:6px 10px 12px;
-}
-.tool-list[aria-hidden="true"] { display:none; }
 
 /* ============================================================
    10. STATUS RIBBON
    ============================================================ */
+
 .status-ribbon {
-  height:var(--status-height);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  height: var(--status-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  padding:6px 12px;
-  border-top:1px solid rgba(255,255,255,0.02);
+  padding: 6px 12px;
+  border-top: 1px solid rgba(255,255,255,0.02);
 
-  background:linear-gradient(180deg, rgba(0,0,0,0.06), transparent);
+  background: linear-gradient(180deg, rgba(0,0,0,0.06), transparent);
 }
 
 .status-left,
 .status-right {
-  display:flex;
-  gap:8px;
-  align-items:center;
-  color:var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
 }
 
+
 /* ============================================================
-   11. WORKSPACE CREATION PAGE (from your file)
+   11. WORKSPACE CREATION PAGE
    ============================================================ */
+
 .workspace-screen {
   height: 100vh;
   display: flex;
@@ -485,6 +534,7 @@ html, body {
   gap: 16px;
   margin-top: 16px;
 }
+
 .ws-row > div { flex: 1; }
 
 label {
@@ -528,6 +578,7 @@ input:focus, select:focus {
   transition: 0.25s ease;
   font-size: 15px;
 }
+
 .ws-secondary {
   background: rgba(255,255,255,0.08);
   color: var(--text);
@@ -544,29 +595,18 @@ input:focus, select:focus {
   transform: translateY(-2px);
 }
 
-/* animations */
+/* Animations */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Select fixes */
-select {
-  background-color: rgba(255,255,255,0.08) !important;
-  color: var(--text) !important;
-}
-select option {
-  background-color: #1a1d23 !important;
-  color: var(--text) !important;
-}
-select option:hover {
-  background-color: #2a2f38 !important;
-}
 
 /* ============================================================
    12. CINEMATIC MODAL
    ============================================================ */
+
 .indigis-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -601,10 +641,12 @@ select option:hover {
 }
 
 .modal-icon {
-  width: 80px; height: 80px;
+  width: 80px;
+  height: 80px;
   margin: 0 auto 12px;
   position: relative;
 }
+
 .pulse {
   position: absolute;
   inset: 0;
@@ -615,6 +657,7 @@ select option:hover {
 
   filter: blur(4px);
 }
+
 @keyframes pulse {
   0%{transform:scale(.9);opacity:.5}
   50%{transform:scale(1.15);opacity:.9}
@@ -646,61 +689,128 @@ select option:hover {
   transform: translateY(-2px);
 }
 
+
 /* ============================================================
-   13. RESPONSIVE
+   13. RESPONSIVE BEHAVIOR
    ============================================================ */
+
 @media (max-width:900px){
   .left-panel { display:none; }
-  .map-placeholder{font-size:14px}
 }
 
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important}
 }
-/* FULL-WIDTH GRADIENT HEADERS */
+/* ============================================================
+   COLOR PALETTE (from your reference image)
+============================================================ */
+:root {
+  --clr-imagery:    #6B3FA0;
+  --clr-vector:     #1C75BC;
+  --clr-maptools:   #29ABE2;
+  --clr-terrain:    #009444;
+  --clr-digitize:   #8DC63F;
+  --clr-rasterlite: #FBB040;
+  --clr-raster:     #F7941D;
+  --clr-analysis:   #F15A29;
+  --clr-defense:    #9E1F63;
+  --clr-uav:        #6D6E71;
+}
+
+/* ============================================================
+   GRADIENT SHADE SYSTEM FOR TOOL BUTTONS
+============================================================ */
+/* MAP TOOLS */
+.map-1 { background: rgba(41,171,226,0.90); }
+.map-2 { background: rgba(41,171,226,0.70); }
+.map-3 { background: rgba(41,171,226,0.50); }
+.map-4 { background: rgba(41,171,226,0.35); }
+
+/* LAYER / VECTOR */
+.vector-1 { background: rgba(28,117,188,0.90); }
+.vector-2 { background: rgba(28,117,188,0.70); }
+.vector-3 { background: rgba(28,117,188,0.50); }
+.vector-4 { background: rgba(28,117,188,0.35); }
+
+/* DIGITIZATION */
+.digitize-1 { background: rgba(141,198,63,0.90); }
+.digitize-2 { background: rgba(141,198,63,0.70); }
+.digitize-3 { background: rgba(141,198,63,0.50); }
+.digitize-4 { background: rgba(141,198,63,0.35); }
+
+/* TERRAIN */
+.terrain-1 { background: rgba(0,148,68,0.90); }
+.terrain-2 { background: rgba(0,148,68,0.70); }
+.terrain-3 { background: rgba(0,148,68,0.50); }
+.terrain-4 { background: rgba(0,148,68,0.35); }
+
+/* RASTER PROCESSING */
+.raster-1 { background: rgba(247,148,29,0.90); }
+.raster-2 { background: rgba(247,148,29,0.70); }
+.raster-3 { background: rgba(247,148,29,0.50); }
+.raster-4 { background: rgba(247,148,29,0.35); }
+
+/* ANALYSIS / QUERIES */
+.analysis-1 { background: rgba(241,90,41,0.90); }
+.analysis-2 { background: rgba(241,90,41,0.70); }
+.analysis-3 { background: rgba(241,90,41,0.50); }
+.analysis-4 { background: rgba(241,90,41,0.35); }
+
+/* DEFENSE */
+.defense-1 { background: rgba(158,31,99,0.90); }
+.defense-2 { background: rgba(158,31,99,0.70); }
+.defense-3 { background: rgba(158,31,99,0.50); }
+.defense-4 { background: rgba(158,31,99,0.35); }
+
+/* UAV */
+.uav-1 { background: rgba(109,110,113,0.90); }
+.uav-2 { background: rgba(109,110,113,0.70); }
+.uav-3 { background: rgba(109,110,113,0.50); }
+.uav-4 { background: rgba(109,110,113,0.35); }
+
+/* ============================================================
+   LEFT PANEL – STRUCTURE STYLE
+============================================================ */
+.left-panel {
+  width: 260px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 .section-header {
-  padding: 10px 14px;
-  font-weight: 600;
-  border-radius: 6px;
-  margin-bottom: 4px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
   color: white;
-  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
 }
 
-/* Category gradients */
-.grad-vector {
-  background: linear-gradient(90deg, #2979FF, #00E5FF);
-}
-
-.grad-raster {
-  background: linear-gradient(90deg, #FF8C42, #FFD65B);
-}
-
-.grad-terrain {
-  background: linear-gradient(90deg, #2ECC71, #A6FF4D);
-}
-
-.grad-imagery {
-  background: linear-gradient(90deg, #7B61FF, #FF4DFF);
-}
-
-.grad-defense {
-  background: linear-gradient(90deg, #FF3B30, #FF4DD2);
-}
-
-.grad-uav {
-  background: linear-gradient(90deg, #00D4FF, #66FFE5);
-}
-
-/* Ensure collapsible animations still work */
-.tool-list[aria-hidden="true"] {
+.tool-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
   display: none;
 }
-.tool-list {
-  display: none; /* Hidden by default */
-  padding-left: 8px;
+
+.tool-btn {
+  width: 100%;
+  border: none;
+  margin: 4px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s ease;
 }
 
-.tool-list[aria-hidden="false"] {
-  display: block;
+.tool-btn:hover {
+  transform: translateX(4px);
+  filter: brightness(1.1);
 }
