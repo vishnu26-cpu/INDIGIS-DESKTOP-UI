@@ -186,20 +186,20 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
 
 /* mode + controls */
 .hud-right{display:flex;align-items:center;gap:12px}
-.mode-chip{display:flex;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.02)}
+.mode-chip{display:flex;border-radius:8px;overflow:visible;background:rgba(255,255,255,0.02)}
 .mode-btn{padding:8px 12px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-weight:600}
 .mode-btn.active{background:var(--vector);color:#fff}
 .icon-btn{width:36px;height:36px;border-radius:8px;border:none;background:transparent;color:var(--text);cursor:pointer}
 .icon-btn:hover{background:var(--glass)}
 
 /* MAIN area */
-.main-area{display:flex;flex:1;gap:var(--gap);padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);overflow:hidden}
+.main-area{display:flex;flex:1;gap:var(--gap);padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);overflow:visible}
 .left-panel{width:var(--left-width);min-width:var(--left-width);display:flex;flex-direction:column;gap:12px}
 .right-panel{width:var(--right-width);min-width:var(--right-width);display:flex;flex-direction:column;gap:12px}
-.map-area{flex:1;display:flex;flex-direction:column;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.35);background:var(--ui-surface)}
+.map-area{flex:1;display:flex;flex-direction:column;border-radius:8px;overflow:visible;box-shadow:0 6px 18px rgba(0,0,0,0.35);background:var(--ui-surface)}
 
 /* Panels */
-.panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+.panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:var(--radius);overflow:visible;border:1px solid rgba(255,255,255,0.02)}
 .panel-header{padding:12px 14px;font-weight:700;color:var(--text);border-bottom:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
 .panel-body{padding:10px}
 
@@ -267,7 +267,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease;
 }
