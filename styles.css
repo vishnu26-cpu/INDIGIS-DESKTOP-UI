@@ -814,3 +814,92 @@ input:focus, select:focus {
   transform: translateX(4px);
   filter: brightness(1.1);
 }
+/* TOP TAB CONTROL */
+.rp-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.rp-tab {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.rp-tab:hover {
+  background: rgba(41,121,255,0.15);
+}
+
+.rp-tab.active {
+  background: linear-gradient(90deg, #2979FF, #00E5FF);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(41,121,255,0.4);
+}
+
+/* HIDDEN VIEW */
+.rp-view.hidden { display: none; }
+
+.rp-title {
+  margin: 8px 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Fields */
+.rp-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.rp-field label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.rp-field input,
+.rp-field select {
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  color: var(--text);
+}
+
+.rp-apply {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg,#2979FF,#00E5FF);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.rp-apply:hover {
+  transform: translateY(-2px);
+}
+
+/* Attribute table */
+.rp-attr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.rp-attr-table td,
+.rp-attr-table th {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}

@@ -168,3 +168,16 @@
   });
 
 })();
+document.querySelectorAll(".rp-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+
+    // remove previous selection
+    document.querySelectorAll(".rp-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".rp-view").forEach(v => v.classList.add("hidden"));
+
+    // activate clicked tab
+    tab.classList.add("active");
+    const selected = tab.dataset.tab;
+    document.getElementById("rp-" + selected).classList.remove("hidden");
+  });
+});

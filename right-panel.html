@@ -1,0 +1,84 @@
+<aside class="right-panel">
+
+  <!-- TOP TAB SWITCHER -->
+  <div class="rp-tabs">
+    <button class="rp-tab active" data-tab="inspector" title="View & edit visual styling of the selected layer or feature.">
+      Inspector
+    </button>
+    <button class="rp-tab" data-tab="metadata" title="View dataset information like source, CRS, extent, and description.">
+      Metadata
+    </button>
+    <button class="rp-tab" data-tab="attributes" title="View attribute fields and values of selected features.">
+      Attributes
+    </button>
+  </div>
+
+  <!-- ==== INSPECTOR ==== -->
+  <div class="rp-view" id="rp-inspector">
+    <h3 class="rp-title">Inspector</h3>
+
+    <div class="rp-field">
+      <label>Layer</label>
+      <select id="rpLayerSelect">
+        <option value="none">— None —</option>
+        <option value="vector">Vector Layer</option>
+        <option value="raster">Raster Layer</option>
+        <option value="terrain">Terrain Layer</option>
+      </select>
+    </div>
+
+    <div class="rp-field">
+      <label>Opacity</label>
+      <input type="range" id="rpOpacity" min="0" max="1" step="0.01" value="0.9" />
+    </div>
+
+    <div class="rp-field">
+      <label>Stroke Width</label>
+      <select id="rpStroke">
+        <option>1px</option>
+        <option>2px</option>
+        <option>3px</option>
+        <option>4px</option>
+      </select>
+    </div>
+
+    <button class="rp-apply">Apply Style</button>
+  </div>
+
+  <!-- ==== METADATA ==== -->
+  <div class="rp-view hidden" id="rp-metadata">
+    <h3 class="rp-title">Metadata</h3>
+
+    <div class="rp-field">
+      <label>Source</label>
+      <input placeholder="GeoServer, Local File…" />
+    </div>
+
+    <div class="rp-field">
+      <label>CRS</label>
+      <input placeholder="EPSG:4326 / EPSG:3857…" />
+    </div>
+
+    <div class="rp-field">
+      <label>Extent</label>
+      <input placeholder="Bounding box…" />
+    </div>
+  </div>
+
+  <!-- ==== ATTRIBUTES ==== -->
+  <div class="rp-view hidden" id="rp-attributes">
+    <h3 class="rp-title">Attributes</h3>
+
+    <table class="rp-attr-table">
+      <thead>
+        <tr><th>Field</th><th>Value</th></tr>
+      </thead>
+      <tbody id="rpAttrBody">
+        <tr><td>ID</td><td>—</td></tr>
+        <tr><td>Name</td><td>—</td></tr>
+        <tr><td>Type</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</aside>
