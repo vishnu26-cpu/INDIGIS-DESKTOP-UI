@@ -657,3 +657,42 @@ select option:hover {
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important}
 }
+/* FULL-WIDTH GRADIENT HEADERS */
+.section-header {
+  padding: 10px 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+/* Category gradients */
+.grad-vector {
+  background: linear-gradient(90deg, #2979FF, #00E5FF);
+}
+
+.grad-raster {
+  background: linear-gradient(90deg, #FF8C42, #FFD65B);
+}
+
+.grad-terrain {
+  background: linear-gradient(90deg, #2ECC71, #A6FF4D);
+}
+
+.grad-imagery {
+  background: linear-gradient(90deg, #7B61FF, #FF4DFF);
+}
+
+.grad-defense {
+  background: linear-gradient(90deg, #FF3B30, #FF4DD2);
+}
+
+.grad-uav {
+  background: linear-gradient(90deg, #00D4FF, #66FFE5);
+}
+
+/* Ensure collapsible animations still work */
+.tool-list[aria-hidden="true"] {
+  display: none;
+}
