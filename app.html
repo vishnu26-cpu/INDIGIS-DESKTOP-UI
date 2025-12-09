@@ -104,22 +104,11 @@
     </script>
 
     <!-- MAP AREA -->
-   <div class="map-toolbar">
-  <div class="toolbar-left">
-    <label style="margin-right:8px;">Basemap:</label>
-
-    <select id="basemapSelect" class="basemap-select">
-      <option value="osm">OSM (Default)</option>
-      <option value="googleSat">Google Satellite</option>
-      <option value="googleHybrid">Google Hybrid</option>
-      <option value="googleTerrain">Google Terrain</option>
-      <option value="dark">Dark Matter</option>
-    </select>
-  </div>
-
-  <div id="mapInfo" style="color:var(--muted)">—</div>
-</div>
-
+    <main class="map-area">
+      <div class="map-toolbar">
+        <div>Map View</div>
+        <div id="mapInfo" style="color:var(--muted)">—</div>
+      </div>
 
       <div id="olMap"></div>
       <div id="cesiumContainer"></div>
@@ -257,41 +246,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let olMap, cesiumViewer;
 
     function initOL() {
-      // ---- BASEMAP SOURCES ----
-const baseLayers = {
-  osm: new ol.layer.Tile({
-    source: new ol.source.OSM(),
-    visible: true
-  }),
+      const fromLonLat = ol.proj.fromLonLat;
+      olMap = new ol.Map({
+        target: 'olMap',
+        layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
+        view: new ol.View({ center: fromLonLat([78.9629,20.5937]), zoom: 3 }),
+        controls: ol.control.defaults({ attribution:false, rotate:false })
+      });
 
-  googleSat: new ol.layer.Tile({
-    source: new ol.source.XYZ({
-      url: "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
-    }),
-    visible: false
-  }),
+      olMap.on('pointermove', evt => {
+        const c = ol.proj.toLonLat(evt.coordinate);
+        coordsEl.textContent = `Lat: ${c[1].toFixed(5)} , Lon: ${c[0].toFixed(5)}`;
+      });
 
-  googleHybrid: new ol.layer.Tile({
-    source: new ol.source.XYZ({
-      url: "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
-    }),
-    visible: false
-  }),
-
-  googleTerrain: new ol.layer.Tile({
-    source: new ol.source.XYZ({
-      url: "https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}"
-    }),
-    visible: false
-  }),
-
-  dark: new ol.layer.Tile({
-    source: new ol.source.XYZ({
-      url: "https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-    }),
-    visible: false
-  })
-};
+      olMap.getView().on('change:resolution', () => {
+        const zoom = olMap.getView().getZoom();
+        scaleEl.textContent = `zoom ${zoom.toFixed(2)}`;
+        mapInfo.textContent = `Mode: 2D · Zoom ${zoom.toFixed(2)}`;
+      });
     }
 
     function initCesium() {
@@ -381,16 +353,6 @@ const baseLayers = {
   })();
 
 });
-document.getElementById("basemapSelect").addEventListener("change", (e) => {
-  const selected = e.target.value;
-
-  Object.keys(baseLayers).forEach(key => {
-    baseLayers[key].setVisible(key === selected);
-  });
-
-  mapInfo.textContent = "Basemap: " + selected;
-});
-
 </script>
 
 <script>
@@ -587,56 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-/* ============================================================
-   PANEL RESIZERS — LEFT + RIGHT
-============================================================ */
-
-(function() {
-
-  const leftWrap = document.getElementById("leftPanelWrapper");
-  const rightWrap = document.getElementById("rightPanelWrapper");
-  const leftHandle = document.getElementById("leftPanelResize");
-  const rightHandle = document.getElementById("rightPanelResize");
-
-  let resizeLeft = false;
-  let resizeRight = false;
-
-  leftHandle.addEventListener("mousedown", () => {
-    resizeLeft = true;
-    document.body.style.userSelect = "none";
-  });
-
-  rightHandle.addEventListener("mousedown", () => {
-    resizeRight = true;
-    document.body.style.userSelect = "none";
-  });
-
-  document.addEventListener("mousemove", (e) => {
-
-    if (resizeLeft) {
-      const newWidth = e.clientX;
-      if (newWidth > 140 && newWidth < 420) {
-        leftWrap.style.width = newWidth + "px";
-      }
-    }
-
-    if (resizeRight) {
-      const newWidth = window.innerWidth - e.clientX;
-      if (newWidth > 160 && newWidth < 420) {
-        rightWrap.style.width = newWidth + "px";
-      }
-    }
-
-  });
-
-  document.addEventListener("mouseup", () => {
-    resizeLeft = false;
-    resizeRight = false;
-    document.body.style.userSelect = "";
-  });
-
-})();
 </script>
+
 </body>
 </html>
