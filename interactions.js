@@ -70,3 +70,101 @@
     }
   });
 })();
+// left-panel.js (or append to your main script)
+// Safe guard: run when DOM ready
+(function() {
+  function qs(sel) { return document.querySelector(sel); }
+  function qsa(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+  const sections = qsa('.tool-section');
+  const searchInput = qs('#lpSearch');
+
+  // Accordion toggle handler
+  sections.forEach(sec => {
+    const hdr = sec.querySelector('.section-header');
+    const list = sec.querySelector('.tool-list');
+
+    function setOpen(open) {
+      hdr.setAttribute('aria-expanded', open ? 'true' : 'false');
+      list.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+
+    // default behaviour: first section open
+    if (sec.dataset.section === 'maptools') setOpen(true);
+
+    hdr.addEventListener('click', () => {
+      const isOpen = hdr.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+
+    hdr.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        hdr.click();
+      }
+    });
+  });
+
+  // Tool button clicks — placeholder wiring
+  qsa('.tool-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // remove active from others
+      qsa('.tool-btn.active').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+
+      const tool = btn.dataset.tool;
+      // basic routing — replace with your actual function calls
+      console.log('Tool clicked:', tool);
+
+      // small example: open modal or call a function
+      if (tool === 'open-map') {
+        // open map file UI (placeholder)
+        alert('Open map dialog (placeholder)');
+      }
+      // add more tool handlers as needed
+    });
+  });
+
+  // Search filter
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      qsa('.tool-btn').forEach(btn => {
+        const txt = btn.textContent.trim().toLowerCase();
+        btn.parentElement.style.display = txt.includes(q) ? '' : 'none';
+      });
+      // show sections that contain visible items
+      sections.forEach(sec => {
+        const visible = sec.querySelectorAll('li:not([style*="display: none"])').length > 0;
+        sec.querySelector('.tool-list').style.display = visible ? 'block' : 'none';
+      });
+    });
+  }
+
+  // Collapse/pin behaviour (basic)
+  const collapseBtn = qs('#lpCollapseBtn');
+  const pinBtn = qs('#lpPinBtn');
+  const leftPanel = qs('#leftPanel');
+  let pinned = false;
+
+  collapseBtn && collapseBtn.addEventListener('click', () => {
+    if (leftPanel.style.width && leftPanel.style.width !== '') {
+      // collapse
+      leftPanel.style.width = '';
+      leftPanel.style.minWidth = '';
+      leftPanel.style.display = 'none';
+      collapseBtn.textContent = '▶';
+    } else {
+      leftPanel.style.display = 'flex';
+      leftPanel.style.width = 'var(--left-width)';
+      collapseBtn.textContent = '◀';
+    }
+  });
+
+  pinBtn && pinBtn.addEventListener('click', () => {
+    pinned = !pinned;
+    pinBtn.style.background = pinned ? 'rgba(41,121,255,0.12)' : 'transparent';
+    pinBtn.title = pinned ? 'Pinned' : 'Pin panel';
+  });
+
+})();

@@ -210,18 +210,23 @@
 
   <!-- MAIN AREA -->
   <div class="main-area">
-    <aside class="left-panel">
-      <div class="panel">
-        <div class="panel-header">Layers</div>
-        <div class="panel-body">
-          <ul class="layer-list">
-            <li><span class="chip vector">Base Map</span></li>
-            <li><span class="chip vector">Points</span></li>
-            <li><span class="chip raster">Raster</span></li>
-          </ul>
-        </div>
-      </div>
-    </aside>
+   <!-- new -->
+<!-- if you cannot include server-side, copy-paste left-panel.html content here -->
+<!-- otherwise load via template/include -->
+<div id="leftPanelContainer"></div>
+
+<!-- after page load, fetch and inject fragment (optional) -->
+<script>
+  // option: dynamic include (only if serving via http(s))
+  fetch('left-panel.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('leftPanelContainer').innerHTML = html)
+    .catch(()=> {
+      // fallback: you can copy html directly if fetch not available
+      console.log('left-panel.html not loaded - paste fragment directly into app.');
+    });
+</script>
+
 
     <main class="map-area">
       <div class="map-toolbar">
