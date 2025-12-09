@@ -10,7 +10,7 @@ html, body {
   height: 100%;
   font-family: "Segoe UI", Arial, sans-serif;
   color: white;
-  overflow: hidden;
+  overflow: visible;
   background: #000;
 }
 
@@ -38,7 +38,7 @@ html, body {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease;
 }
