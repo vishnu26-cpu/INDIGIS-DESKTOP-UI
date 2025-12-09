@@ -373,6 +373,369 @@ function initLeftPanel() {
   console.log("LEFT PANEL READY ✔️");
 }
 </script>
+<!-- LEFT PANEL FULL PREMIUM NEON EDITION -->
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+/* ===== NEON ENGINE ===== */
+
+.neon-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,0.4))
+          drop-shadow(0 0 12px rgba(0,255,255,0.25));
+}
+
+.tool-btn:hover .neon-icon {
+  filter: drop-shadow(0 0 10px var(--vector)) drop-shadow(0 0 20px var(--vector));
+}
+
+.tool-btn.active .neon-icon {
+  animation: iconPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes iconPulse {
+  0% { filter: drop-shadow(0 0 4px var(--vector)); }
+  50% { filter: drop-shadow(0 0 14px var(--vector)); }
+  100% { filter: drop-shadow(0 0 4px var(--vector)); }
+}
+
+/* Category gradients */
+.svg-vector    { --g1:#2979FF; --g2:#00E5FF; }
+.svg-raster    { --g1:#FF8C42; --g2:#FFD65B; }
+.svg-terrain   { --g1:#2ECC71; --g2:#A6FF4D; }
+.svg-imagery   { --g1:#7B61FF; --g2:#FF4DFF; }
+.svg-defense   { --g1:#FF3B30; --g2:#FF4DD2; }
+.svg-uav       { --g1:#00D4FF; --g2:#66FFE5; }
+
+.neon-icon stroke {
+  stroke: url(#gradDefault);
+}
+</style>
+
+<svg width="0" height="0">
+  <defs>
+    <linearGradient id="gradDefault" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="var(--g1)"/>
+      <stop offset="100%" stop-color="var(--g2)"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div id="leftPanel" class="left-panel">
+
+  <!-- SEARCH -->
+  <div class="lp-search-wrap">
+    <input id="lpSearch" class="lp-search" placeholder="Search tools…">
+  </div>
+
+  <!-- =================================================== -->
+  <!-- 1. MAP TOOLS (Blue / Cyan) -->
+  <!-- =================================================== -->
+  <div class="tool-section" data-section="maptools">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24">
+          <path d="M3 6l7-3 7 3 7-3v12l-7 3-7-3-7 3z"></path>
+        </svg>
+        <span class="section-title">Map Tools</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <!-- Map Basics -->
+      <li><button class="tool-btn" data-tool="map-intro">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg> Map Intro
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="open-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4z"/></svg> Open Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="close-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M6 6l12 12m0-12L6 18"/></svg> Close Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="import-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/></svg> Import Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="export-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M12 21V9m0 0l4 4m-4-4l-4 4"/></svg> Export Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="inset-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 4h9v9H4zM11 11h9v9h-9z"/></svg> Inset Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="overview-map">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg> Overview Map
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="3d-view">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/></svg> 3D View
+      </button></li>
+    </ul>
+  </div>
+
+
+  <!-- =================================================== -->
+  <!-- 2. LAYER MANAGEMENT -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4z"/></svg>
+        <span class="section-title">Layer Management</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="add-layer">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M12 4l9 4-9 4-9-4z"/></svg> Add Layer
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="remove-layer">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M6 6l12 12"/></svg> Remove Layer
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="layer-style">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg> Layer Style
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="reorder-layer">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M6 9h12M6 15h12"/></svg> Reorder Layers
+      </button></li>
+    </ul>
+  </div>
+
+
+  <!-- =================================================== -->
+  <!-- 3. DIGITIZATION -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 20l16-16"/></svg>
+        <span class="section-title">Digitization</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="draw-point">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/></svg> Draw Point
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="draw-line">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 12h16"/></svg> Draw Line
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="draw-polygon">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><polygon points="12 4 20 18 4 18"/></svg> Draw Polygon
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="freehand">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 12c4-6 12 6 16 0"/></svg> Freehand
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="topology">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/></svg> Topology Tools
+      </button></li>
+    </ul>
+  </div>
+
+  <!-- =================================================== -->
+  <!-- 4. VECTOR PROCESSING -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M12 3l9 4-9 4-9-4z"/></svg>
+        <span class="section-title">Vector Processing</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="buffer">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></svg> Buffer
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="clip">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg> Clip
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="intersection">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg> Intersection
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="union">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg> Union
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="difference">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M7 7h10v10H7z"/></svg> Difference
+      </button></li>
+    </ul>
+  </div>
+
+  <!-- =================================================== -->
+  <!-- 5. RASTER PROCESSING -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-raster" viewBox="0 0 24 24">
+          <path d="M3 3h18v18H3z"/>
+        </svg>
+        <span class="section-title">Raster Processing</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="raster-clip">
+        <svg class="neon-icon svg-raster" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg> Raster Clip
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="merge">
+        <svg class="neon-icon svg-raster" viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4z"/></svg> Merge Rasters
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="raster-calc">
+        <svg class="neon-icon svg-raster" viewBox="0 0 24 24"><path d="M6 6h12M6 12h12M6 18h12"/></svg> Raster Calculator
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="interpolation">
+        <svg class="neon-icon svg-raster" viewBox="0 0 24 24"><path d="M4 12c4-6 8 6 12 0"/></svg> Interpolation
+      </button></li>
+    </ul>
+  </div>
+
+  <!-- =================================================== -->
+  <!-- 6. TERRAIN ANALYSIS -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-terrain" viewBox="0 0 24 24"><path d="M3 18l6-6 4 4 8-8"/></svg>
+        <span class="section-title">Terrain</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="slope">
+        <svg class="neon-icon svg-terrain" viewBox="0 0 24 24"><path d="M4 16l8-8 8 8"/></svg> Slope
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="aspect">
+        <svg class="neon-icon svg-terrain" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg> Aspect
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="hillshade">
+        <svg class="neon-icon svg-terrain" viewBox="0 0 24 24"><path d="M3 17l9-12 9 12z"/></svg> Hillshade
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="elev-profile">
+        <svg class="neon-icon svg-terrain" viewBox="0 0 24 24"><path d="M3 12h18M3 12l4-4 5 5 3-3 5 5"/></svg> Elevation Profile
+      </button></li>
+    </ul>
+  </div>
+
+
+  <!-- =================================================== -->
+  <!-- 7. ANALYSIS & QUERIES -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M3 12h18"/></svg>
+        <span class="section-title">Analysis & Queries</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="measure-distance">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 12h16"/></svg> Measure Distance
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="measure-area">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg> Measure Area
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="identify">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg> Identify
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="spatial-query">
+        <svg class="neon-icon svg-vector" viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/></svg> Spatial Query
+      </button></li>
+    </ul>
+  </div>
+
+  <!-- =================================================== -->
+  <!-- 8. COMMUNICATION / DEFENSE -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-defense" viewBox="0 0 24 24"><path d="M12 3v18m9-9H3"/></svg>
+        <span class="section-title">Communication Tools</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="radar">
+        <svg class="neon-icon svg-defense" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg> Radar Coverage
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="radio-los">
+        <svg class="neon-icon svg-defense" viewBox="0 0 24 24"><path d="M4 20l8-16 8 16"/></svg> Radio LOS
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="gps-sim">
+        <svg class="neon-icon svg-defense" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg> GPS Simulation
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="trajectory">
+        <svg class="neon-icon svg-defense" viewBox="0 0 24 24"><path d="M3 17c4-7 8-10 18-12"/></svg> Missile Trajectory
+      </button></li>
+    </ul>
+  </div>
+
+
+  <!-- =================================================== -->
+  <!-- 9. UAV TOOLS -->
+  <!-- =================================================== -->
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="hdr-left">
+        <svg class="neon-icon svg-uav" viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/></svg>
+        <span class="section-title">UAV Tools</span>
+      </div>
+    </div>
+
+    <ul class="tool-list">
+      <li><button class="tool-btn" data-tool="uav-stream">
+        <svg class="neon-icon svg-uav" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg> UAV Live Stream
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="uav-playback">
+        <svg class="neon-icon svg-uav" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Video Playback
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="uav-telemetry">
+        <svg class="neon-icon svg-uav" viewBox="0 0 24 24"><path d="M4 18l6-6 4 4 6-6"/></svg> Telemetry Overlay
+      </button></li>
+
+      <li><button class="tool-btn" data-tool="uav-object-track">
+        <svg class="neon-icon svg-uav" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/></svg> Object Tracking
+      </button></li>
+    </ul>
+  </div>
+
+</div>
 
 </body>
 </html>
