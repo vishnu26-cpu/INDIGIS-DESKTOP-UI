@@ -903,3 +903,31 @@ input:focus, select:focus {
   padding: 8px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+/* =============================================
+   CINEMATIC TOOLTIP (Custom Hover Popup)
+============================================= */
+
+.indigis-tooltip {
+  position: fixed;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.70);
+  backdrop-filter: blur(8px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.15);
+
+  color: #fff;
+  font-size: 13px;
+  border-radius: 8px;
+  max-width: 240px;
+  z-index: 999999;
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+.indigis-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
