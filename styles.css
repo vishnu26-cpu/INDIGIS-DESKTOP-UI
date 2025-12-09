@@ -23,8 +23,8 @@
   --hud-height: 56px;
   --status-height: 36px;
 
-  --left-width: 200px;
-  --right-width: 200px;
+  --left-width: 100px;
+  --right-width: 100px;
 }
 
 /* Light theme override */
