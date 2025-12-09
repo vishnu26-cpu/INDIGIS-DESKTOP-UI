@@ -968,3 +968,11 @@ input:focus, select:focus {
 .resize-handle:hover {
   background: rgba(41,121,255,0.4);
 }
+.basemap-select {
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  border-radius: 8px;
+  font-size: 13px;
+}
