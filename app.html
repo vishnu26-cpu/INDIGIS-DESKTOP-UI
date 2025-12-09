@@ -22,6 +22,8 @@
       width: 100%;
       height: calc(100vh - var(--hud-height) - var(--status-height) - 32px);
       min-height: 420px;
+      position: relative;
+      z-index: 1; 
     }
     #cesiumContainer { display:none; position:relative; z-index:2; }
     #olMap { display:block; position:relative; z-index:1; }
@@ -46,6 +48,8 @@
       box-shadow:0 6px 20px rgba(0,0,0,0.45);
       gap:12px;
       overflow: visible; /* FIX dropdown visibility */
+      position: relative;
+      z-index: 9999999 !important;
     }
 
     .hud-left {
@@ -95,7 +99,7 @@
       padding: 6px 0;
       display: none;
       box-shadow: 0 12px 40px rgba(0,0,0,0.55);
-      z-index: 999999 !important; /* FIX */
+      z-index: 999999 !important; 
       animation: dropdownPop .18s cubic-bezier(.2,.9,.2,1);
     }
 
