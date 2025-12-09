@@ -134,9 +134,13 @@
 <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
 <script src="https://unpkg.com/cesium/Build/Cesium/Cesium.js"></script>
 
-<!-- MAP + DROPDOWN LOGIC (UNCHANGED) -->
+<!-- MAP + DROPDOWN LOGIC -->
 <script>
-/* MAP LOGIC — unchanged */
+document.addEventListener("DOMContentLoaded", () => {
+
+/* ===========================
+      MAP LOGIC
+=========================== */
 (function () {
   const olEl = document.getElementById('olMap');
   const cesiumEl = document.getElementById('cesiumContainer');
@@ -255,7 +259,9 @@
   });
 })();
 
-/* Dropdown menu logic */
+/* ===========================
+      DROPDOWNS (FIXED)
+=========================== */
 function toggleMenu(menuId) {
   const menu = document.getElementById(menuId);
   const isOpen = menu.style.display === "block";
@@ -264,15 +270,22 @@ function toggleMenu(menuId) {
   if (!isOpen) menu.style.display = "block";
 }
 
-document.getElementById("workspaceMenuBtn").onclick = e => {
-  e.stopPropagation();
-  toggleMenu("workspaceMenu");
-};
+const workspaceBtn = document.getElementById("workspaceMenuBtn");
+const modeBtn = document.getElementById("modeMenuBtn");
 
-document.getElementById("modeMenuBtn").onclick = e => {
-  e.stopPropagation();
-  toggleMenu("modeMenu");
-};
+if (workspaceBtn) {
+  workspaceBtn.onclick = e => {
+    e.stopPropagation();
+    toggleMenu("workspaceMenu");
+  };
+}
+
+if (modeBtn) {
+  modeBtn.onclick = e => {
+    e.stopPropagation();
+    toggleMenu("modeMenu");
+  };
+}
 
 document.addEventListener("click", () => {
   document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
@@ -295,6 +308,8 @@ document.querySelectorAll("#modeMenu .menu-item").forEach(item => {
     alert("User mode set: " + item.dataset.mode);
     document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
   };
+});
+
 });
 </script>
 
