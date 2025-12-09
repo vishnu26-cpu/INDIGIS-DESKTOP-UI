@@ -181,3 +181,51 @@ document.querySelectorAll(".rp-tab").forEach(tab => {
     document.getElementById("rp-" + selected).classList.remove("hidden");
   });
 });
+/* ===========================================================
+   RESIZABLE LEFT + RIGHT PANELS
+=========================================================== */
+
+(function () {
+  const leftPanel = document.querySelector("#leftPanelContainer");
+  const rightPanel = document.querySelector(".right-panel");
+
+  const leftHandle = document.getElementById("leftPanelResize");
+  const rightHandle = document.getElementById("rightPanelResize");
+
+  let resizingLeft = false;
+  let resizingRight = false;
+
+  /* ---------------- LEFT PANEL DRAG ---------------- */
+  leftHandle.addEventListener("mousedown", () => {
+    resizingLeft = true;
+    document.body.style.userSelect = "none";
+  });
+
+  /* ---------------- RIGHT PANEL DRAG ---------------- */
+  rightHandle.addEventListener("mousedown", () => {
+    resizingRight = true;
+    document.body.style.userSelect = "none";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (resizingLeft) {
+      let newWidth = e.clientX;
+      if (newWidth < 150) newWidth = 150;
+      if (newWidth > 380) newWidth = 380;
+      leftPanel.style.width = newWidth + "px";
+    }
+
+    if (resizingRight) {
+      let newWidth = window.innerWidth - e.clientX;
+      if (newWidth < 160) newWidth = 160;
+      if (newWidth > 420) newWidth = 420;
+      rightPanel.style.width = newWidth + "px";
+    }
+  });
+
+  document.addEventListener("mouseup", () => {
+    resizingLeft = false;
+    resizingRight = false;
+    document.body.style.userSelect = "auto";
+  });
+})();

@@ -83,21 +83,25 @@
   </header>
 
 
-  <!-- MAIN AREA -->
-  <div class="main-area">
+<div class="main-area">
 
+    <!-- LEFT PANEL -->
     <div id="leftPanelContainer"></div>
+
+    <!-- LEFT PANEL RESIZE HANDLE -->
+    <div id="leftPanelResize" class="resize-handle"></div>
 
     <script>
       fetch('left-panel.html')
         .then(r => r.text())
         .then(html => {
           document.getElementById('leftPanelContainer').innerHTML = html;
-          initLeftPanel();   // <-- unified single initializer
+          initLeftPanel();
         })
         .catch(() => console.log("left-panel.html not loaded"));
     </script>
 
+    <!-- MAP AREA -->
     <main class="map-area">
       <div class="map-toolbar">
         <div>Map View</div>
@@ -108,7 +112,12 @@
       <div id="cesiumContainer"></div>
     </main>
 
+    <!-- RIGHT PANEL RESIZE HANDLE -->
+    <div id="rightPanelResize" class="resize-handle"></div>
+
+    <!-- RIGHT PANEL -->
     <aside class="right-panel">
+
 
   <!-- TOP TABS -->
   <div class="rp-tabs">

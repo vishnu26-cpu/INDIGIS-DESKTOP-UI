@@ -931,3 +931,16 @@ input:focus, select:focus {
   opacity: 1;
   transform: translateY(0);
 }
+/* ================================
+   RESIZABLE PANEL HANDLES
+================================ */
+.resize-handle {
+  width: 6px;
+  cursor: ew-resize;
+  background: rgba(255,255,255,0.05);
+  transition: background .2s;
+}
+
+.resize-handle:hover {
+  background: rgba(41,121,255,0.35);
+}
