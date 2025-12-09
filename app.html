@@ -335,6 +335,97 @@ function initializeINDIGISMENUS() {
 }
 
 </script>
+<script>
+/* =========================================================
+   LEFT PANEL FIX — RUN AFTER left-panel.html IS LOADED
+========================================================= */
+
+function initLeftPanelFix() {
+
+  // Helper functions
+  const qs  = (sel) => document.querySelector(sel);
+  const qsa = (sel) => Array.from(document.querySelectorAll(sel));
+
+  const sections = qsa('.tool-section');
+  const searchInput = qs('#lpSearch');
+
+  /* -----------------------------
+        ACCORDION / COLLAPSE
+  ------------------------------*/
+  sections.forEach(sec => {
+    const hdr = sec.querySelector('.section-header');
+    const list = sec.querySelector('.tool-list');
+
+    if (!hdr || !list) return;
+
+    // Default open first section (optional)
+    if (sec.dataset.section === 'maptools') {
+      hdr.setAttribute('aria-expanded', 'true');
+      list.setAttribute('aria-hidden', 'false');
+    }
+
+    hdr.addEventListener('click', () => {
+      const isOpen = hdr.getAttribute('aria-expanded') === 'true';
+      hdr.setAttribute('aria-expanded', !isOpen);
+      list.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+    });
+  });
+
+  /* -----------------------------
+         TOOL BUTTON CLICK
+  ------------------------------*/
+  qsa('.tool-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      qsa('.tool-btn.active').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+
+      console.log("Tool clicked:", btn.dataset.tool);
+    });
+  });
+
+  /* -----------------------------
+            SEARCH BAR
+  ------------------------------*/
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase();
+
+      sections.forEach(sec => {
+        let matchFound = false;
+
+        qsa('.tool-btn', sec).forEach(btn => {
+          const text = btn.textContent.toLowerCase();
+          const match = text.includes(q);
+
+          btn.parentElement.style.display = match ? '' : 'none';
+          if (match) matchFound = true;
+        });
+
+        sec.querySelector('.tool-list').style.display = matchFound ? 'block' : 'none';
+      });
+    });
+  }
+
+  console.log("LEFT PANEL: FIX APPLIED ✔️");
+}
+
+/* =========================================================
+   ENSURE THE FIX RUNS ONLY AFTER left-panel.html IS LOADED
+========================================================= */
+(function(){
+  const container = document.getElementById("leftPanelContainer");
+
+  // Patch the fetch loader to run our fix afterward
+  const _setHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML').set;
+
+  Object.defineProperty(container, 'innerHTML', {
+    set(value) {
+      _setHTML.call(this, value);    // Insert HTML normally
+      setTimeout(initLeftPanelFix, 50);  // Apply fix after DOM updates
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
