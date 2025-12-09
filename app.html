@@ -85,11 +85,13 @@
 
 <div class="main-area">
 
-    <!-- LEFT PANEL -->
+   <!-- LEFT PANEL WRAPPER -->
+<div id="leftPanelWrapper">
     <div id="leftPanelContainer"></div>
+</div>
 
-    <!-- LEFT PANEL RESIZE HANDLE -->
-    <div id="leftPanelResize" class="resize-handle"></div>
+<!-- LEFT PANEL RESIZE HANDLE -->
+<div id="leftPanelResize" class="resize-handle"></div>
 
     <script>
       fetch('left-panel.html')
@@ -113,7 +115,10 @@
     </main>
 
     <!-- RIGHT PANEL RESIZE HANDLE -->
-    <div id="rightPanelResize" class="resize-handle"></div>
+   <!-- RIGHT PANEL WRAPPER -->
+<div id="rightPanelWrapper">
+    <aside class="right-panel">
+
 
     <!-- RIGHT PANEL -->
     <aside class="right-panel">
@@ -201,8 +206,10 @@
       </tbody>
     </table>
   </div>
-
 </aside>
+</div> <!-- END rightPanelWrapper -->
+
+
 
 
   </div>
@@ -542,7 +549,56 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-</script>
 
+/* ============================================================
+   PANEL RESIZERS — LEFT + RIGHT
+============================================================ */
+
+(function() {
+
+  const leftWrap = document.getElementById("leftPanelWrapper");
+  const rightWrap = document.getElementById("rightPanelWrapper");
+  const leftHandle = document.getElementById("leftPanelResize");
+  const rightHandle = document.getElementById("rightPanelResize");
+
+  let resizeLeft = false;
+  let resizeRight = false;
+
+  leftHandle.addEventListener("mousedown", () => {
+    resizeLeft = true;
+    document.body.style.userSelect = "none";
+  });
+
+  rightHandle.addEventListener("mousedown", () => {
+    resizeRight = true;
+    document.body.style.userSelect = "none";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+
+    if (resizeLeft) {
+      const newWidth = e.clientX;
+      if (newWidth > 140 && newWidth < 420) {
+        leftWrap.style.width = newWidth + "px";
+      }
+    }
+
+    if (resizeRight) {
+      const newWidth = window.innerWidth - e.clientX;
+      if (newWidth > 160 && newWidth < 420) {
+        rightWrap.style.width = newWidth + "px";
+      }
+    }
+
+  });
+
+  document.addEventListener("mouseup", () => {
+    resizeLeft = false;
+    resizeRight = false;
+    document.body.style.userSelect = "";
+  });
+
+})();
+</script>
 </body>
 </html>

@@ -944,3 +944,27 @@ input:focus, select:focus {
 .resize-handle:hover {
   background: rgba(41,121,255,0.35);
 }
+#leftPanelWrapper {
+  width: var(--left-width);
+  min-width: 140px;
+  max-width: 420px;
+  display: flex;
+}
+
+#rightPanelWrapper {
+  width: var(--right-width);
+  min-width: 160px;
+  max-width: 420px;
+  display: flex;
+}
+
+.resize-handle {
+  width: 6px;
+  background: rgba(255,255,255,0.08);
+  cursor: ew-resize;
+  transition: 0.2s;
+}
+
+.resize-handle:hover {
+  background: rgba(41,121,255,0.4);
+}
