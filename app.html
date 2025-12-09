@@ -90,10 +90,17 @@
     <div id="leftPanelContainer"></div>
 
     <script>
+      // Load left panel & THEN initialize UI
       fetch('left-panel.html')
         .then(r => r.text())
-        .then(html => document.getElementById('leftPanelContainer').innerHTML = html)
-        .catch(()=> console.log('left-panel.html not loaded'));
+        .then(html => {
+          document.getElementById('leftPanelContainer').innerHTML = html;
+          initializeINDIGISMENUS();  // <-- FIXED HERE
+        })
+        .catch(()=> {
+          console.log('left-panel.html not loaded');
+          initializeINDIGISMENUS();  // still run menu logic
+        });
     </script>
 
     <!-- MAP AREA -->
@@ -138,9 +145,9 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-/* ===========================
-      MAP LOGIC
-=========================== */
+/* --------------------------------------
+            MAP LOGIC (unchanged)
+-------------------------------------- */
 (function () {
   const olEl = document.getElementById('olMap');
   const cesiumEl = document.getElementById('cesiumContainer');
@@ -258,59 +265,75 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "index.html";
   });
 })();
+}); // END DOMContentLoaded
 
-/* ===========================
-      DROPDOWNS (FIXED)
-=========================== */
-function toggleMenu(menuId) {
-  const menu = document.getElementById(menuId);
-  const isOpen = menu.style.display === "block";
 
-  document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
-  if (!isOpen) menu.style.display = "block";
-}
 
-const workspaceBtn = document.getElementById("workspaceMenuBtn");
-const modeBtn = document.getElementById("modeMenuBtn");
+/* =========================================================
+      MENU + DROPDOWN LOGIC (runs AFTER left-panel loads)
+========================================================= */
+function initializeINDIGISMENUS() {
 
-if (workspaceBtn) {
-  workspaceBtn.onclick = e => {
-    e.stopPropagation();
-    toggleMenu("workspaceMenu");
-  };
-}
+  // Safety: check elements exist
+  const workspaceBtn = document.getElementById("workspaceMenuBtn");
+  const modeBtn = document.getElementById("modeMenuBtn");
 
-if (modeBtn) {
-  modeBtn.onclick = e => {
-    e.stopPropagation();
-    toggleMenu("modeMenu");
-  };
-}
+  function toggleMenu(menuId) {
+    const menu = document.getElementById(menuId);
+    const isOpen = menu.style.display === "block";
 
-document.addEventListener("click", () => {
-  document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
-});
-
-/* actions */
-document.getElementById("saveWorkspace").onclick = () => alert("Save workspace (placeholder)");
-document.getElementById("saveAsWorkspace").onclick = () => alert("Save As… (placeholder)");
-document.getElementById("openRecent").onclick = () => alert("Open Recent (placeholder)");
-
-document.getElementById("closeWorkspace").onclick = () => {
-  if (confirm("Close workspace?")) {
-    localStorage.removeItem('indigis_workspace_created');
-    window.location.href = "workspace.html";
-  }
-};
-
-document.querySelectorAll("#modeMenu .menu-item").forEach(item => {
-  item.onclick = () => {
-    alert("User mode set: " + item.dataset.mode);
     document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
-  };
-});
+    if (!isOpen) menu.style.display = "block";
+  }
 
-});
+  if (workspaceBtn) {
+    workspaceBtn.onclick = e => {
+      e.stopPropagation();
+      toggleMenu("workspaceMenu");
+    };
+  }
+
+  if (modeBtn) {
+    modeBtn.onclick = e => {
+      e.stopPropagation();
+      toggleMenu("modeMenu");
+    };
+  }
+
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
+  });
+
+  // Actions
+  const btnSave = document.getElementById("saveWorkspace");
+  const btnSaveAs = document.getElementById("saveAsWorkspace");
+  const btnRecent = document.getElementById("openRecent");
+  const btnClose = document.getElementById("closeWorkspace");
+
+  btnSave && (btnSave.onclick = () => alert("Save workspace (placeholder)"));
+  btnSaveAs && (btnSaveAs.onclick = () => alert("Save As… (placeholder)"));
+  btnRecent && (btnRecent.onclick = () => alert("Open Recent (placeholder)"));
+
+  if (btnClose) {
+    btnClose.onclick = () => {
+      if (confirm("Close workspace?")) {
+        localStorage.removeItem('indigis_workspace_created');
+        window.location.href = "workspace.html";
+      }
+    };
+  }
+
+  // User mode menu items
+  document.querySelectorAll("#modeMenu .menu-item").forEach(item => {
+    item.onclick = () => {
+      alert("User mode set: " + item.dataset.mode);
+      document.querySelectorAll(".menu-dropdown").forEach(m => m.style.display = "none");
+    };
+  });
+
+  console.log("Menus initialized ✔️");
+}
+
 </script>
 
 </body>
