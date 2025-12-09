@@ -398,28 +398,42 @@ html, body {
 }
 
 /* FULL-WIDTH GRADIENT HEADERS */
+/* ❖ PREMIUM GRADIENT PALETTE FOR LEFT PANEL ❖ */
+
+.grad-maptools {
+  background: linear-gradient(90deg, #3A7BD5, #00D2FF);
+}
+
 .grad-vector {
-  background: linear-gradient(90deg, #2979FF, #00E5FF);
+  background: linear-gradient(90deg, #2364AA, #3FA7D6);
+}
+
+.grad-digitization {
+  background: linear-gradient(90deg, #5A8F3E, #A8D672);
+}
+
+.grad-vectorproc {
+  background: linear-gradient(90deg, #1C4E80, #4EA5D9);
 }
 
 .grad-raster {
-  background: linear-gradient(90deg, #FF8C42, #FFD65B);
+  background: linear-gradient(90deg, #D6851C, #F2C14E);
 }
 
 .grad-terrain {
-  background: linear-gradient(90deg, #2ECC71, #A6FF4D);
+  background: linear-gradient(90deg, #2D6A4F, #95D5B2);
 }
 
-.grad-imagery {
-  background: linear-gradient(90deg, #7B61FF, #FF4DFF);
+.grad-analysis {
+  background: linear-gradient(90deg, #C4473A, #FF7F50);
 }
 
 .grad-defense {
-  background: linear-gradient(90deg, #FF3B30, #FF4DD2);
+  background: linear-gradient(90deg, #8B2D56, #C7367F);
 }
 
 .grad-uav {
-  background: linear-gradient(90deg, #00D4FF, #66FFE5);
+  background: linear-gradient(90deg, #495057, #ADB5BD);
 }
 
 /* Tool list — hidden until expanded */
