@@ -218,6 +218,18 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
 .map-toolbar{display:flex;justify-content:space-between;padding:10px 12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-bottom:1px solid rgba(255,255,255,0.02)}
 .map-canvas{flex:1;display:flex;align-items:center;justify-content:center;padding:16px}
 .map-placeholder{width:100%;height:100%;border-radius:6px;background:linear-gradient(180deg, #0b1220, #0f2a3a);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:16px}
+.hud-left-menus, 
+.menu-box, 
+.menu-dropdown {
+    z-index: 99999999 !important;
+    position: relative;
+}
+.left-panel,
+.right-panel,
+.map-area {
+    z-index: 1 !important;
+    position: relative;
+}
 
 /* status ribbon */
 .status-ribbon{height:var(--status-height);display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-top:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(0,0,0,0.06), transparent)}
@@ -229,8 +241,6 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
 
 /* RESPONSIVE */
 @media (max-width:900px){
-  .left-panel{display:none}
-  .right-panel{display:none}
   .map-placeholder{font-size:14px}
   
 }
@@ -334,5 +344,5 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe 
   box-shadow: 0 10px 30px rgba(41,121,255,0.3); transition: .25s ease;
 }
 .modal-close:hover { transform: translateY(-2px); }
-/* === FIX DROPDOWN MENU VISIBILITY === */
+
 
