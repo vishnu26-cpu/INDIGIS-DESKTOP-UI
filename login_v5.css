@@ -207,3 +207,11 @@ html, body {
 @media (max-width: 740px) {
 
 }
+/* Prevent app layout from appearing on login screen */
+body.login-page .top-hud,
+body.login-page .main-area,
+body.login-page .left-panel,
+body.login-page .right-panel,
+body.login-page .status-ribbon {
+  display: none !important;
+}
