@@ -20,17 +20,15 @@ html, body {
 
 .planet-bg {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 70vw;     
-  height: 100vh;
- background-image: url("./assets/Earth.jpg");
-
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("assets/Earth.jpg");
   background-size: cover;
-  background-position: right center;
-  background-repeat: no-repeat;
-  z-index: -3;
+  background-position: center;
+  z-index: -1;   /* Body stays behind */
 }
+
 /* === INDIGIS LOGO (shared global) === */
 .indigis-logo {
   width: 54px;
@@ -85,6 +83,10 @@ html, body {
   filter: drop-shadow(0 0 10px rgba(41,121,255,0.45));
 }
 
+.login-center {
+  position: relative;
+  z-index: 5;
+}
 
 
 
@@ -96,15 +98,10 @@ html, body {
 .planet-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,1) 0%,
-    rgba(0,0,0,0.95) 20%,
-    rgba(0,0,0,0.75) 40%,
-    rgba(0,0,0,0.0) 70%
-  );
-  z-index: -2;
+  background: rgba(0,0,0,0.65); /* dark filter */
+  z-index: 0;    /* overlay above the image, below login box */
 }
+
 
 /* =========================================================
    (OLD BACKGROUND BLOCK REMOVED — NO GIF NEEDED)
@@ -215,4 +212,8 @@ body.login-page .left-panel,
 body.login-page .right-panel,
 body.login-page .status-ribbon {
   display: none !important;
+}
+.login-page {
+  position: relative;
+  overflow: hidden;
 }
