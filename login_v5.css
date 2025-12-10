@@ -22,9 +22,10 @@ html, body {
   position: fixed;
   top: 0;
   right: 0;
-  width: 70vw;        /* Planet fills right portion */
+  width: 70vw;     
   height: 100vh;
-  background-image: url("assets/Earth.jpg"); /* <-- Change name to your file */
+ background-image: url("./assets/Earth.jpg");
+
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
