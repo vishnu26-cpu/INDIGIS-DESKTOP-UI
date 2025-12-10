@@ -1,9 +1,9 @@
 /* ===========================================================
-   INTERACTIONS.JS — CLEANED + FULLY CORRECTED
-   WORKING THEME SWITCH • LEFT PANEL • RIGHT PANEL • RESIZERS
+   INTERACTIONS.JS — COMPLETE WORKING + LOGGING ENABLED
 =========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("%c[INIT] DOM Loaded — Starting UI Engine", "color:#4D9FFF;font-weight:bold;");
 
   /* ---------------------------------------------------------
       THEME SWITCHER  (Light / Dark)
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       themeBtn.textContent = "🌙";
     }
 
+    console.log("%c[THEME] Switched to → " + name, "color:#FFD75F;font-weight:bold;");
     localStorage.setItem("indigis.theme", name);
   }
 
@@ -31,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
     themeBtn.addEventListener("click", () => {
       const current = localStorage.getItem("indigis.theme") || "dark";
       const next = current === "dark" ? "light" : "dark";
+
+      console.log("%c[THEME] Button Clicked — Toggling", "color:#88E1FF;");
       applyTheme(next);
     });
   }
@@ -40,8 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
       LOGOUT HANDLER
   --------------------------------------------------------- */
   const logoutBtn = document.getElementById("logoutBtn");
+
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
+      console.log("%c[AUTH] Logging Out...", "color:#FF6B6B;font-weight:bold;");
       localStorage.removeItem("indigis_logged_in");
       window.location.href = "index.html";
     });
@@ -49,9 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* ---------------------------------------------------------
-      COORDS DEMO (FAKE until map loads)
+      COORDINATE FAKE UPDATE (for UI)
   --------------------------------------------------------- */
   const coordsEl = document.getElementById("coords");
+
   if (coordsEl) {
     setInterval(() => {
       const now = new Date();
@@ -62,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ===========================================================
-      LEFT PANEL (Accordion + Search + Tool Activation)
+   LEFT PANEL — Accordion + Tool Clicks + Search
 =========================================================== */
 
 (function() {
@@ -76,10 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
   sections.forEach(sec => {
     const header = sec.querySelector(".section-header");
     const list = sec.querySelector(".tool-list");
+    const sectionName = header.textContent.trim();
 
     header.addEventListener("click", () => {
       const isOpen = list.getAttribute("aria-hidden") === "false";
       list.setAttribute("aria-hidden", isOpen ? "true" : "false");
+
+      console.log(
+        `%c[LEFT PANEL] ${sectionName} → ${isOpen ? "Collapsed" : "Expanded"}`,
+        "color:#9ADAFF;"
+      );
     });
   });
 
@@ -89,7 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
       qsa(".tool-btn.active").forEach(x => x.classList.remove("active"));
       btn.classList.add("active");
 
-      console.log("Tool clicked:", btn.textContent.trim());
+      console.log(
+        `%c[TOOL] Selected → ${btn.textContent.trim()}`,
+        "color:#A6FF7A;font-weight:bold;"
+      );
     });
   });
 
@@ -97,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (searchInput) {
     searchInput.addEventListener("input", () => {
       const q = searchInput.value.toLowerCase();
+      console.log("%c[SEARCH] Query → " + q, "color:#FFD1A9;");
 
       sections.forEach(section => {
         const buttons = section.querySelectorAll(".tool-btn");
@@ -116,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 /* ===========================================================
-      RIGHT PANEL — TAB SWITCHING
+   RIGHT PANEL — TAB SWITCHING
 =========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -130,13 +146,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tab.classList.add("active");
       const id = "rp-" + tab.dataset.tab;
+
       document.getElementById(id).classList.remove("hidden");
+
+      console.log("%c[RIGHT PANEL] Switched Tab → " + tab.dataset.tab, "color:#FF9EFF;");
     });
   });
 });
 
 /* ===========================================================
-      RESIZABLE LEFT + RIGHT PANELS
+   RESIZABLE PANELS — LEFT + RIGHT
 =========================================================== */
 
 (function () {
@@ -149,19 +168,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let resizingLeft = false;
   let resizingRight = false;
 
-  /* ---------------- LEFT PANEL DRAG ---------------- */
+  /* -------- LEFT DRAG -------- */
   if (leftHandle) {
     leftHandle.addEventListener("mousedown", () => {
       resizingLeft = true;
       document.body.style.userSelect = "none";
+      console.log("%c[RESIZE] Left Panel — Start", "color:#67E6DC;");
     });
   }
 
-  /* ---------------- RIGHT PANEL DRAG ---------------- */
+  /* -------- RIGHT DRAG -------- */
   if (rightHandle) {
     rightHandle.addEventListener("mousedown", () => {
       resizingRight = true;
       document.body.style.userSelect = "none";
+      console.log("%c[RESIZE] Right Panel — Start", "color:#67DCFF;");
     });
   }
 
@@ -171,6 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (newWidth < 150) newWidth = 150;
       if (newWidth > 380) newWidth = 380;
       leftPanel.style.width = newWidth + "px";
+
+      console.log("[RESIZE] Left Panel → " + newWidth + "px");
     }
 
     if (resizingRight) {
@@ -178,12 +201,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (newWidth < 150) newWidth = 150;
       if (newWidth > 420) newWidth = 420;
       rightPanel.style.width = newWidth + "px";
+
+      console.log("[RESIZE] Right Panel → " + newWidth + "px");
     }
   });
 
   document.addEventListener("mouseup", () => {
+    if (resizingLeft || resizingRight)
+      console.log("%c[RESIZE] Panels — End", "color:#8AFFC1;");
+
     resizingLeft = false;
     resizingRight = false;
     document.body.style.userSelect = "auto";
   });
+
 })();
