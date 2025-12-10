@@ -1057,3 +1057,45 @@ input:focus, select:focus {
 .resize-handle:hover {
   background: rgba(41,121,255,0.4);
 }
+.map-tools {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.tool-btn-small {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor:pointer;
+  color: var(--text);
+  font-size: 15px;
+  transition: .2s ease;
+}
+.tool-btn-small:hover {
+  background: rgba(41,121,255,0.20);
+  transform: translateY(-2px);
+}
+
+.north-arrow {
+  position:absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  opacity: .85;
+  transition: transform .25s ease-out;
+  z-index: 999;
+}
+.scale-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.45);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #fff;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}

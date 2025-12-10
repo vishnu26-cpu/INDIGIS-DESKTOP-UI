@@ -109,11 +109,22 @@
     <main class="map-area">
       <div class="map-toolbar">
         <div>Map View</div>
+        <div class="map-tools">
+  <button class="tool-btn-small" id="centerMapBtn" title="Center Map">🎯</button>
+  <button class="tool-btn-small" id="toggleGridBtn" title="Grid Overlay">#️⃣</button>
+  <button class="tool-btn-small" id="measureDistBtn" title="Distance Measure">📏</button>
+  <button class="tool-btn-small" id="measureAreaBtn" title="Area Measure">📐</button>
+  <button class="tool-btn-small" id="drawShapeBtn" title="Draw Shapes">✏️</button>
+  <button class="tool-btn-small" id="markerBtn" title="Add Marker">📍</button>
+</div>
+
         <div id="mapInfo" style="color:var(--muted)">—</div>
       </div>
 
       <div id="olMap"></div>
       <div id="cesiumContainer"></div>
+      <div id="northArrow" class="north-arrow">🧭</div>
+
     </main>
 
     <!-- RIGHT PANEL RESIZE HANDLE -->
@@ -340,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggle.click();
       }
     });
-
+let gridLayer = new ol.layer.Graticule({ strokeStyle: new ol.style.Stroke({ color: 'rgba(255,255,255,0.15)', width: 1, }), showLabels: false }); gridLayer.setVisible(false); olMap.addLayer(gridLayer);
     initOL();
 
     window.addEventListener('resize', () => {
@@ -349,12 +360,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById('logoutBtn').addEventListener('click', () => {
+      document.getElementById("toggleGridBtn").onclick = () => {
+  const visible = gridLayer.getVisible();
+  gridLayer.setVisible(!visible);
+  alert("Grid " + (visible ? "Hidden" : "Shown"));
+};
+
       localStorage.removeItem('indigis_logged_in');
       window.location.href = "index.html";
     });
   })();
 
 });
+document.getElementById("centerMapBtn").onclick = () => {
+  if (!is3D) {
+    olMap.getView().setCenter(ol.proj.fromLonLat([78.9629, 20.5937]));
+    olMap.getView().setZoom(4);
+  } else {
+    cesiumViewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(78.9629, 20.5937, 20000000),
+      duration: 1.8
+    });
+  }
+};
+
 </script>
 
 <script>
