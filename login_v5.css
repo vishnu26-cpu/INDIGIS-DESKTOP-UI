@@ -17,7 +17,6 @@ html, body {
 /* =========================================================
    SPACEX-STYLE PLANET BACKGROUND (RIGHT SIDE)
    ========================================================= */
-
 .planet-bg {
   position: fixed;
   inset: 0;
@@ -25,9 +24,13 @@ html, body {
   height: 100%;
   background-image: url("assets/Earth.jpg");
   background-size: cover;
-  background-position: center;
-  z-index: -1;   /* Body stays behind */
+
+  /* SHIFT EARTH TO THE RIGHT */
+  background-position: 85% center; /* 0% = left, 50% = center, 100% = full right */
+
+  z-index: -1;
 }
+
 
 /* === INDIGIS LOGO (shared global) === */
 .indigis-logo {
