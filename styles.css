@@ -27,14 +27,81 @@
   --right-width: 250px;
 }
 
-/* Light theme override */
+/* ============================================================
+   LIGHT THEME — Full UI Override
+============================================================ */
 .theme-light {
   --ui-bg: #F5F7FA;
   --ui-surface: #FFFFFF;
-  --text: #0E1620;
+
+  --text: #1A1F25;
   --muted: #5C6B73;
-  --glass: rgba(41,121,255,0.06);
+
+  --glass: rgba(41,121,255,0.08);
+
+  --section-shadow: rgba(0,0,0,0.06);
+
+  --left-width: 250px;
+  --right-width: 250px;
 }
+
+/* Light theme panel backgrounds */
+.theme-light .left-panel,
+.theme-light .right-panel {
+  background: #ffffff;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+}
+
+/* Light theme map toolbar */
+.theme-light .map-toolbar {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Light theme tab control */
+.theme-light .rp-tab {
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: #1A1F25;
+}
+.theme-light .rp-tab.active {
+  background: linear-gradient(90deg, #2979FF, #00A8FF);
+  color: #fff;
+}
+
+/* Light theme section headers */
+.theme-light .section-header {
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* Light theme expand-list arrow color */
+.theme-light .section-header::after {
+  filter: brightness(0);
+}
+
+/* Light theme tool buttons */
+.theme-light .tool-btn {
+  color: #1A1F25;
+  border-color: rgba(0,0,0,0.06);
+  background: rgba(0,0,0,0.03);
+}
+.theme-light .tool-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Light theme modal */
+.theme-light .indigis-modal {
+  background: rgba(255,255,255,0.8);
+  color: #1A1F25;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.theme-light .modal-close {
+  background: linear-gradient(180deg,#2979FF,#006FE6);
+}
+
 
 /* ============================================================
    2. GLOBAL RESET + BASE
@@ -381,21 +448,29 @@ html, body {
   overflow: visible;
 }
 
+/* Arrow icon for headers */
 .section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  cursor: pointer;
-  user-select: none;
-  gap: 8px;
-
-  border-radius: 6px;
-  margin-bottom: 4px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
+  position: relative;
+  padding-right: 30px; /* space for arrow */
 }
+
+/* Default arrow (collapsed) */
+.section-header::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: 0.25s ease;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Expanded state — rotate arrow upwards */
+.section-header[aria-expanded="true"]::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
 
 /* FULL-WIDTH GRADIENT HEADERS */
 /* ❖ PREMIUM GRADIENT PALETTE FOR LEFT PANEL ❖ */
