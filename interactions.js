@@ -24,22 +24,26 @@
     }
 
     // theme apply function
-    function applyTheme(name) {
-      document.body.classList.remove('theme-light', 'theme-auto', 'theme-dark');
-      if (name === 'light') {
-        document.body.classList.add('theme-light');
-        if (themeBtn) themeBtn.setAttribute('aria-pressed', 'false');
-      } else if (name === 'dark') {
-        document.body.classList.add('theme-auto');
-        if (themeBtn) themeBtn.setAttribute('aria-pressed', 'true');
-      } else {
-        const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (isDark) document.body.classList.remove('theme-light');
-        else document.body.classList.add('theme-light');
-        if (themeBtn) themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-      }
-      localStorage.setItem('indigis.theme', name);
-    }
+    // FINAL & CORRECT THEME APPLY FUNCTION
+function applyTheme(name) {
+  document.body.classList.remove('theme-light', 'theme-dark', 'theme-auto');
+
+  if (name === 'light') {
+    document.body.classList.add('theme-light');
+    if (themeBtn) themeBtn.textContent = "🌞";
+  }
+  else if (name === 'dark') {
+    document.body.classList.add('theme-dark');
+    if (themeBtn) themeBtn.textContent = "🌙";
+  }
+  else {
+    // AUTO MODE – follow system
+    document.body.classList.add('theme-auto');
+    if (themeBtn) themeBtn.textContent = "🌓";
+  }
+
+  localStorage.setItem('indigis.theme', name);
+}
 
     // init saved theme
     const savedTheme = localStorage.getItem('indigis.theme') || 'auto';
