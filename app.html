@@ -86,6 +86,20 @@
 
 
 <div class="main-area">
+<!-- RIGHT PANEL WRAPPER -->
+<div id="rightPanelWrapper">
+  <div id="rightPanelContainer"></div>
+</div>
+
+<script>
+  fetch('right-panel.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('rightPanelContainer').innerHTML = html;
+      initRightPanel();   // we will define this
+    })
+    .catch(() => console.log("right-panel.html not loaded"));
+</script>
 
    <!-- LEFT PANEL WRAPPER -->
 <div id="leftPanelWrapper">
@@ -126,26 +140,6 @@
       <div id="northArrow" class="north-arrow">🧭</div>
 
     </main>
-
-    <!-- RIGHT PANEL RESIZE HANDLE -->
-   <!-- RIGHT PANEL WRAPPER -->
-<!-- RIGHT PANEL WRAPPER -->
-<div id="rightPanelWrapper">
-
-  <aside class="right-panel">
-
-    <!-- TOP TABS -->
-    <div class="rp-tabs">
-      <button class="rp-tab active" data-tab="inspector">
-        Inspector
-      </button>
-      <button class="rp-tab" data-tab="metadata">
-        Metadata
-      </button>
-      <button class="rp-tab" data-tab="attributes">
-        Attributes
-      </button>
-    </div>
 
     <!-- INSPECTOR VIEW -->
     <div class="rp-view" id="rp-inspector">
@@ -213,7 +207,7 @@
 
   </aside>
 </div>
-<!-- END rightPanelWrapper -->
+
 
 <!-- ===========================
      SECONDARY LAYERS PANEL

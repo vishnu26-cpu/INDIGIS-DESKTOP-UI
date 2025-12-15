@@ -1,7 +1,7 @@
 <aside class="right-panel">
 
   <!-- ===========================
-       A. TOP TABS
+       TOP TABS
   ============================ -->
   <div class="rp-tabs">
     <button class="rp-tab active" data-tab="console">Console</button>
@@ -10,42 +10,40 @@
   </div>
 
   <!-- ===========================
-       B. MAIN CONTENT AREA
+       CONTENT AREA
   ============================ -->
   <div class="rp-content">
 
-    <!-- CONSOLE VIEW -->
+    <!-- CONSOLE -->
     <div class="rp-view" id="rp-console">
       <h3 class="rp-title">System Console</h3>
 
       <ul class="console-list">
-        <li class="console-item error">❌ Raster clip failed: CRS mismatch</li>
-        <li class="console-item warning">⚠️ Layer not visible at current scale</li>
-        <li class="console-item info">ℹ️ Map loaded successfully</li>
+        <li class="console-item info">ℹ️ Application loaded successfully</li>
       </ul>
     </div>
 
-    <!-- METADATA VIEW -->
+    <!-- METADATA -->
     <div class="rp-view hidden" id="rp-metadata">
       <h3 class="rp-title">Metadata</h3>
 
       <div class="rp-field">
         <label>Source</label>
-        <input placeholder="GeoServer, Local File…" />
+        <input placeholder="GeoServer / File" />
       </div>
 
       <div class="rp-field">
         <label>CRS</label>
-        <input placeholder="EPSG:4326 / EPSG:3857…" />
+        <input placeholder="EPSG:4326" />
       </div>
 
       <div class="rp-field">
         <label>Extent</label>
-        <input placeholder="Bounding box…" />
+        <input placeholder="Bounding box" />
       </div>
     </div>
 
-    <!-- ATTRIBUTES VIEW -->
+    <!-- ATTRIBUTES -->
     <div class="rp-view hidden" id="rp-attributes">
       <h3 class="rp-title">Attributes</h3>
 
@@ -56,7 +54,6 @@
         <tbody>
           <tr><td>ID</td><td>—</td></tr>
           <tr><td>Name</td><td>—</td></tr>
-          <tr><td>Type</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -64,7 +61,7 @@
   </div>
 
   <!-- ===========================
-       C. BOTTOM ACTION STRIP
+       BOTTOM ACTION STRIP
   ============================ -->
   <div class="rp-actions">
     <button id="openLayersBtn" class="rp-action-btn">🗂 Layers</button>

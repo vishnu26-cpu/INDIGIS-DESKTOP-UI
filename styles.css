@@ -1099,3 +1099,10 @@ input:focus, select:focus {
   z-index: 999;
   backdrop-filter: blur(4px);
 }
+.layers-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+}
