@@ -101,24 +101,6 @@
     .catch(() => console.log("right-panel.html not loaded"));
 </script>
 
-   <!-- LEFT PANEL WRAPPER -->
-<div id="leftPanelWrapper">
-    <div id="leftPanelContainer"></div>
-</div>
-
-<!-- LEFT PANEL RESIZE HANDLE -->
-<div id="leftPanelResize" class="resize-handle"></div>
-
-    <script>
-      fetch('left-panel.html')
-        .then(r => r.text())
-        .then(html => {
-          document.getElementById('leftPanelContainer').innerHTML = html;
-          initLeftPanel();
-        })
-        .catch(() => console.log("left-panel.html not loaded"));
-    </script>
-
     <!-- MAP AREA -->
     <main class="map-area">
       <div class="map-toolbar">
@@ -137,8 +119,24 @@
 
       <div id="olMap"></div>
       <div id="cesiumContainer"></div>
-      <div id="northArrow" class="north-arrow">🧭</div>
+      <!-- <div id="northArrow" class="north-arrow">🧭</div> -->
+ <!-- LEFT PANEL WRAPPER -->
+<div id="leftPanelWrapper">
+    <div id="leftPanelContainer"></div>
+</div>
 
+<!-- LEFT PANEL RESIZE HANDLE -->
+<div id="leftPanelResize" class="resize-handle"></div>
+
+    <script>
+      fetch('left-panel.html')
+        .then(r => r.text())
+        .then(html => {
+          document.getElementById('leftPanelContainer').innerHTML = html;
+          initLeftPanel();
+        })
+        .catch(() => console.log("left-panel.html not loaded"));
+    </script>
     </main>
 
 
