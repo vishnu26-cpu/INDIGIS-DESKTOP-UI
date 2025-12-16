@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>INDIGIS – Basic Mode</title>
-<link rel="stylesheet" href="./basic.css">
 
+  <!-- BASIC MODE CSS (same folder) -->
+  <link rel="stylesheet" href="./basic.css">
 </head>
 
 <body class="theme-dark">
@@ -12,7 +13,8 @@
 <!-- ================= TOP BAR ================= -->
 <header class="topbar">
   <div class="topbar-left">
-    <img src="assets/logo.png" class="logo" />
+    <!-- LOGO (goes one level up to assets) -->
+    <img src="../assets/logo.png" class="logo" />
     <span class="brand">INDIGIS</span>
 
     <!-- Workspace -->
@@ -61,16 +63,17 @@
     </div>
   </div>
 </header>
+
+<!-- ================= MAIN LAYOUT ================= -->
 <div id="indigis-basic-app">
 
-  <!-- LEFT PANEL -->
+  <!-- ========== LEFT PANEL ========== -->
   <aside class="left-panel">
 
     <div class="lp-header">
-      <span>BASIC TOOLS</span>
+      BASIC TOOLS
     </div>
 
-    <!-- SECTION -->
     <div class="lp-section">
       <button class="lp-section-title">Navigation</button>
       <div class="lp-tools">
@@ -109,73 +112,70 @@
 
   </aside>
 
+  <!-- ========== MAP AREA ========== -->
+  <main class="main">
+    <div class="map-placeholder">
+      BASIC GIS MAP AREA
+    </div>
+  </main>
 
+  <!-- ========== RIGHT PANEL ========== -->
+  <aside class="right-panel">
+
+    <div class="rp-header">
+      <span>PROPERTIES</span>
+      <button class="rp-close" id="rpCloseBtn">⟨</button>
+    </div>
+
+    <div class="rp-tabs">
+      <button class="rp-tab active" data-tab="layers">Layers</button>
+      <button class="rp-tab" data-tab="info">Info</button>
+      <button class="rp-tab" data-tab="settings">Settings</button>
+    </div>
+
+    <div class="rp-content">
+
+      <!-- Layers -->
+      <div class="rp-view active" id="rp-layers">
+        <div class="layer-item">
+          <input type="checkbox" checked />
+          <span>Base Map</span>
+        </div>
+        <div class="layer-item">
+          <input type="checkbox" checked />
+          <span>Roads</span>
+        </div>
+        <div class="layer-item">
+          <input type="checkbox" />
+          <span>Buildings</span>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="rp-view" id="rp-info">
+        <p class="rp-muted">
+          Click on map to view feature information.
+        </p>
+      </div>
+
+      <!-- Settings -->
+      <div class="rp-view" id="rp-settings">
+        <label class="rp-setting">
+          <input type="checkbox" />
+          Show grid
+        </label>
+        <label class="rp-setting">
+          <input type="checkbox" />
+          Enable snapping
+        </label>
+      </div>
+
+    </div>
+  </aside>
 
 </div>
 
-<!-- ================= MAIN AREA ================= -->
-<main class="main">
-  <div class="map-placeholder">
-    BASIC GIS MAP AREA
-  </div>
-</main>
-<!-- RIGHT PANEL -->
-<aside class="right-panel">
-
-  <!-- Header -->
-  <div class="rp-header">
-    <span>PROPERTIES</span>
-    <button class="rp-close" id="rpCloseBtn">⟨</button>
-  </div>
-
-  <!-- Tabs -->
-  <div class="rp-tabs">
-    <button class="rp-tab active" data-tab="layers">Layers</button>
-    <button class="rp-tab" data-tab="info">Info</button>
-    <button class="rp-tab" data-tab="settings">Settings</button>
-  </div>
-
-  <!-- Views -->
-  <div class="rp-content">
-
-    <!-- Layers -->
-    <div class="rp-view active" id="rp-layers">
-      <div class="layer-item">
-        <input type="checkbox" checked />
-        <span>Base Map</span>
-      </div>
-      <div class="layer-item">
-        <input type="checkbox" checked />
-        <span>Roads</span>
-      </div>
-      <div class="layer-item">
-        <input type="checkbox" />
-        <span>Buildings</span>
-      </div>
-    </div>
-
-    <!-- Info -->
-    <div class="rp-view" id="rp-info">
-      <p class="rp-muted">
-        Click on map to view feature information.
-      </p>
-    </div>
-
-    <!-- Settings -->
-    <div class="rp-view" id="rp-settings">
-      <label class="rp-setting">
-        <input type="checkbox" />
-        Show grid
-      </label>
-      <label class="rp-setting">
-        <input type="checkbox" />
-        Enable snapping
-      </label>
-    </div>
-
-  </div>
-</aside>
-
+<!-- BASIC MODE JS -->
 <script src="./basic.js"></script>
 
 </body>

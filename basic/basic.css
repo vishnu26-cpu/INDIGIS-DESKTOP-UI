@@ -125,11 +125,10 @@ body { font-family: "Segoe UI", sans-serif; }
   border-radius: 6px;
 }
 
-/* ===== MAIN ===== */
 .main {
-  height: calc(100vh - 52px);
+  flex: 1;        /* take remaining space */
+  position: relative;
 }
-
 .map-placeholder {
   height: 100%;
   display: flex;
@@ -145,8 +144,10 @@ body { font-family: "Segoe UI", sans-serif; }
 #indigis-basic-app {
   display: flex;
   height: 100vh;
+  height: calc(100vh - 52px); 
   background: #0e1116;
 }
+
 
 /* ===========================
    LEFT PANEL
