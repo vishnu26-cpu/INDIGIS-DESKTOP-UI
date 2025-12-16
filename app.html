@@ -86,24 +86,20 @@
 
 
 <div class="main-area">
-
-   <!-- LEFT PANEL WRAPPER -->
-<div id="leftPanelWrapper">
-    <div id="leftPanelContainer"></div>
+<!-- RIGHT PANEL WRAPPER -->
+<div id="rightPanelWrapper">
+  <div id="rightPanelContainer"></div>
 </div>
 
-<!-- LEFT PANEL RESIZE HANDLE -->
-<div id="leftPanelResize" class="resize-handle"></div>
-
-    <script>
-      fetch('left-panel.html')
-        .then(r => r.text())
-        .then(html => {
-          document.getElementById('leftPanelContainer').innerHTML = html;
-          initLeftPanel();
-        })
-        .catch(() => console.log("left-panel.html not loaded"));
-    </script>
+<script>
+  fetch('right-panel.html')
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById('rightPanelContainer').innerHTML = html;
+      initRightPanel();   // we will define this
+    })
+    .catch(() => console.log("right-panel.html not loaded"));
+</script>
 
     <!-- MAP AREA -->
     <main class="map-area">
@@ -123,97 +119,27 @@
 
       <div id="olMap"></div>
       <div id="cesiumContainer"></div>
-      <div id="northArrow" class="north-arrow">🧭</div>
+      <!-- <div id="northArrow" class="north-arrow">🧭</div> -->
+ <!-- LEFT PANEL WRAPPER -->
+<div id="leftPanelWrapper">
+    <div id="leftPanelContainer"></div>
+</div>
 
+<!-- LEFT PANEL RESIZE HANDLE -->
+<div id="leftPanelResize" class="resize-handle"></div>
+
+    <script>
+      fetch('left-panel.html')
+        .then(r => r.text())
+        .then(html => {
+          document.getElementById('leftPanelContainer').innerHTML = html;
+          initLeftPanel();
+        })
+        .catch(() => console.log("left-panel.html not loaded"));
+    </script>
     </main>
 
-    <!-- RIGHT PANEL RESIZE HANDLE -->
-   <!-- RIGHT PANEL WRAPPER -->
-<!-- RIGHT PANEL WRAPPER -->
-<div id="rightPanelWrapper">
 
-  <aside class="right-panel">
-
-    <!-- TOP TABS -->
-    <div class="rp-tabs">
-      <button class="rp-tab active" data-tab="inspector">
-        Inspector
-      </button>
-      <button class="rp-tab" data-tab="metadata">
-        Metadata
-      </button>
-      <button class="rp-tab" data-tab="attributes">
-        Attributes
-      </button>
-    </div>
-
-    <!-- INSPECTOR VIEW -->
-    <div class="rp-view" id="rp-inspector">
-      <h3 class="rp-title">Inspector</h3>
-
-      <div class="rp-field">
-        <label>Layer</label>
-        <select id="rpLayerSelect">
-          <option value="none">— No Layer —</option>
-          <option value="vector">Vector Layer</option>
-          <option value="raster">Raster Layer</option>
-          <option value="terrain">Terrain Layer</option>
-        </select>
-      </div>
-
-      <div class="rp-field">
-        <label>Opacity</label>
-        <input type="range" min="0" max="1" step="0.01" value="0.85">
-      </div>
-
-      <div class="rp-field">
-        <label>Stroke Width</label>
-        <select>
-          <option>1 px</option>
-          <option>2 px</option>
-          <option>3 px</option>
-          <option>4 px</option>
-        </select>
-      </div>
-
-      <button class="rp-apply">Apply Style</button>
-    </div>
-
-    <!-- METADATA VIEW -->
-    <div class="rp-view hidden" id="rp-metadata">
-      <h3 class="rp-title">Metadata</h3>
-      <div class="rp-field">
-        <label>Source</label>
-        <input />
-      </div>
-      <div class="rp-field">
-        <label>CRS</label>
-        <input />
-      </div>
-      <div class="rp-field">
-        <label>Extent</label>
-        <input />
-      </div>
-    </div>
-
-    <!-- ATTRIBUTES VIEW -->
-    <div class="rp-view hidden" id="rp-attributes">
-      <h3 class="rp-title">Attributes</h3>
-      <table class="rp-attr-table">
-        <thead>
-          <tr><th>Field</th><th>Value</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>ID</td><td>—</td></tr>
-          <tr><td>Name</td><td>—</td></tr>
-          <tr><td>Type</td><td>—</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-  </aside>
-</div>
-<!-- END rightPanelWrapper -->
 
 <!-- ===========================
      SECONDARY LAYERS PANEL

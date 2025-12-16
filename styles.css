@@ -373,7 +373,13 @@ html, body {
   gap: 10px;
   padding: 10px;
 }
-
+.map-area {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ui-surface);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
 .right-panel {
   width: var(--right-width);
   min-width: var(--right-width);
@@ -382,13 +388,7 @@ html, body {
   gap: 12px;
 }
 
-.map-area {
-  flex: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--ui-surface);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-}
+
 
 /* ============================================================
    8. MAP TOOLBAR + MAPS
@@ -1098,4 +1098,11 @@ input:focus, select:focus {
   color: #fff;
   z-index: 999;
   backdrop-filter: blur(4px);
+}
+.layers-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
 }
