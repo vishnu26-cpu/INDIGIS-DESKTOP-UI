@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>INDIGIS – Basic Mode</title>
+  <link rel="stylesheet" href="css/basic.css" />
+</head>
+
+<body class="theme-dark">
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="topbar-left">
+    <img src="assets/logo.svg" class="logo" />
+    <span class="brand">INDIGIS</span>
+
+    <!-- Workspace -->
+    <div class="dropdown">
+      <button class="btn">Workspace ▾</button>
+      <div class="menu">
+        <button>Save Workspace</button>
+        <button>Save As</button>
+        <button>Recent Workspaces</button>
+        <hr />
+        <button class="danger">Close Workspace</button>
+      </div>
+    </div>
+
+    <!-- User Mode -->
+    <div class="dropdown">
+      <button class="btn">User Mode ▾</button>
+      <div class="menu">
+        <button disabled>Basic ✓</button>
+        <button onclick="switchMode('intermediate')">Intermediate</button>
+        <button onclick="switchMode('advanced')">Advanced</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <!-- Theme -->
+    <button id="themeToggle" class="icon-btn">🌙</button>
+
+    <!-- 2D / 3D -->
+    <div class="toggle">
+      <button class="active">2D</button>
+      <button>3D</button>
+    </div>
+
+    <!-- Settings -->
+    <div class="dropdown">
+      <button class="icon-btn">⚙</button>
+      <div class="menu right">
+        <button>Account</button>
+        <button>Preferences</button>
+        <button>Help</button>
+        <hr />
+        <button class="danger" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MAIN AREA ================= -->
+<main class="main">
+  <div class="map-placeholder">
+    BASIC GIS MAP AREA
+  </div>
+</main>
+
+<script src="js/basic.js"></script>
+</body>
+</html>
