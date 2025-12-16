@@ -629,15 +629,18 @@ localStorage.setItem('indigis_workspace_created', 'true');
 
 switch (userMode.value) {
   case 'basic':
-    window.location.href = 'basic/basic.html';
+    window.location.href = './basic/basic.html';
     break;
+
   case 'intermediate':
-    window.location.href = 'intermediate.html';
+    window.location.href = './intermediate/intermediate.html';
     break;
+
   case 'advanced':
-    window.location.href = 'advanced.html';
+    window.location.href = './advanced/advanced.html';
     break;
 }
+
 
     });
 userMode.addEventListener('change', updatePreview);
