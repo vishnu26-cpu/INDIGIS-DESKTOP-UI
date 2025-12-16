@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>INDIGIS – Basic Mode</title>
-
-  <!-- BASIC MODE CSS (same folder) -->
   <link rel="stylesheet" href="./basic.css">
 </head>
 
@@ -13,11 +11,9 @@
 <!-- ================= TOP BAR ================= -->
 <header class="topbar">
   <div class="topbar-left">
-    <!-- LOGO (goes one level up to assets) -->
     <img src="../assets/logo.png" class="logo" />
     <span class="brand">INDIGIS</span>
 
-    <!-- Workspace -->
     <div class="dropdown">
       <button class="btn">Workspace ▾</button>
       <div class="menu">
@@ -29,7 +25,6 @@
       </div>
     </div>
 
-    <!-- User Mode -->
     <div class="dropdown">
       <button class="btn">User Mode ▾</button>
       <div class="menu">
@@ -41,16 +36,16 @@
   </div>
 
   <div class="topbar-right">
-    <!-- Theme -->
+    <!-- NEW: reopen right panel -->
+    <button id="openRightPanelBtn" class="icon-btn" title="Open Inspector / AI">🧠</button>
+
     <button id="themeToggle" class="icon-btn">🌙</button>
 
-    <!-- 2D / 3D -->
     <div class="toggle">
       <button class="active">2D</button>
       <button>3D</button>
     </div>
 
-    <!-- Settings -->
     <div class="dropdown">
       <button class="icon-btn">⚙</button>
       <div class="menu right">
@@ -67,12 +62,9 @@
 <!-- ================= MAIN LAYOUT ================= -->
 <div id="indigis-basic-app">
 
-  <!-- ========== LEFT PANEL ========== -->
+  <!-- LEFT PANEL (UNCHANGED) -->
   <aside class="left-panel">
-
-    <div class="lp-header">
-      BASIC TOOLS
-    </div>
+    <div class="lp-header">BASIC TOOLS</div>
 
     <div class="lp-section">
       <button class="lp-section-title">Navigation</button>
@@ -109,65 +101,68 @@
         <button class="lp-tool">North Arrow</button>
       </div>
     </div>
-
   </aside>
 
-  <!-- ========== MAP AREA ========== -->
+  <!-- MAP -->
   <main class="main">
-    <div class="map-placeholder">
-      BASIC GIS MAP AREA
-    </div>
+    <div class="map-placeholder">BASIC GIS MAP AREA</div>
   </main>
 
-  <!-- ========== RIGHT PANEL ========== -->
-  <aside class="right-panel">
+  <!-- RIGHT PANEL -->
+  <aside class="right-panel" id="rightPanel">
 
     <div class="rp-header">
       <span>PROPERTIES</span>
       <button class="rp-close" id="rpCloseBtn">⟨</button>
     </div>
 
+    <!-- UPDATED TABS -->
     <div class="rp-tabs">
       <button class="rp-tab active" data-tab="layers">Layers</button>
       <button class="rp-tab" data-tab="info">Info</button>
+      <button class="rp-tab" data-tab="inspector">Inspector</button>
+      <button class="rp-tab" data-tab="ai">AI</button>
       <button class="rp-tab" data-tab="settings">Settings</button>
     </div>
 
     <div class="rp-content">
 
-      <!-- Layers -->
+      <!-- Layers (UNCHANGED) -->
       <div class="rp-view active" id="rp-layers">
-        <div class="layer-item">
-          <input type="checkbox" checked />
-          <span>Base Map</span>
-        </div>
-        <div class="layer-item">
-          <input type="checkbox" checked />
-          <span>Roads</span>
-        </div>
-        <div class="layer-item">
-          <input type="checkbox" />
-          <span>Buildings</span>
-        </div>
+        <div class="layer-item"><input type="checkbox" checked> Base Map</div>
+        <div class="layer-item"><input type="checkbox" checked> Roads</div>
+        <div class="layer-item"><input type="checkbox"> Buildings</div>
       </div>
 
-      <!-- Info -->
+      <!-- Info (UNCHANGED) -->
       <div class="rp-view" id="rp-info">
-        <p class="rp-muted">
-          Click on map to view feature information.
-        </p>
+        <p class="rp-muted">Click on map to view feature information.</p>
       </div>
 
-      <!-- Settings -->
+      <!-- NEW: Inspector -->
+      <div class="rp-view" id="rp-inspector">
+        <div class="log error">❌ CRS not defined</div>
+        <div class="log warn">⚠️ Layer mismatch detected</div>
+        <div class="log info">ℹ️ Workspace loaded</div>
+      </div>
+
+      <!-- NEW: AI Assistant -->
+      <div class="rp-view" id="rp-ai">
+        <div class="ai-box">
+          <div class="ai-msg">
+            Hi 👋 I’m INDIGIS AI. Ask me anything about this application.
+          </div>
+          <div class="ai-input">
+            <input type="text" placeholder="Ask about tools, errors, workflow…" />
+            <button>Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings (UNCHANGED) -->
       <div class="rp-view" id="rp-settings">
-        <label class="rp-setting">
-          <input type="checkbox" />
-          Show grid
-        </label>
-        <label class="rp-setting">
-          <input type="checkbox" />
-          Enable snapping
-        </label>
+        <label class="rp-setting"><input type="checkbox"> Show grid</label>
+        <label class="rp-setting"><input type="checkbox"> Enable snapping</label>
       </div>
 
     </div>
@@ -175,8 +170,6 @@
 
 </div>
 
-<!-- BASIC MODE JS -->
 <script src="./basic.js"></script>
-
 </body>
 </html>

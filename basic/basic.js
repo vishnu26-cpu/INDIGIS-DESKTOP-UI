@@ -53,33 +53,29 @@ document.querySelectorAll('.lp-tool').forEach(tool => {
   });
 });
 // =============================
-// RIGHT PANEL TABS
+// RIGHT PANEL TABS (UNCHANGED LOGIC)
 // =============================
-
 document.querySelectorAll('.rp-tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.rp-tab').forEach(t =>
-      t.classList.remove('active')
-    );
-    document.querySelectorAll('.rp-view').forEach(v =>
-      v.classList.remove('active')
-    );
+    document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.rp-view').forEach(v => v.classList.remove('active'));
 
     tab.classList.add('active');
-    document
-      .getElementById('rp-' + tab.dataset.tab)
-      .classList.add('active');
+    document.getElementById('rp-' + tab.dataset.tab).classList.add('active');
   });
 });
 
 // =============================
-// RIGHT PANEL COLLAPSE
+// RIGHT PANEL CLOSE + REOPEN (FIXED)
 // =============================
-
-const rightPanel = document.querySelector('.right-panel');
+const rightPanel = document.getElementById('rightPanel');
 const closeBtn = document.getElementById('rpCloseBtn');
+const openBtn = document.getElementById('openRightPanelBtn');
 
 closeBtn.addEventListener('click', () => {
-  rightPanel.style.display =
-    rightPanel.style.display === 'none' ? 'flex' : 'none';
+  rightPanel.classList.add('hidden');
+});
+
+openBtn.addEventListener('click', () => {
+  rightPanel.classList.remove('hidden');
 });
