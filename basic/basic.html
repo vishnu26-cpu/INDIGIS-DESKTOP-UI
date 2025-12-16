@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <title>INDIGIS – Basic Mode</title>
   <link rel="stylesheet" href="./basic.css">
+  <!-- OpenLayers (2D) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+<script src="https://cdn.jsdelivr.net/npm/ol@latest/ol.js"></script>
+
+<!-- Cesium (3D) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Widgets/widgets.css">
+<script src="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Cesium.js"></script>
+
 </head>
 
 <body class="theme-dark">
@@ -103,10 +111,17 @@
     </div>
   </aside>
 
-  <!-- MAP -->
-  <main class="main">
-    <div class="map-placeholder">BASIC GIS MAP AREA</div>
-  </main>
+  <!-- MAP CONTAINERS -->
+<div id="map2d" class="map-container"></div>
+<div id="map3d" class="map-container hidden"></div>
+
+<!-- MAP STATUS BAR -->
+<div class="map-status-bar">
+  <span id="coordReadout">Lat: -- , Lon: --</span>
+  <span id="zoomReadout">Zoom: --</span>
+  <span id="modeReadout">Mode: 2D</span>
+</div>
+
 
   <!-- RIGHT PANEL -->
   <aside class="right-panel" id="rightPanel">
