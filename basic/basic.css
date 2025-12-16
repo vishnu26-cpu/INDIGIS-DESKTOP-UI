@@ -138,3 +138,99 @@ body { font-family: "Segoe UI", sans-serif; }
   opacity: 0.4;
   font-size: 18px;
 }
+/* ===========================
+   BASIC APP LAYOUT
+=========================== */
+
+#indigis-basic-app {
+  display: flex;
+  height: 100vh;
+  background: #0e1116;
+}
+
+/* ===========================
+   LEFT PANEL
+=========================== */
+
+.left-panel {
+  width: 260px;
+  background: linear-gradient(180deg, #11161d, #0b0f14);
+  border-right: 1px solid #1f2630;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.lp-header {
+  padding: 14px 16px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #9fb6ff;
+  border-bottom: 1px solid #1f2630;
+}
+
+/* SECTION */
+.lp-section {
+  border-bottom: 1px solid #1f2630;
+}
+
+.lp-section-title {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfd8ff;
+  cursor: pointer;
+}
+
+.lp-section-title:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* TOOLS */
+.lp-tools {
+  padding: 6px 0 10px 0;
+}
+
+.lp-tool {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 24px;
+  text-align: left;
+  font-size: 14px;
+  color: #e4e7ff;
+  cursor: pointer;
+}
+
+.lp-tool:hover {
+  background: rgba(41,121,255,0.15);
+}
+
+.lp-tool.active {
+  background: linear-gradient(90deg, rgba(41,121,255,0.35), transparent);
+  color: #ffffff;
+  border-left: 3px solid #2979ff;
+}
+
+/* ===========================
+   MAP AREA
+=========================== */
+
+.map-area {
+  flex: 1;
+  position: relative;
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 18px;
+}
