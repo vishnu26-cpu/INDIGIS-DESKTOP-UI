@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <title>INDIGIS – Basic Mode</title>
+
   <link rel="stylesheet" href="./basic.css">
+
   <!-- OpenLayers (2D) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
-<script src="https://cdn.jsdelivr.net/npm/ol@latest/ol.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/ol.js"></script>
 
-<!-- Cesium (3D) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Widgets/widgets.css">
-<script src="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Cesium.js"></script>
-
+  <!-- Cesium (3D) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Widgets/widgets.css">
+  <script src="https://cdn.jsdelivr.net/npm/cesium/Build/Cesium/Cesium.js"></script>
 </head>
 
 <body class="theme-dark">
@@ -44,9 +45,7 @@
   </div>
 
   <div class="topbar-right">
-    <!-- NEW: reopen right panel -->
     <button id="openRightPanelBtn" class="icon-btn" title="Open Inspector / AI">🧠</button>
-
     <button id="themeToggle" class="icon-btn">🌙</button>
 
     <div class="toggle">
@@ -111,27 +110,31 @@
     </div>
   </aside>
 
-  <!-- MAP CONTAINERS -->
-<div id="map2d" class="map-container"></div>
-<div id="map3d" class="map-container hidden"></div>
+  <!-- ========== MAP AREA (FIXED) ========== -->
+  <main class="main">
 
-<!-- MAP STATUS BAR -->
-<div class="map-status-bar">
-  <span id="coordReadout">Lat: -- , Lon: --</span>
-  <span id="zoomReadout">Zoom: --</span>
-  <span id="modeReadout">Mode: 2D</span>
-</div>
+    <div id="map2d" class="map-container"></div>
+    <div id="map3d" class="map-container hidden"></div>
 
+    <!-- STATUS BAR -->
+    <div class="map-status-bar">
+      <span id="coordReadout">Lat: -- , Lon: --</span>
+      <span id="zoomReadout">Zoom: --</span>
+      <span id="modeReadout">Mode: 2D</span>
+    </div>
 
-  <!-- RIGHT PANEL -->
-  <aside class="right-panel" id="rightPanel">
+    <!-- NORTH ARROW -->
+    <div class="north-arrow">N</div>
 
+  </main>
+
+  <!-- RIGHT PANEL (UNCHANGED STRUCTURE) -->
+  <aside class="right-panel hidden" id="rightPanel">
     <div class="rp-header">
       <span>PROPERTIES</span>
       <button class="rp-close" id="rpCloseBtn">⟨</button>
     </div>
 
-    <!-- UPDATED TABS -->
     <div class="rp-tabs">
       <button class="rp-tab active" data-tab="layers">Layers</button>
       <button class="rp-tab" data-tab="info">Info</button>
@@ -142,31 +145,25 @@
 
     <div class="rp-content">
 
-      <!-- Layers (UNCHANGED) -->
       <div class="rp-view active" id="rp-layers">
         <div class="layer-item"><input type="checkbox" checked> Base Map</div>
         <div class="layer-item"><input type="checkbox" checked> Roads</div>
         <div class="layer-item"><input type="checkbox"> Buildings</div>
       </div>
 
-      <!-- Info (UNCHANGED) -->
       <div class="rp-view" id="rp-info">
         <p class="rp-muted">Click on map to view feature information.</p>
       </div>
 
-      <!-- NEW: Inspector -->
       <div class="rp-view" id="rp-inspector">
         <div class="log error">❌ CRS not defined</div>
         <div class="log warn">⚠️ Layer mismatch detected</div>
         <div class="log info">ℹ️ Workspace loaded</div>
       </div>
 
-      <!-- NEW: AI Assistant -->
       <div class="rp-view" id="rp-ai">
         <div class="ai-box">
-          <div class="ai-msg">
-            Hi 👋 I’m INDIGIS AI. Ask me anything about this application.
-          </div>
+          <div class="ai-msg">Hi 👋 I’m INDIGIS AI.</div>
           <div class="ai-input">
             <input type="text" placeholder="Ask about tools, errors, workflow…" />
             <button>Send</button>
@@ -174,7 +171,6 @@
         </div>
       </div>
 
-      <!-- Settings (UNCHANGED) -->
       <div class="rp-view" id="rp-settings">
         <label class="rp-setting"><input type="checkbox"> Show grid</label>
         <label class="rp-setting"><input type="checkbox"> Enable snapping</label>

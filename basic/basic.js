@@ -27,34 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
 function switchMode(mode) {
   location.href = mode + ".html";
 }
-// =============================
-// LEFT PANEL INTERACTIONS
-// =============================
 
-// Accordion toggle
+/* =============================
+   LEFT PANEL
+============================= */
 document.querySelectorAll('.lp-section-title').forEach(title => {
   title.addEventListener('click', () => {
     const tools = title.nextElementSibling;
-    const isOpen = tools.style.display !== 'none';
-    tools.style.display = isOpen ? 'none' : 'block';
+    tools.style.display =
+      tools.style.display === 'none' ? 'block' : 'none';
   });
 });
 
-// Tool selection highlight
 document.querySelectorAll('.lp-tool').forEach(tool => {
   tool.addEventListener('click', () => {
-    document
-      .querySelectorAll('.lp-tool.active')
+    document.querySelectorAll('.lp-tool.active')
       .forEach(t => t.classList.remove('active'));
-
     tool.classList.add('active');
-
-    console.log('[BASIC TOOL]', tool.textContent);
   });
 });
-// =============================
-// RIGHT PANEL TABS (UNCHANGED LOGIC)
-// =============================
+
+/* =============================
+   RIGHT PANEL TABS
+============================= */
 document.querySelectorAll('.rp-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
@@ -65,39 +60,32 @@ document.querySelectorAll('.rp-tab').forEach(tab => {
   });
 });
 
-// =============================
-// RIGHT PANEL CLOSE + REOPEN (FIXED)
-// =============================
+/* =============================
+   RIGHT PANEL OPEN / CLOSE
+============================= */
 const rightPanel = document.getElementById('rightPanel');
-const closeBtn = document.getElementById('rpCloseBtn');
-const openBtn = document.getElementById('openRightPanelBtn');
+document.getElementById('rpCloseBtn').onclick = () => rightPanel.classList.add('hidden');
+document.getElementById('openRightPanelBtn').onclick = () => rightPanel.classList.remove('hidden');
 
-closeBtn.addEventListener('click', () => {
-  rightPanel.classList.add('hidden');
-});
-
-openBtn.addEventListener('click', () => {
-  rightPanel.classList.remove('hidden');
-});
-// =============================
-// 2D MAP (OpenLayers - OSM)
-// =============================
+/* =============================
+   2D MAP (OpenLayers)
+============================= */
 const map2d = new ol.Map({
   target: 'map2d',
   layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM()
-    })
+    new ol.layer.Tile({ source: new ol.source.OSM() })
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([78.9629, 20.5937]), // India
+    center: ol.proj.fromLonLat([78.9629, 20.5937]),
     zoom: 4
   })
 });
 
-// =============================
-// 3D MAP (Cesium)
-// =============================
+map2d.addControl(new ol.control.ScaleLine({ units: 'metric' }));
+
+/* =============================
+   3D MAP (Cesium)
+============================= */
 const viewer3d = new Cesium.Viewer('map3d', {
   animation: false,
   timeline: false,
@@ -105,44 +93,47 @@ const viewer3d = new Cesium.Viewer('map3d', {
   sceneModePicker: false
 });
 
-// =============================
-// MAP READOUTS
-// =============================
+/* =============================
+   READOUTS
+============================= */
 const coordReadout = document.getElementById('coordReadout');
 const zoomReadout = document.getElementById('zoomReadout');
 const modeReadout = document.getElementById('modeReadout');
 
-// Mouse move (2D)
 map2d.on('pointermove', evt => {
   const [lon, lat] = ol.proj.toLonLat(evt.coordinate);
-  coordReadout.textContent =
-    `Lat: ${lat.toFixed(5)} , Lon: ${lon.toFixed(5)}`;
+  coordReadout.textContent = `Lat: ${lat.toFixed(5)}, Lon: ${lon.toFixed(5)}`;
 });
 
-// Zoom readout
 map2d.getView().on('change:resolution', () => {
-  zoomReadout.textContent =
-    `Zoom: ${map2d.getView().getZoom().toFixed(2)}`;
+  zoomReadout.textContent = `Zoom: ${map2d.getView().getZoom().toFixed(2)}`;
 });
 
-// =============================
-// 2D / 3D TOGGLE
-// =============================
+viewer3d.camera.changed.addEventListener(() => {
+  const h = Math.round(viewer3d.camera.positionCartographic.height);
+  zoomReadout.textContent = `Height: ${h} m`;
+});
+
+/* =============================
+   2D / 3D TOGGLE
+============================= */
 const btn2d = document.querySelector('.toggle button:nth-child(1)');
 const btn3d = document.querySelector('.toggle button:nth-child(2)');
 
-btn2d.addEventListener('click', () => {
-  document.getElementById('map2d').classList.remove('hidden');
+btn2d.onclick = () => {
+  map2d.getTargetElement().classList.remove('hidden');
   document.getElementById('map3d').classList.add('hidden');
   btn2d.classList.add('active');
   btn3d.classList.remove('active');
   modeReadout.textContent = 'Mode: 2D';
-});
+};
 
-btn3d.addEventListener('click', () => {
+btn3d.onclick = () => {
   document.getElementById('map3d').classList.remove('hidden');
-  document.getElementById('map2d').classList.add('hidden');
+  map2d.getTargetElement().classList.add('hidden');
   btn3d.classList.add('active');
   btn2d.classList.remove('active');
   modeReadout.textContent = 'Mode: 3D';
-});
+
+  setTimeout(() => viewer3d.resize(), 100);
+};
