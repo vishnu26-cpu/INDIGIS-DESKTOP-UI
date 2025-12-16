@@ -234,3 +234,92 @@ body { font-family: "Segoe UI", sans-serif; }
   color: rgba(255,255,255,0.25);
   font-size: 18px;
 }
+/* ===========================
+   RIGHT PANEL
+=========================== */
+
+.right-panel {
+  width: 300px;
+  background: linear-gradient(180deg, #11161d, #0b0f14);
+  border-left: 1px solid #1f2630;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.rp-header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #9fb6ff;
+  border-bottom: 1px solid #1f2630;
+}
+
+.rp-close {
+  background: none;
+  border: none;
+  color: #9fb6ff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* TABS */
+.rp-tabs {
+  display: flex;
+  border-bottom: 1px solid #1f2630;
+}
+
+.rp-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  color: #cfd8ff;
+  cursor: pointer;
+}
+
+.rp-tab.active {
+  background: rgba(41,121,255,0.15);
+  border-bottom: 2px solid #2979ff;
+}
+
+/* CONTENT */
+.rp-content {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* VIEWS */
+.rp-view {
+  display: none;
+}
+
+.rp-view.active {
+  display: block;
+}
+
+/* LAYERS */
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+/* INFO / SETTINGS */
+.rp-muted {
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+}
+
+.rp-setting {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}

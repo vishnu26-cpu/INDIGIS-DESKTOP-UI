@@ -12,7 +12,7 @@
 <!-- ================= TOP BAR ================= -->
 <header class="topbar">
   <div class="topbar-left">
-    <img src="assets/logo.svg" class="logo" />
+    <img src="assets/logo.png" class="logo" />
     <span class="brand">INDIGIS</span>
 
     <!-- Workspace -->
@@ -119,6 +119,62 @@
     BASIC GIS MAP AREA
   </div>
 </main>
+<!-- RIGHT PANEL -->
+<aside class="right-panel">
+
+  <!-- Header -->
+  <div class="rp-header">
+    <span>PROPERTIES</span>
+    <button class="rp-close" id="rpCloseBtn">⟨</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="rp-tabs">
+    <button class="rp-tab active" data-tab="layers">Layers</button>
+    <button class="rp-tab" data-tab="info">Info</button>
+    <button class="rp-tab" data-tab="settings">Settings</button>
+  </div>
+
+  <!-- Views -->
+  <div class="rp-content">
+
+    <!-- Layers -->
+    <div class="rp-view active" id="rp-layers">
+      <div class="layer-item">
+        <input type="checkbox" checked />
+        <span>Base Map</span>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" checked />
+        <span>Roads</span>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" />
+        <span>Buildings</span>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="rp-view" id="rp-info">
+      <p class="rp-muted">
+        Click on map to view feature information.
+      </p>
+    </div>
+
+    <!-- Settings -->
+    <div class="rp-view" id="rp-settings">
+      <label class="rp-setting">
+        <input type="checkbox" />
+        Show grid
+      </label>
+      <label class="rp-setting">
+        <input type="checkbox" />
+        Enable snapping
+      </label>
+    </div>
+
+  </div>
+</aside>
 
 <script src="./basic.js"></script>
 
