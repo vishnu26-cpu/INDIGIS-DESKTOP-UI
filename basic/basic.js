@@ -63,9 +63,22 @@ document.querySelectorAll('.rp-tab').forEach(tab => {
 /* =============================
    RIGHT PANEL OPEN / CLOSE
 ============================= */
+// =============================
+// RIGHT PANEL OPEN / CLOSE
+// =============================
 const rightPanel = document.getElementById('rightPanel');
-document.getElementById('rpCloseBtn').onclick = () => rightPanel.classList.add('hidden');
-document.getElementById('openRightPanelBtn').onclick = () => rightPanel.classList.remove('hidden');
+const closeBtn = document.getElementById('rpCloseBtn');
+const openBtn = document.getElementById('openRightPanelBtn');
+
+// Close (hide)
+closeBtn.addEventListener('click', () => {
+  rightPanel.classList.add('hidden');
+});
+
+// Open (show)
+openBtn.addEventListener('click', () => {
+  rightPanel.classList.remove('hidden');
+});
 
 /* =============================
    2D MAP (OpenLayers)
