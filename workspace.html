@@ -428,26 +428,37 @@
             <input id="wsName" name="wsName" placeholder="My Project X" required aria-required="true" />
           </div>
 
-          <div class="field" style="display:flex;gap:12px">
-            <div style="flex:1">
-              <label for="basemap">Base map</label>
-              <select id="basemap" name="basemap" aria-label="Base map">
-                <option value="osm">OpenStreetMap</option>
-                <option value="sat">Satellite</option>
-                <option value="dark">Dark</option>
-                <option value="terrain">Terrain</option>
-              </select>
-            </div>
+         <div class="field" style="display:flex;gap:12px">
+  <div style="flex:1">
+    <label for="basemap">Base map</label>
+    <select id="basemap" name="basemap">
+      <option value="osm">OpenStreetMap</option>
+      <option value="sat">Satellite</option>
+      <option value="dark">Dark</option>
+      <option value="terrain">Terrain</option>
+    </select>
+  </div>
 
-            <div style="width:160px">
-              <label for="proj">Projection</label>
-              <select id="proj" name="proj" aria-label="Projection">
-                <option value="webmercator">WebMercator (EPSG:3857)</option>
-                <option value="epsg4326">EPSG:4326</option>
-                <option value="epsg32643">EPSG:32643</option>
-              </select>
-            </div>
-          </div>
+  <div style="width:170px">
+    <label for="proj">Projection</label>
+    <select id="proj" name="proj">
+      <option value="webmercator">WebMercator (EPSG:3857)</option>
+      <option value="epsg4326">EPSG:4326</option>
+      <option value="epsg32643">EPSG:32643</option>
+    </select>
+  </div>
+
+  <div style="width:170px">
+    <label for="userMode">User mode</label>
+    <select id="userMode" name="userMode">
+      <option value="basic">Basic</option>
+      <option value="intermediate">Intermediate</option>
+      <option value="advanced">Advanced</option>
+    </select>
+  </div>
+</div>
+
+
 
           <div class="meta">Tip: use a short descriptive name (e.g. "LULC_2025").</div>
         </div>
@@ -550,15 +561,20 @@
     const basemap = document.getElementById('basemap');
     const proj = document.getElementById('proj');
     const preview = document.getElementById('wsPreview');
+    const userMode = document.getElementById('userMode');
 
-    function updatePreview() {
-      const bm = basemap.value === 'osm' ? 'OpenStreetMap' :
-                 basemap.value === 'sat' ? 'Satellite' :
-                 basemap.value === 'dark' ? 'Dark' :
-                 basemap.value === 'terrain' ? 'Terrain' : basemap.value;
-      const pr = proj.value;
-      preview.textContent = `Preview: ${bm} • ${pr}`;
-    }
+ function updatePreview() {
+  const bm =
+    basemap.value === 'osm' ? 'OpenStreetMap' :
+    basemap.value === 'sat' ? 'Satellite' :
+    basemap.value === 'dark' ? 'Dark' :
+    basemap.value === 'terrain' ? 'Terrain' : basemap.value;
+
+  const pr = proj.value;
+  const mode = userMode.value;
+
+  preview.textContent = `Preview: ${bm} • ${pr} • ${mode.toUpperCase()} mode`;
+}
 
     // restore existing workspace values if present
     document.addEventListener('DOMContentLoaded', () => {
@@ -569,6 +585,7 @@
           wsName.value = obj.name || '';
           basemap.value = obj.basemap || 'osm';
           proj.value = obj.proj || 'webmercator';
+          userMode.value = obj.userMode || 'basic';
         } catch(e) { /* ignore */ }
       }
       updatePreview();
@@ -599,8 +616,31 @@
       localStorage.setItem('indigis_workspace_data', JSON.stringify(data));
       localStorage.setItem('indigis_workspace_created', 'true');
       // go to main app
-      window.location.href = 'app.html';
+     const data1 = {
+  name,
+  basemap: basemap.value,
+  proj: proj.value,
+  userMode: userMode.value,
+  createdAt: new Date().toISOString()
+};
+
+localStorage.setItem('indigis_workspace_data', JSON.stringify(data));
+localStorage.setItem('indigis_workspace_created', 'true');
+
+switch (userMode.value) {
+  case 'basic':
+    window.location.href = 'basic.html';
+    break;
+  case 'intermediate':
+    window.location.href = 'intermediate.html';
+    break;
+  case 'advanced':
+    window.location.href = 'advanced.html';
+    break;
+}
+
     });
+userMode.addEventListener('change', updatePreview);
 
     // back button
     document.getElementById('backBtn').addEventListener('click', () => {
