@@ -124,12 +124,6 @@ body {
   cursor: pointer;
 }
 
-/* COLLAPSIBLE TOOL LIST */
-.lp-tools {
-  max-height: 0;               /* ✅ CLOSED BY DEFAULT */
-  overflow: hidden;
-  transition: max-height 0.25s ease;
-}
 
 /* OPEN STATE */
 .lp-section.open .lp-tools {
@@ -144,7 +138,8 @@ body {
   border: none;
   color: #e4e7ff;
   text-align: left;
-  cursor: pointer;
+  cursor: pointer;              /* ✅ CLOSED BY DEFAULT */
+
 }
 
 .lp-tool:hover {
