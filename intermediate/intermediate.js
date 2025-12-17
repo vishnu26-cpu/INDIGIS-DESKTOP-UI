@@ -55,19 +55,14 @@ map.getView().on("change:resolution", () => {
 // =============================
 // RIGHT PANEL TABS (PROPERTIES)
 // =============================
-document.querySelectorAll(".rp-tab").forEach(tab => {
-  tab.onclick = () => {
-    document.querySelectorAll(".rp-tab")
-      .forEach(t => t.classList.remove("active"));
+document.querySelectorAll('.rp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.rp-view').forEach(v => v.classList.remove('active'));
 
-    document.querySelectorAll(".rp-view")
-      .forEach(v => v.classList.remove("active"));
-
-    tab.classList.add("active");
-    document
-      .getElementById("rp-" + tab.dataset.tab)
-      .classList.add("active");
-  };
+    tab.classList.add('active');
+    document.getElementById('rp-' + tab.dataset.tab).classList.add('active');
+  });
 });
 
 // =============================
