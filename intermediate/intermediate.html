@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>INDIGIS – Intermediate Mode</title>
+  <link rel="stylesheet" href="./intermediate.css">
+
+  <!-- OpenLayers -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/ol.js"></script>
+</head>
+
+<body class="theme-dark">
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <div class="topbar-left">
+    <img src="../assets/logo.png" class="logo" />
+    <span class="brand">INDIGIS</span>
+
+    <div class="dropdown">
+      <button class="btn">Workspace ▾</button>
+      <div class="menu">
+        <button>Save Workspace</button>
+        <button>Save As</button>
+        <button>Recent Workspaces</button>
+        <hr />
+        <button class="danger">Close Workspace</button>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn">User Mode ▾</button>
+      <div class="menu">
+        <button onclick="switchMode('basic')">Basic</button>
+        <button disabled>Intermediate ✓</button>
+        <button onclick="switchMode('advanced')">Advanced</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <button id="themeToggle" class="icon-btn">🌙</button>
+  </div>
+</header>
+
+<!-- ================= MAIN LAYOUT ================= -->
+<div id="indigis-app">
+
+  <!-- ========== LEFT PANEL ========== -->
+  <aside class="left-panel">
+
+    <!-- BASIC (INHERITED) -->
+    <div class="lp-header">BASIC</div>
+
+    <div class="lp-section">
+      <button class="lp-section-title">Navigation</button>
+      <div class="lp-tools">
+        <button class="lp-tool">Pan</button>
+        <button class="lp-tool">Zoom In</button>
+        <button class="lp-tool">Zoom Out</button>
+        <button class="lp-tool">Full Extent</button>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <button class="lp-section-title">Digitizing</button>
+      <div class="lp-tools">
+        <button class="lp-tool">Add Point</button>
+        <button class="lp-tool">Add Line</button>
+        <button class="lp-tool">Add Polygon</button>
+        <button class="lp-tool">Edit Feature</button>
+      </div>
+    </div>
+
+    <!-- INTERMEDIATE DOMAINS -->
+    <div class="lp-header">INTERMEDIATE</div>
+
+    <div class="lp-section">
+      <button class="lp-section-title" data-domain="vector">Vector Analysis</button>
+      <div class="lp-tools">
+        <button class="lp-tool domain-tool">Open Vector Toolbox</button>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <button class="lp-section-title" data-domain="raster">Raster Analysis</button>
+      <div class="lp-tools">
+        <button class="lp-tool domain-tool">Open Raster Toolbox</button>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <button class="lp-section-title" data-domain="interpolation">Interpolation</button>
+      <div class="lp-tools">
+        <button class="lp-tool domain-tool">Open Interpolation Toolbox</button>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <button class="lp-section-title" data-domain="suitability">Suitability</button>
+      <div class="lp-tools">
+        <button class="lp-tool domain-tool">Open Suitability Tools</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ========== MAP AREA ========== -->
+  <main class="main">
+    <div id="map" class="map"></div>
+    <div class="status-bar">
+      <span id="coordReadout">Lat: -- , Lon: --</span>
+      <span id="zoomReadout">Zoom: --</span>
+    </div>
+  </main>
+
+  <!-- ========== RIGHT PANEL (TOOLBOX) ========== -->
+  <aside class="right-panel" id="toolboxPanel">
+    <div class="rp-header">
+      <span id="toolboxTitle">Toolbox</span>
+      <button id="rpCloseBtn">⟨</button>
+    </div>
+
+    <div class="rp-content">
+      <input class="tool-search" placeholder="Search tools…" />
+
+      <div id="toolList" class="tool-list">
+        <div class="tool-card">Select a domain to view tools</div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script src="./intermediate.js"></script>
+</body>
+</html>
