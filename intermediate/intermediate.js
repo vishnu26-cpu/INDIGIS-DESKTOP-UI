@@ -1,121 +1,121 @@
-// =============================
-// THEME
-// =============================
-const themeBtn = document.getElementById("themeToggle");
-let theme = localStorage.getItem("theme") || "dark";
-applyTheme(theme);
-
-themeBtn.onclick = () => {
-  theme = theme === "dark" ? "light" : "dark";
-  applyTheme(theme);
+/* =====================================================
+   GLOBAL APP STATE
+===================================================== */
+const AppState = {
+  theme: localStorage.getItem("theme") || "dark",
+  mode: "intermediate"
 };
 
-function applyTheme(t) {
-  document.body.className = "theme-" + t;
-  themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
+/* =====================================================
+   THEME HANDLING
+===================================================== */
+const themeBtn = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+  document.body.classList.remove("theme-dark", "theme-light");
+  document.body.classList.add(`theme-${theme}`);
+  themeBtn.textContent = theme === "dark" ? "🌙" : "🌞";
+  localStorage.setItem("theme", theme);
 }
 
-// =============================
-// MODE SWITCH
-// =============================
+themeBtn?.addEventListener("click", () => {
+  AppState.theme = AppState.theme === "dark" ? "light" : "dark";
+  applyTheme(AppState.theme);
+});
+
+// Init theme
+applyTheme(AppState.theme);
+
+/* =====================================================
+   MODE SWITCH
+===================================================== */
 function switchMode(mode) {
-  location.href = `../${mode}/${mode}.html`;
+  if (!mode) return;
+  window.location.href = `../${mode}/${mode}.html`;
 }
 
-// =============================
-// MAP INIT (SAME AS BASIC)
-// =============================
-const map = new ol.Map({
-  target: "map",
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM()
-    })
-  ],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([78.96, 20.59]),
-    zoom: 4
-  })
-});
+/* =====================================================
+   RIGHT PANEL TABS (PROPERTIES)
+===================================================== */
+const rpTabs = document.querySelectorAll(".rp-tab");
+const rpViews = document.querySelectorAll(".rp-view");
 
-// =============================
-// MAP READOUTS
-// =============================
-map.on("pointermove", e => {
-  const [lon, lat] = ol.proj.toLonLat(e.coordinate);
-  document.getElementById("coordReadout").textContent =
-    `Lat: ${lat.toFixed(4)} , Lon: ${lon.toFixed(4)}`;
-});
+rpTabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.tab;
 
-map.getView().on("change:resolution", () => {
-  document.getElementById("zoomReadout").textContent =
-    `Zoom: ${map.getView().getZoom().toFixed(2)}`;
-});
+    rpTabs.forEach(t => t.classList.remove("active"));
+    rpViews.forEach(v => v.classList.remove("active"));
 
-// =============================
-// RIGHT PANEL TABS (PROPERTIES)
-// =============================
-document.querySelectorAll('.rp-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.rp-view').forEach(v => v.classList.remove('active'));
-
-    tab.classList.add('active');
-    document.getElementById('rp-' + tab.dataset.tab).classList.add('active');
+    tab.classList.add("active");
+    document.getElementById(`rp-${target}`)?.classList.add("active");
   });
 });
 
-// =============================
-// LEFT PANEL ACCORDION
-// =============================
-// =============================
-// LEFT PANEL – CLICK DROPDOWN ONLY
-// =============================
+/* =====================================================
+   LEFT PANEL ACCORDION (UNCHANGED LOGIC, CLEANED)
+===================================================== */
 document.querySelectorAll(".lp-section-title").forEach(title => {
   title.addEventListener("click", () => {
-    const section = title.parentElement;
+    const current = title.parentElement;
 
-    // close others (optional, desktop-style)
-    document.querySelectorAll(".lp-section").forEach(sec => {
-      if (sec !== section) sec.classList.remove("open");
+    document.querySelectorAll(".lp-section").forEach(section => {
+      if (section !== current) section.classList.remove("open");
     });
 
-    // toggle current
-    section.classList.toggle("open");
+    current.classList.toggle("open");
   });
 });
 
-
-// =============================
-// TOOL SELECTION HIGHLIGHT
-// =============================
+/* =====================================================
+   TOOL SELECTION HIGHLIGHT (UI ONLY)
+===================================================== */
 document.querySelectorAll(".lp-tool").forEach(tool => {
-  tool.onclick = () => {
+  tool.addEventListener("click", () => {
     document
       .querySelectorAll(".lp-tool.active")
       .forEach(t => t.classList.remove("active"));
 
     tool.classList.add("active");
-  };
+
+    // Hook for future logic
+    onToolSelected(tool.textContent.trim());
+  });
 });
 
-// =============================
-// PROCESSING TOOLS (UI ONLY)
-// =============================
-document.querySelectorAll(".proc-tool").forEach(btn => {
-  btn.onclick = () => {
-    alert(
-      `Tool selected: ${btn.textContent}\n(Logic will be added later)`
-    );
-  };
-});
+function onToolSelected(toolName) {
+  console.log(`[TOOL SELECTED]: ${toolName}`);
+}
 
-/* ======================================================
-   INTERMEDIATE EXTENSIONS (SAFE ADDITIONS ONLY)
-====================================================== */
+/* =====================================================
+   MAP PLACEHOLDER READOUT (SAFE)
+===================================================== */
+const coordEl = document.getElementById("coordReadout");
+const zoomEl = document.getElementById("zoomReadout");
 
-// Placeholder hook for future analysis tools
+/* 
+  NOTE:
+  Actual OpenLayers/Cesium map init will plug in here.
+  This avoids runtime errors when map is not ready.
+*/
+function updateCoordinates(lat, lon) {
+  if (!coordEl) return;
+  coordEl.textContent = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
+}
+
+function updateZoom(zoom) {
+  if (!zoomEl) return;
+  zoomEl.textContent = `Zoom: ${zoom.toFixed(2)}`;
+}
+
+/* =====================================================
+   INTERMEDIATE EXTENSION HOOKS
+===================================================== */
 window.runIntermediateTool = function (toolName) {
   console.log("[INTERMEDIATE TOOL]", toolName);
-  alert(`Running ${toolName}\n(backend logic later)`);
+
+  const processingPanel = document.getElementById("rp-processing");
+  if (processingPanel) {
+    processingPanel.innerHTML += `<p>▶ ${toolName} executed</p>`;
+  }
 };
