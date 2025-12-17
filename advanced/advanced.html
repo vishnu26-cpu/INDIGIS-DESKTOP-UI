@@ -66,19 +66,78 @@
 <div id="indigis-app">
 
 <!-- ========== TOOL TAB (ADVANCED) ========== -->
-<aside class="left-panel advanced-tools">
+<aside class="left-panel">
 
   <div class="lp-header">ADVANCED TOOLS</div>
 
-  <button class="adv-domain" data-domain="terrain">🛰 3D & Terrain</button>
-  <button class="adv-domain" data-domain="raster">🌍 Raster & RS</button>
-  <button class="adv-domain" data-domain="lidar">📡 LiDAR</button>
-  <button class="adv-domain" data-domain="sar">📶 SAR</button>
-  <button class="adv-domain" data-domain="analysis">📊 Advanced Analysis</button>
-  <button class="adv-domain" data-domain="python">🐍 Python / Automation</button>
-  <button class="adv-domain" data-domain="ai">🤖 AI / ML</button>
+  <!-- 3D & TERRAIN -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">3D & Terrain</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">Viewshed</button>
+      <button class="lp-tool">Radar Dome</button>
+      <button class="lp-tool">Line of Sight</button>
+      <button class="lp-tool">Terrain Profile</button>
+      <button class="lp-tool">Cut / Fill</button>
+    </div>
+  </div>
+
+  <!-- REMOTE SENSING -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">Remote Sensing</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">LULC Classification</button>
+      <button class="lp-tool">Supervised</button>
+      <button class="lp-tool">Unsupervised</button>
+      <button class="lp-tool">Accuracy Assessment</button>
+      <button class="lp-tool">NDVI / NDWI</button>
+    </div>
+  </div>
+
+  <!-- SAR -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">SAR Processing</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">Speckle Filtering</button>
+      <button class="lp-tool">Coherence</button>
+      <button class="lp-tool">Change Detection</button>
+      <button class="lp-tool">Polarimetric Analysis</button>
+    </div>
+  </div>
+
+  <!-- LiDAR -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">LiDAR Processing</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">Point Cloud Classification</button>
+      <button class="lp-tool">DSM / DTM</button>
+      <button class="lp-tool">Canopy Height Model</button>
+    </div>
+  </div>
+
+  <!-- AUTOMATION -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">Automation & Scripting</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">Python Integration</button>
+      <button class="lp-tool">Batch Processing</button>
+      <button class="lp-tool">Model Builder</button>
+      <button class="lp-tool">Custom Scripts</button>
+    </div>
+  </div>
+
+  <!-- AI / ML -->
+  <div class="lp-domain">
+    <button class="lp-domain-title">AI / ML</button>
+    <div class="lp-subtools">
+      <button class="lp-tool">ML Classification</button>
+      <button class="lp-tool">Feature Extraction</button>
+      <button class="lp-tool">Object Detection</button>
+    </div>
+  </div>
 
 </aside>
+
 
 <!-- ========== MAP AREA (UNCHANGED) ========== -->
 <main class="map-area">

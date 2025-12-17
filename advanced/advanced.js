@@ -104,3 +104,22 @@ document.querySelectorAll(".rp-tab").forEach(tab => {
     document.getElementById("rp-" + tab.dataset.tab).classList.add("active");
   };
 });
+document.querySelectorAll(".lp-domain-title").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const domain = btn.parentElement;
+
+    // close others (optional but pro)
+    document.querySelectorAll(".lp-domain").forEach(d => {
+      if (d !== domain) d.classList.remove("open");
+    });
+
+    domain.classList.toggle("open");
+  });
+});
+
+// tool click placeholder
+document.querySelectorAll(".lp-tool").forEach(tool => {
+  tool.addEventListener("click", () => {
+    console.log("[ADVANCED TOOL]", tool.textContent);
+  });
+});
