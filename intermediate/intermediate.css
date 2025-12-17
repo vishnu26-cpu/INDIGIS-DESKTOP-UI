@@ -271,3 +271,362 @@ body {
   height: calc(100vh - 52px);
   overflow: hidden;
 }
+/* ===== RESET ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Segoe UI", sans-serif; }
+
+/* ===== THEMES ===== */
+.theme-dark {
+  background: #0e1116;
+  color: #fff;
+}
+
+.theme-light {
+  background: #f4f6f8;
+  color: #000;
+}
+
+/* ===== TOP BAR ===== */
+.topbar {
+  height: 52px;
+  background: linear-gradient(#111, #0b0d11);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid #222;
+}
+
+.topbar-left, .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 28px;
+}
+
+.brand {
+  font-weight: 600;
+  margin-right: 12px;
+}
+
+/* ===== BUTTONS ===== */
+.btn, .icon-btn {
+  background: #1a1f26;
+  border: 1px solid #2a2f36;
+  color: inherit;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  background: #1a1f26;
+  border: 1px solid #2a2f36;
+  min-width: 180px;
+  border-radius: 8px;
+  padding: 6px;
+  z-index: 100;
+}
+
+.menu.right {
+  right: 0;
+  left: auto;
+}
+
+.menu button {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: #2a2f36;
+}
+
+.menu hr {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 6px 0;
+}
+
+.menu .danger {
+  color: #ff6b6b;
+}
+
+.dropdown:hover .menu {
+  display: block;
+}
+
+/* ===== TOGGLE ===== */
+.toggle {
+  display: flex;
+  background: #1a1f26;
+  border-radius: 6px;
+}
+
+.toggle button {
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.toggle .active {
+  background: #2a7fff;
+  border-radius: 6px;
+}
+
+.main {
+  flex: 1;        /* take remaining space */
+  position: relative;
+}
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  font-size: 18px;
+}
+/* ===========================
+   BASIC APP LAYOUT
+=========================== */
+
+#indigis-basic-app {
+  display: flex;
+  height: 100vh;
+  height: calc(100vh - 52px); 
+  background: #0e1116;
+}
+
+
+/* ===========================
+   LEFT PANEL
+=========================== */
+
+.left-panel {
+  width: 260px;
+  background: linear-gradient(180deg, #11161d, #0b0f14);
+  border-right: 1px solid #1f2630;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.lp-header {
+  padding: 14px 16px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #9fb6ff;
+  border-bottom: 1px solid #1f2630;
+}
+
+/* SECTION */
+.lp-section {
+  border-bottom: 1px solid #1f2630;
+}
+
+.lp-section-title {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfd8ff;
+  cursor: pointer;
+}
+
+.lp-section-title:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* TOOLS */
+.lp-tools {
+  padding: 6px 0 10px 0;
+}
+
+.lp-tool {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 24px;
+  text-align: left;
+  font-size: 14px;
+  color: #e4e7ff;
+  cursor: pointer;
+}
+
+.lp-tool:hover {
+  background: rgba(41,121,255,0.15);
+}
+
+.lp-tool.active {
+  background: linear-gradient(90deg, rgba(41,121,255,0.35), transparent);
+  color: #ffffff;
+  border-left: 3px solid #2979ff;
+}
+
+/* ===========================
+   MAP AREA
+=========================== */
+
+.map-area {
+  flex: 1;
+  position: relative;
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 18px;
+}
+/* ===========================
+   RIGHT PANEL
+=========================== */
+
+.right-panel {
+  width: 300px;
+  background: linear-gradient(180deg, #11161d, #0b0f14);
+  border-left: 1px solid #1f2630;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.rp-header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #9fb6ff;
+  border-bottom: 1px solid #1f2630;
+}
+
+.rp-close {
+  background: none;
+  border: none;
+  color: #9fb6ff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* TABS */
+.rp-tabs {
+  display: flex;
+  border-bottom: 1px solid #1f2630;
+}
+
+.rp-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  color: #cfd8ff;
+  cursor: pointer;
+}
+
+.rp-tab.active {
+  background: rgba(41,121,255,0.15);
+  border-bottom: 2px solid #2979ff;
+}
+
+/* CONTENT */
+.rp-content {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* VIEWS */
+.rp-view {
+  display: none;
+}
+
+.rp-view.active {
+  display: block;
+}
+
+/* LAYERS */
+.layer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+/* INFO / SETTINGS */
+.rp-muted {
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+}
+
+.rp-setting {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+/* =========================
+   MAP CONTAINERS
+========================= */
+
+.map-container {
+  position: absolute;
+  inset: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================
+   MAP STATUS BAR
+========================= */
+
+.map-status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(10,14,20,0.85);
+  border-top: 1px solid #1f2630;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 12px;
+  font-size: 12px;
+  color: #cfd8ff;
+  z-index: 10;
+}
