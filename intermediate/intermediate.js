@@ -73,13 +73,23 @@ document.querySelectorAll(".rp-tab").forEach(tab => {
 // =============================
 // LEFT PANEL ACCORDION
 // =============================
+// =============================
+// LEFT PANEL – CLICK DROPDOWN ONLY
+// =============================
 document.querySelectorAll(".lp-section-title").forEach(title => {
-  title.onclick = () => {
-    const tools = title.nextElementSibling;
-    tools.style.display =
-      tools.style.display === "none" ? "block" : "none";
-  };
+  title.addEventListener("click", () => {
+    const section = title.parentElement;
+
+    // close others (optional, desktop-style)
+    document.querySelectorAll(".lp-section").forEach(sec => {
+      if (sec !== section) sec.classList.remove("open");
+    });
+
+    // toggle current
+    section.classList.toggle("open");
+  });
 });
+
 
 // =============================
 // TOOL SELECTION HIGHLIGHT

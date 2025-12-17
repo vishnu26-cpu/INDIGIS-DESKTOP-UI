@@ -1,6 +1,22 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #0e1116;
+  color: #fff;
+  overflow: hidden; /* ✅ NO PAGE SCROLL */
+}
+
+/* =========================
+   TOP BAR
+========================= */
 .topbar {
   height: 52px;
   display: flex;
@@ -11,16 +27,26 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   border-bottom: 1px solid #222;
 }
 
-.topbar-left, .topbar-right {
+.topbar-left,
+.topbar-right {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.logo { height: 28px; }
-.brand { font-weight: 600; }
+.logo {
+  height: 28px;
+}
 
-.btn, .icon-btn {
+.brand {
+  font-weight: 600;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn,
+.icon-btn {
   background: #1a1f26;
   border: 1px solid #2a2f36;
   color: #fff;
@@ -29,33 +55,64 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   cursor: pointer;
 }
 
-.dropdown { position: relative; }
+/* =========================
+   DROPDOWNS (TOP BAR)
+========================= */
+.dropdown {
+  position: relative;
+}
+
 .menu {
   display: none;
   position: absolute;
   top: 38px;
+  left: 0;
   background: #1a1f26;
   border: 1px solid #2a2f36;
+  min-width: 180px;
+  border-radius: 8px;
+  padding: 6px;
+  z-index: 200;
 }
-.dropdown:hover .menu { display: block; }
 
+.dropdown:hover .menu {
+  display: block;
+}
+
+/* =========================
+   APP LAYOUT
+========================= */
 #indigis-app {
   display: flex;
   height: calc(100vh - 52px);
+  overflow: hidden; /* ✅ FIX: no scroll */
 }
 
+/* =========================
+   LEFT PANEL (TOOLS)
+========================= */
 .left-panel {
   width: 260px;
   background: #0b0f14;
   border-right: 1px solid #1f2630;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ✅ IMPORTANT */
 }
 
 .lp-header {
   padding: 14px;
   font-weight: 700;
   color: #9fb6ff;
+  border-bottom: 1px solid #1f2630;
 }
 
+/* SECTION */
+.lp-section {
+  border-bottom: 1px solid #1f2630;
+}
+
+/* TITLE (CLICKABLE) */
 .lp-section-title {
   padding: 12px;
   background: none;
@@ -63,8 +120,23 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   color: #cfd8ff;
   width: 100%;
   text-align: left;
+  font-size: 14px;
+  cursor: pointer;
 }
 
+/* COLLAPSIBLE TOOL LIST */
+.lp-tools {
+  max-height: 0;               /* ✅ CLOSED BY DEFAULT */
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+/* OPEN STATE */
+.lp-section.open .lp-tools {
+  max-height: 420px;           /* enough for tools */
+}
+
+/* TOOL */
 .lp-tool {
   width: 100%;
   padding: 10px 24px;
@@ -72,11 +144,25 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   border: none;
   color: #e4e7ff;
   text-align: left;
+  cursor: pointer;
 }
 
+.lp-tool:hover {
+  background: rgba(41, 121, 255, 0.15);
+}
+
+.lp-tool.active {
+  background: linear-gradient(90deg, rgba(41,121,255,0.35), transparent);
+  border-left: 3px solid #2979ff;
+}
+
+/* =========================
+   MAP AREA
+========================= */
 .map-area {
   flex: 1;
   position: relative;
+  overflow: hidden; /* ✅ NO SCROLL */
 }
 
 .map {
@@ -84,34 +170,43 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   height: 100%;
 }
 
+/* STATUS BAR */
 .map-status-bar {
   position: absolute;
   bottom: 6px;
   left: 6px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 13px;
   display: flex;
   gap: 14px;
+  z-index: 20;
 }
 
+/* =========================
+   RIGHT PANEL (PROPERTIES)
+========================= */
 .right-panel {
   width: 320px;
   background: #0b0f14;
   border-left: 1px solid #1f2630;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* ✅ FIX */
 }
 
+/* HEADER */
 .rp-header {
   padding: 10px;
   font-weight: 700;
   color: #9fb6ff;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid #1f2630;
 }
 
+/* TABS */
 .rp-tabs {
   display: flex;
   border-bottom: 1px solid #1f2630;
@@ -123,21 +218,33 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   background: none;
   border: none;
   color: #cfd8ff;
+  cursor: pointer;
 }
 
 .rp-tab.active {
-  background: rgba(41,121,255,0.15);
+  background: rgba(41, 121, 255, 0.15);
+  border-bottom: 2px solid #2979ff;
 }
 
+/* CONTENT */
 .rp-content {
   flex: 1;
   padding: 12px;
-  overflow-y: auto;
+  overflow-y: auto; /* ✅ ONLY RIGHT PANEL SCROLLS */
 }
 
-.rp-view { display: none; }
-.rp-view.active { display: block; }
+/* VIEWS */
+.rp-view {
+  display: none;
+}
 
+.rp-view.active {
+  display: block;
+}
+
+/* =========================
+   PROCESSING / TOOLBOX UI
+========================= */
 .tool-group {
   margin-bottom: 14px;
 }
@@ -156,8 +263,10 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   color: #fff;
   padding: 8px;
   border-radius: 6px;
+  cursor: pointer;
 }
-/* Nested query tools */
+
+/* NESTED (SQL / QUERY) */
 .sub-tools {
   padding-left: 14px;
   border-left: 2px solid #1f2630;
