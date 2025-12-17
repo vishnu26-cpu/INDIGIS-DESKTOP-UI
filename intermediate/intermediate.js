@@ -7,12 +7,7 @@
     return;
   }
 
-  const ws = JSON.parse(wsRaw);
 
-  if (ws.userMode !== 'intermediate' && ws.userMode !== 'advanced') {
-    alert('You do not have access to Intermediate mode.');
-    window.location.href = `../${ws.userMode}/${ws.userMode}.html`;
-  }
 })();
 /* =============================
    THEME
