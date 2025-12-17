@@ -1,15 +1,6 @@
-(function guardIntermediate() {
-  const wsRaw = localStorage.getItem('indigis_workspace_data');
-
-  if (!wsRaw) {
-    alert('No workspace found. Please create a workspace.');
-    window.location.href = '../workspace.html';
-    return;
-  }
-
-
-})();
-
+// =============================
+// THEME
+// =============================
 const themeBtn = document.getElementById("themeToggle");
 let theme = localStorage.getItem("theme") || "dark";
 applyTheme(theme);
@@ -24,16 +15,16 @@ function applyTheme(t) {
   themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
 }
 
-/* =============================
-   MODE SWITCH
-============================= */
+// =============================
+// MODE SWITCH
+// =============================
 function switchMode(mode) {
   location.href = `../${mode}/${mode}.html`;
 }
 
-/* =============================
-   MAP INIT
-============================= */
+// =============================
+// MAP INIT
+// =============================
 const map = new ol.Map({
   target: "map",
   layers: [
@@ -56,37 +47,23 @@ map.getView().on("change:resolution", () => {
     `Zoom: ${map.getView().getZoom().toFixed(2)}`;
 });
 
-/* =============================
-   TOOLBOX LOGIC
-============================= */
-const toolsByDomain = {
-  vector: ["Buffer", "Clip", "Intersect", "Union", "Dissolve"],
-  raster: ["Raster Calculator", "Reclassify", "Zonal Statistics"],
-  interpolation: ["IDW", "Kriging", "Spline"],
-  suitability: ["Weighted Overlay", "Site Suitability"]
-};
+// =============================
+// RIGHT PANEL TABS
+// =============================
+document.querySelectorAll(".rp-tab").forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll(".rp-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".rp-view").forEach(v => v.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById("rp-" + tab.dataset.tab).classList.add("active");
+  };
+});
 
-document.querySelectorAll(".lp-section-title[data-domain]")
-  .forEach(btn => {
-    btn.onclick = () => {
-      const domain = btn.dataset.domain;
-      const list = document.getElementById("toolList");
-      document.getElementById("toolboxTitle").textContent =
-        domain.toUpperCase() + " TOOLS";
-
-      list.innerHTML = "";
-      toolsByDomain[domain].forEach(t => {
-        const div = document.createElement("div");
-        div.className = "tool-card";
-        div.textContent = t;
-        list.appendChild(div);
-      });
-    };
-  });
-
-/* =============================
-   TOOLBOX CLOSE
-============================= */
-document.getElementById("rpCloseBtn").onclick = () => {
-  document.getElementById("toolboxPanel").style.display = "none";
-};
+// =============================
+// PROCESSING TOOLS (UI ONLY)
+// =============================
+document.querySelectorAll(".proc-tool").forEach(btn => {
+  btn.onclick = () => {
+    alert(`Tool selected: ${btn.textContent}\n(Logic will be added later)`);
+  };
+});
