@@ -4,20 +4,18 @@
   <meta charset="UTF-8" />
   <title>INDIGIS – Intermediate Mode</title>
 
-  <!-- Base CSS -->
+  <!-- SAME CSS BASE AS BASIC -->
+  <link rel="stylesheet" href="../basic/basic.css">
+  <!-- INTERMEDIATE EXTENSIONS -->
   <link rel="stylesheet" href="./intermediate.css">
-
-  <!-- OpenLayers -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css">
-  <script src="https://cdn.jsdelivr.net/npm/ol@latest/ol.js"></script>
 </head>
 
 <body class="theme-dark">
 
-<!-- ================= TOP BAR ================= -->
+<!-- ================= TOP BAR (UNCHANGED) ================= -->
 <header class="topbar">
   <div class="topbar-left">
-    <img src="../assets/logo.png" class="logo">
+    <img src="../assets/logo.png" class="logo" />
     <span class="brand">INDIGIS</span>
 
     <div class="dropdown">
@@ -26,7 +24,7 @@
         <button>Save Workspace</button>
         <button>Save As</button>
         <button>Recent Workspaces</button>
-        <hr>
+        <hr />
         <button class="danger">Close Workspace</button>
       </div>
     </div>
@@ -43,137 +41,183 @@
 
   <div class="topbar-right">
     <button id="themeToggle" class="icon-btn">🌙</button>
+
     <div class="toggle">
       <button class="active">2D</button>
       <button>3D</button>
     </div>
-    <button class="icon-btn">⚙</button>
+
+    <div class="dropdown">
+      <button class="icon-btn">⚙</button>
+      <div class="menu right">
+        <button>Account</button>
+        <button>Preferences</button>
+        <button>Help</button>
+        <hr />
+        <button class="danger" id="logoutBtn">Logout</button>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- ================= APP LAYOUT ================= -->
-<div id="indigis-app">
+<!-- ================= MAIN LAYOUT ================= -->
+<div id="indigis-basic-app">
 
-  <!-- ========== LEFT PANEL (BASIC + DIGITIZING) ========== -->
-  <aside class="left-panel">
-    <div class="lp-header">TOOLS</div>
+<!-- ========== TOOL TAB (INTERMEDIATE) ========== -->
+<aside class="left-panel">
 
-    <div class="lp-section">
-      <button class="lp-section-title">Navigation</button>
-      <div class="lp-tools">
-        <button class="lp-tool">Pan</button>
-        <button class="lp-tool">Zoom In</button>
-        <button class="lp-tool">Zoom Out</button>
-        <button class="lp-tool">Full Extent</button>
-      </div>
+  <div class="lp-header">TOOLS</div>
+
+  <!-- BASIC STILL AVAILABLE -->
+  <div class="lp-section">
+    <button class="lp-section-title">Navigation</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Pan</button>
+      <button class="lp-tool">Zoom In</button>
+      <button class="lp-tool">Zoom Out</button>
+      <button class="lp-tool">Full Extent</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Digitizing</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Add Point</button>
+      <button class="lp-tool">Add Line</button>
+      <button class="lp-tool">Add Polygon</button>
+      <button class="lp-tool">Edit Feature</button>
+    </div>
+  </div>
+
+  <!-- ===== INTERMEDIATE DOMAINS ===== -->
+
+  <div class="lp-section">
+    <button class="lp-section-title">Vector Analysis</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Buffer</button>
+      <button class="lp-tool">Clip</button>
+      <button class="lp-tool">Intersect</button>
+      <button class="lp-tool">Union</button>
+      <button class="lp-tool">Dissolve</button>
+      <button class="lp-tool">Split</button>
+      <button class="lp-tool">Merge</button>
+      <button class="lp-tool">Spatial Join</button>
+      <button class="lp-tool">Near</button>
+      <button class="lp-tool">Point in Polygon</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Raster Analysis</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Raster Calculator</button>
+      <button class="lp-tool">Reclassify</button>
+      <button class="lp-tool">Raster Clip</button>
+      <button class="lp-tool">Zonal Statistics</button>
+      <button class="lp-tool">Slope / Aspect</button>
+      <button class="lp-tool">Hillshade</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Interpolation</button>
+    <div class="lp-tools">
+      <button class="lp-tool">IDW</button>
+      <button class="lp-tool">Kriging</button>
+      <button class="lp-tool">Spline</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Suitability & Overlay</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Weighted Overlay</button>
+      <button class="lp-tool">Multi-criteria Analysis</button>
+      <button class="lp-tool">Site Suitability</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Change Detection</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Raster Difference</button>
+      <button class="lp-tool">Vector Change (Before / After)</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Data Management</button>
+    <div class="lp-tools">
+      <button class="lp-tool">Load Vector</button>
+      <button class="lp-tool">Load Raster</button>
+      <button class="lp-tool">CRS Transformation</button>
+      <button class="lp-tool">Attribute Table</button>
+      <button class="lp-tool">Field Calculator</button>
+    </div>
+  </div>
+
+  <div class="lp-section">
+    <button class="lp-section-title">Selection & Query</button>
+    <div class="lp-tools sub-tools">
+      <button class="lp-tool">Select by Attribute</button>
+      <button class="lp-tool">Select by Location</button>
+      <button class="lp-tool">SQL Query</button>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ========== MAP AREA (UNCHANGED) ========== -->
+<main class="main">
+  <div class="map-placeholder">INTERMEDIATE GIS MAP AREA</div>
+
+  <div class="map-status-bar">
+    <span id="coordReadout">Lat: --, Lon: --</span>
+    <span id="zoomReadout">Zoom: --</span>
+    <span id="modeReadout">Mode: Intermediate</span>
+  </div>
+</main>
+
+<!-- ========== PROPERTIES TAB (UNCHANGED) ========== -->
+<aside class="right-panel">
+
+  <div class="rp-header">
+    <span>PROPERTIES</span>
+    <button class="rp-close">⟨</button>
+  </div>
+
+  <div class="rp-tabs">
+    <button class="rp-tab active" data-tab="layers">Layers</button>
+    <button class="rp-tab" data-tab="processing">Processing</button>
+    <button class="rp-tab" data-tab="info">Info</button>
+    <button class="rp-tab" data-tab="inspector">Inspector</button>
+    <button class="rp-tab" data-tab="ai">AI</button>
+  </div>
+
+  <div class="rp-content">
+    <div class="rp-view active" id="rp-layers">
+      <label class="layer-item"><input type="checkbox" checked> Base Map</label>
+      <label class="layer-item"><input type="checkbox"> Roads</label>
+      <label class="layer-item"><input type="checkbox"> Buildings</label>
     </div>
 
-    <div class="lp-section">
-      <button class="lp-section-title">Digitizing</button>
-      <div class="lp-tools">
-        <button class="lp-tool">Add Point</button>
-        <button class="lp-tool">Add Line</button>
-        <button class="lp-tool">Add Polygon</button>
-        <button class="lp-tool">Edit Feature</button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- ========== MAP AREA ========== -->
-  <main class="map-area">
-    <div id="map" class="map"></div>
-
-    <div class="map-status-bar">
-      <span id="coordReadout">Lat: -- , Lon: --</span>
-      <span id="zoomReadout">Zoom: --</span>
-      <span>Mode: Intermediate</span>
-    </div>
-  </main>
-
-  <!-- ========== RIGHT PANEL (PROPERTIES) ========== -->
-  <aside class="right-panel">
-
-    <div class="rp-header">
-      <span>PROPERTIES</span>
-      <button class="rp-close">⟨</button>
+    <div class="rp-view" id="rp-processing">
+      <p class="rp-muted">Processing logs will appear here.</p>
     </div>
 
-    <div class="rp-tabs">
-      <button class="rp-tab active" data-tab="layers">Layers</button>
-      <button class="rp-tab" data-tab="processing">Processing</button>
-      <button class="rp-tab" data-tab="info">Info</button>
-      <button class="rp-tab" data-tab="inspector">Inspector</button>
-      <button class="rp-tab" data-tab="ai">AI</button>
-      <button class="rp-tab" data-tab="settings">Settings</button>
+    <div class="rp-view" id="rp-info">
+      <p class="rp-muted">Feature information panel.</p>
     </div>
 
-    <div class="rp-content">
-
-      <!-- Layers -->
-      <div class="rp-view active" id="rp-layers">
-        <label><input type="checkbox" checked> Base Map</label>
-        <label><input type="checkbox"> Roads</label>
-        <label><input type="checkbox"> Buildings</label>
-      </div>
-
-      <!-- Processing -->
-      <div class="rp-view" id="rp-processing">
-        <div class="tool-group">
-          <h4>Vector Analysis</h4>
-          <button class="proc-tool">Buffer</button>
-          <button class="proc-tool">Clip</button>
-          <button class="proc-tool">Intersect</button>
-          <button class="proc-tool">Dissolve</button>
-        </div>
-
-        <div class="tool-group">
-          <h4>Raster Analysis</h4>
-          <button class="proc-tool">Raster Calculator</button>
-          <button class="proc-tool">Reclassify</button>
-          <button class="proc-tool">Zonal Statistics</button>
-        </div>
-
-        <div class="tool-group">
-          <h4>Interpolation</h4>
-          <button class="proc-tool">IDW</button>
-          <button class="proc-tool">Kriging</button>
-          <button class="proc-tool">Spline</button>
-        </div>
-
-        <div class="tool-group">
-          <h4>Suitability</h4>
-          <button class="proc-tool">Weighted Overlay</button>
-          <button class="proc-tool">Site Suitability</button>
-        </div>
-      </div>
-
-      <!-- Info -->
-      <div class="rp-view" id="rp-info">
-        Click on map to inspect features.
-      </div>
-
-      <!-- Inspector -->
-      <div class="rp-view" id="rp-inspector">
-        <div class="log info">Workspace loaded</div>
-        <div class="log warn">Missing projection metadata</div>
-      </div>
-
-      <!-- AI -->
-      <div class="rp-view" id="rp-ai">
-        <div class="ai-box">
-          <div class="ai-msg">Ask about tools or workflows</div>
-          <input type="text" placeholder="e.g. How to run buffer?">
-        </div>
-      </div>
-
-      <!-- Settings -->
-      <div class="rp-view" id="rp-settings">
-        <label><input type="checkbox"> Enable snapping</label>
-        <label><input type="checkbox"> Show grid</label>
-      </div>
-
+    <div class="rp-view" id="rp-inspector">
+      <p class="rp-muted">Errors, warnings, validations.</p>
     </div>
-  </aside>
+
+    <div class="rp-view" id="rp-ai">
+      <p class="rp-muted">Ask INDIGIS AI about this application.</p>
+    </div>
+  </div>
+</aside>
 
 </div>
 

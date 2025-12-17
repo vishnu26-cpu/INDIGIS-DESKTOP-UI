@@ -23,12 +23,14 @@ function switchMode(mode) {
 }
 
 // =============================
-// MAP INIT
+// MAP INIT (SAME AS BASIC)
 // =============================
 const map = new ol.Map({
   target: "map",
   layers: [
-    new ol.layer.Tile({ source: new ol.source.OSM() })
+    new ol.layer.Tile({
+      source: new ol.source.OSM()
+    })
   ],
   view: new ol.View({
     center: ol.proj.fromLonLat([78.96, 20.59]),
@@ -36,6 +38,9 @@ const map = new ol.Map({
   })
 });
 
+// =============================
+// MAP READOUTS
+// =============================
 map.on("pointermove", e => {
   const [lon, lat] = ol.proj.toLonLat(e.coordinate);
   document.getElementById("coordReadout").textContent =
@@ -48,14 +53,44 @@ map.getView().on("change:resolution", () => {
 });
 
 // =============================
-// RIGHT PANEL TABS
+// RIGHT PANEL TABS (PROPERTIES)
 // =============================
 document.querySelectorAll(".rp-tab").forEach(tab => {
   tab.onclick = () => {
-    document.querySelectorAll(".rp-tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".rp-view").forEach(v => v.classList.remove("active"));
+    document.querySelectorAll(".rp-tab")
+      .forEach(t => t.classList.remove("active"));
+
+    document.querySelectorAll(".rp-view")
+      .forEach(v => v.classList.remove("active"));
+
     tab.classList.add("active");
-    document.getElementById("rp-" + tab.dataset.tab).classList.add("active");
+    document
+      .getElementById("rp-" + tab.dataset.tab)
+      .classList.add("active");
+  };
+});
+
+// =============================
+// LEFT PANEL ACCORDION
+// =============================
+document.querySelectorAll(".lp-section-title").forEach(title => {
+  title.onclick = () => {
+    const tools = title.nextElementSibling;
+    tools.style.display =
+      tools.style.display === "none" ? "block" : "none";
+  };
+});
+
+// =============================
+// TOOL SELECTION HIGHLIGHT
+// =============================
+document.querySelectorAll(".lp-tool").forEach(tool => {
+  tool.onclick = () => {
+    document
+      .querySelectorAll(".lp-tool.active")
+      .forEach(t => t.classList.remove("active"));
+
+    tool.classList.add("active");
   };
 });
 
@@ -64,6 +99,18 @@ document.querySelectorAll(".rp-tab").forEach(tab => {
 // =============================
 document.querySelectorAll(".proc-tool").forEach(btn => {
   btn.onclick = () => {
-    alert(`Tool selected: ${btn.textContent}\n(Logic will be added later)`);
+    alert(
+      `Tool selected: ${btn.textContent}\n(Logic will be added later)`
+    );
   };
 });
+
+/* ======================================================
+   INTERMEDIATE EXTENSIONS (SAFE ADDITIONS ONLY)
+====================================================== */
+
+// Placeholder hook for future analysis tools
+window.runIntermediateTool = function (toolName) {
+  console.log("[INTERMEDIATE TOOL]", toolName);
+  alert(`Running ${toolName}\n(backend logic later)`);
+};

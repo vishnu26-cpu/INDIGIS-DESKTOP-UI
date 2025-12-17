@@ -157,3 +157,8 @@ body { font-family: "Segoe UI", sans-serif; background: #0e1116; color: #fff; }
   padding: 8px;
   border-radius: 6px;
 }
+/* Nested query tools */
+.sub-tools {
+  padding-left: 14px;
+  border-left: 2px solid #1f2630;
+}
