@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>INDIGIS – Advanced Mode</title>
+
+  <!-- BASE STYLES -->
+  <link rel="stylesheet" href="../basic/basic.css">
+  <link rel="stylesheet" href="../intermediate/intermediate.css">
+
+  <!-- ADVANCED EXTENSIONS -->
+  <link rel="stylesheet" href="./advanced.css">
+</head>
+
+<body class="theme-dark">
+
+<!-- ================= TOP BAR (UNCHANGED) ================= -->
+<header class="topbar">
+  <div class="topbar-left">
+    <img src="../assets/logo.png" class="logo" />
+    <span class="brand">INDIGIS</span>
+
+    <div class="dropdown">
+      <button class="btn">Workspace ▾</button>
+      <div class="menu">
+        <button>Save Workspace</button>
+        <button>Save As</button>
+        <button>Recent Workspaces</button>
+        <hr />
+        <button class="danger">Close Workspace</button>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn">User Mode ▾</button>
+      <div class="menu">
+        <button onclick="switchMode('basic')">Basic</button>
+        <button onclick="switchMode('intermediate')">Intermediate</button>
+        <button disabled>Advanced ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <button id="themeToggle" class="icon-btn">🌙</button>
+
+    <div class="toggle">
+      <button class="active">2D</button>
+      <button>3D</button>
+    </div>
+
+    <div class="dropdown">
+      <button class="icon-btn">⚙</button>
+      <div class="menu right">
+        <button>Account</button>
+        <button>Preferences</button>
+        <button>Help</button>
+        <hr />
+        <button class="danger">Logout</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MAIN LAYOUT ================= -->
+<div id="indigis-app">
+
+<!-- ========== TOOL TAB (ADVANCED) ========== -->
+<aside class="left-panel advanced-tools">
+
+  <div class="lp-header">ADVANCED TOOLS</div>
+
+  <button class="adv-domain" data-domain="terrain">🛰 3D & Terrain</button>
+  <button class="adv-domain" data-domain="raster">🌍 Raster & RS</button>
+  <button class="adv-domain" data-domain="lidar">📡 LiDAR</button>
+  <button class="adv-domain" data-domain="sar">📶 SAR</button>
+  <button class="adv-domain" data-domain="analysis">📊 Advanced Analysis</button>
+  <button class="adv-domain" data-domain="python">🐍 Python / Automation</button>
+  <button class="adv-domain" data-domain="ai">🤖 AI / ML</button>
+
+</aside>
+
+<!-- ========== MAP AREA (UNCHANGED) ========== -->
+<main class="map-area">
+  <div class="map-placeholder">ADVANCED GIS MAP AREA</div>
+
+  <div class="map-status-bar">
+    <span id="coordReadout">Lat: -- , Lon: --</span>
+    <span id="zoomReadout">Zoom: --</span>
+    <span id="modeReadout">Mode: Advanced</span>
+  </div>
+</main>
+
+<!-- ========== PROPERTIES TAB (UNCHANGED STRUCTURE) ========== -->
+<aside class="right-panel">
+
+  <div class="rp-header">
+    <span>PROPERTIES</span>
+  </div>
+
+  <div class="rp-tabs">
+    <button class="rp-tab active" data-tab="layers">Layers</button>
+    <button class="rp-tab" data-tab="processing">Processing</button>
+    <button class="rp-tab" data-tab="info">Info</button>
+    <button class="rp-tab" data-tab="inspector">Inspector</button>
+    <button class="rp-tab" data-tab="ai">AI</button>
+  </div>
+
+  <div class="rp-content">
+
+    <div class="rp-view active" id="rp-layers">
+      <label class="layer-item"><input type="checkbox" checked> Base Map</label>
+      <label class="layer-item"><input type="checkbox"> Roads</label>
+      <label class="layer-item"><input type="checkbox"> Buildings</label>
+    </div>
+
+    <!-- 🔥 TOOL SUB-PANEL (RIGHT SIDE) -->
+    <div class="rp-view" id="="rp-processing">
+      <div id="advancedToolPanel" class="adv-subpanel">
+        <p class="rp-muted">Select an advanced tool category.</p>
+      </div>
+    </div>
+
+    <div class="rp-view" id="rp-info">
+      <p class="rp-muted">Feature information panel.</p>
+    </div>
+
+    <div class="rp-view" id="rp-inspector">
+      <p class="rp-muted">Errors, warnings, logs.</p>
+    </div>
+
+    <div class="rp-view" id="rp-ai">
+      <p class="rp-muted">INDIGIS AI – Advanced assistance.</p>
+    </div>
+
+  </div>
+</aside>
+
+</div>
+
+<script src="./advanced.js"></script>
+</body>
+</html>

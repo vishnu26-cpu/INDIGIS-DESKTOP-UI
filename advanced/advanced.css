@@ -1,0 +1,54 @@
+/* =========================
+   ADVANCED TOOL PANEL
+========================= */
+
+.advanced-tools {
+  background: #0b0f14;
+}
+
+/* DOMAIN BUTTON */
+.adv-domain {
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: #cfd8ff;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.adv-domain:hover,
+.adv-domain.active {
+  background: rgba(41,121,255,0.15);
+  border-left: 3px solid #2979ff;
+}
+
+/* =========================
+   RIGHT SIDE SUB-TOOLS
+========================= */
+
+.adv-subpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adv-subpanel h4 {
+  color: #9fb6ff;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.adv-tool {
+  padding: 8px;
+  border-radius: 6px;
+  background: #1a1f26;
+  border: 1px solid #2a2f36;
+  color: #fff;
+  cursor: pointer;
+}
+
+.adv-tool:hover {
+  background: rgba(41,121,255,0.25);
+}
