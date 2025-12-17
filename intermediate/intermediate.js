@@ -9,9 +9,7 @@
 
 
 })();
-/* =============================
-   THEME
-============================= */
+
 const themeBtn = document.getElementById("themeToggle");
 let theme = localStorage.getItem("theme") || "dark";
 applyTheme(theme);
