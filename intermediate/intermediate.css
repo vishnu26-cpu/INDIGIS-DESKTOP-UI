@@ -271,3 +271,8 @@ body {
   padding-left: 14px;
   border-left: 2px solid #1f2630;
 }
+#indigis-basic-app {
+  display: flex;
+  height: calc(100vh - 52px);
+  overflow: hidden;
+}
