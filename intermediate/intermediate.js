@@ -53,6 +53,30 @@ rpTabs.forEach(tab => {
   });
 });
 
+
+document.querySelectorAll(".dropdown > button").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const dropdown = btn.parentElement;
+
+    // Close other open dropdowns
+    document.querySelectorAll(".dropdown.open").forEach((d) => {
+      if (d !== dropdown) d.classList.remove("open");
+    });
+
+    // Toggle current
+    dropdown.classList.toggle("open");
+  });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".dropdown.open")
+    .forEach((d) => d.classList.remove("open"));
+});
+
 /* =====================================================
    LEFT PANEL ACCORDION (UNCHANGED LOGIC, CLEANED)
 ===================================================== */
