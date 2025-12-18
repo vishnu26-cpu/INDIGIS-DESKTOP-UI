@@ -133,30 +133,30 @@ viewer3d.camera.changed.addEventListener(() => {
 /* =============================
    2D / 3D TOGGLE
 ============================= */
+const map2dEl = document.getElementById("map2d");
+const map3dEl = document.getElementById("map3d");
+const modeReadoutEl = document.getElementById("modeReadout");
+
 const btn2d = document.getElementById("btn2d");
 const btn3d = document.getElementById("btn3d");
 
-const map2d = document.getElementById("map2d");
-const map3d = document.getElementById("map3d");
-const modeReadout = document.getElementById("modeReadout");
-
 btn2d.addEventListener("click", () => {
-  map2d.classList.remove("hidden");
-  map3d.classList.add("hidden");
+  map2dEl.classList.remove("hidden");
+  map3dEl.classList.add("hidden");
 
   btn2d.classList.add("active");
   btn3d.classList.remove("active");
 
-  modeReadout.textContent = "Mode: 2D";
+  modeReadoutEl.textContent = "Mode: 2D";
 });
 
 btn3d.addEventListener("click", () => {
-  map3d.classList.remove("hidden");
-  map2d.classList.add("hidden");
+  map3dEl.classList.remove("hidden");
+  map2dEl.classList.add("hidden");
 
   btn3d.classList.add("active");
   btn2d.classList.remove("active");
 
-  modeReadout.textContent = "Mode: 3D";
+  modeReadoutEl.textContent = "Mode: 3D";
 });
 
