@@ -1,23 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   /* THEME */
-const themeBtn = document.getElementById("themeToggle");
-let theme = localStorage.getItem("theme") || "dark";
+  const themeBtn = document.getElementById("themeToggle");
+  let theme = localStorage.getItem("theme") || "dark";
 
-applyTheme(theme);
-
-themeBtn.addEventListener("click", () => {
-  theme = theme === "dark" ? "light" : "dark";
-  localStorage.setItem("theme", theme);
   applyTheme(theme);
-});
 
-function applyTheme(t) {
-  document.body.classList.remove("theme-dark", "theme-light");
-  document.body.classList.add("theme-" + t);
-  themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
-}
+  themeBtn.addEventListener("click", () => {
+    theme = theme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", theme);
+    applyTheme(theme);
+  });
 
+  function applyTheme(t) {
+    document.body.classList.remove("theme-dark", "theme-light");
+    document.body.classList.add("theme-" + t);
+    themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
+  }
 
   /* LOGOUT */
   document.getElementById("logoutBtn").onclick = () => {
@@ -32,34 +30,65 @@ function switchMode(mode) {
 }
 
 /* =============================
-   LEFT PANEL
+   DROPDOWN CLICK TOGGLE
 ============================= */
-document.querySelectorAll('.lp-section-title').forEach(title => {
-  title.addEventListener('click', () => {
-    const tools = title.nextElementSibling;
-    tools.style.display =
-      tools.style.display === 'none' ? 'block' : 'none';
+
+document.querySelectorAll(".dropdown > button").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const dropdown = btn.parentElement;
+
+    // Close other open dropdowns
+    document.querySelectorAll(".dropdown.open").forEach((d) => {
+      if (d !== dropdown) d.classList.remove("open");
+    });
+
+    // Toggle current
+    dropdown.classList.toggle("open");
   });
 });
 
-document.querySelectorAll('.lp-tool').forEach(tool => {
-  tool.addEventListener('click', () => {
-    document.querySelectorAll('.lp-tool.active')
-      .forEach(t => t.classList.remove('active'));
-    tool.classList.add('active');
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".dropdown.open")
+    .forEach((d) => d.classList.remove("open"));
+});
+
+/* =============================
+   LEFT PANEL
+============================= */
+document.querySelectorAll(".lp-section-title").forEach((title) => {
+  title.addEventListener("click", () => {
+    const tools = title.nextElementSibling;
+    tools.style.display = tools.style.display === "none" ? "block" : "none";
+  });
+});
+
+document.querySelectorAll(".lp-tool").forEach((tool) => {
+  tool.addEventListener("click", () => {
+    document
+      .querySelectorAll(".lp-tool.active")
+      .forEach((t) => t.classList.remove("active"));
+    tool.classList.add("active");
   });
 });
 
 /* =============================
    RIGHT PANEL TABS
 ============================= */
-document.querySelectorAll('.rp-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.rp-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.rp-view').forEach(v => v.classList.remove('active'));
+document.querySelectorAll(".rp-tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document
+      .querySelectorAll(".rp-tab")
+      .forEach((t) => t.classList.remove("active"));
+    document
+      .querySelectorAll(".rp-view")
+      .forEach((v) => v.classList.remove("active"));
 
-    tab.classList.add('active');
-    document.getElementById('rp-' + tab.dataset.tab).classList.add('active');
+    tab.classList.add("active");
+    document.getElementById("rp-" + tab.dataset.tab).classList.add("active");
   });
 });
 
@@ -69,59 +98,57 @@ document.querySelectorAll('.rp-tab').forEach(tab => {
 // =============================
 // RIGHT PANEL OPEN / CLOSE
 // =============================
-const rightPanel = document.getElementById('rightPanel');
-const closeBtn = document.getElementById('rpCloseBtn');
-const openBtn = document.getElementById('openRightPanelBtn');
+const rightPanel = document.getElementById("rightPanel");
+const closeBtn = document.getElementById("rpCloseBtn");
+const openBtn = document.getElementById("openRightPanelBtn");
 
 // Close (hide)
-closeBtn.addEventListener('click', () => {
-  rightPanel.classList.add('hidden');
+closeBtn.addEventListener("click", () => {
+  rightPanel.classList.add("hidden");
 });
 
 // Open (show)
-openBtn.addEventListener('click', () => {
-  rightPanel.classList.remove('hidden');
+openBtn.addEventListener("click", () => {
+  rightPanel.classList.remove("hidden");
 });
 
 /* =============================
    2D MAP (OpenLayers)
 ============================= */
 const map2d = new ol.Map({
-  target: 'map2d',
-  layers: [
-    new ol.layer.Tile({ source: new ol.source.OSM() })
-  ],
+  target: "map2d",
+  layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
   view: new ol.View({
     center: ol.proj.fromLonLat([78.9629, 20.5937]), // INDIA
-    zoom: 5,   
-  })
+    zoom: 5,
+  }),
 });
 
-map2d.addControl(new ol.control.ScaleLine({ units: 'metric' }));
+map2d.addControl(new ol.control.ScaleLine({ units: "metric" }));
 
 /* =============================
    3D MAP (Cesium)
 ============================= */
-const viewer3d = new Cesium.Viewer('map3d', {
+const viewer3d = new Cesium.Viewer("map3d", {
   animation: false,
   timeline: false,
   baseLayerPicker: false,
-  sceneModePicker: false
+  sceneModePicker: false,
 });
 
 /* =============================
    READOUTS
 ============================= */
-const coordReadout = document.getElementById('coordReadout');
-const zoomReadout = document.getElementById('zoomReadout');
-const modeReadout = document.getElementById('modeReadout');
+const coordReadout = document.getElementById("coordReadout");
+const zoomReadout = document.getElementById("zoomReadout");
+const modeReadout = document.getElementById("modeReadout");
 
-map2d.on('pointermove', evt => {
+map2d.on("pointermove", (evt) => {
   const [lon, lat] = ol.proj.toLonLat(evt.coordinate);
   coordReadout.textContent = `Lat: ${lat.toFixed(5)}, Lon: ${lon.toFixed(5)}`;
 });
 
-map2d.getView().on('change:resolution', () => {
+map2d.getView().on("change:resolution", () => {
   zoomReadout.textContent = `Zoom: ${map2d.getView().getZoom().toFixed(2)}`;
 });
 
@@ -133,23 +160,23 @@ viewer3d.camera.changed.addEventListener(() => {
 /* =============================
    2D / 3D TOGGLE
 ============================= */
-const btn2d = document.querySelector('.toggle button:nth-child(1)');
-const btn3d = document.querySelector('.toggle button:nth-child(2)');
+const btn2d = document.querySelector(".toggle button:nth-child(1)");
+const btn3d = document.querySelector(".toggle button:nth-child(2)");
 
 btn2d.onclick = () => {
-  map2d.getTargetElement().classList.remove('hidden');
-  document.getElementById('map3d').classList.add('hidden');
-  btn2d.classList.add('active');
-  btn3d.classList.remove('active');
-  modeReadout.textContent = 'Mode: 2D';
+  map2d.getTargetElement().classList.remove("hidden");
+  document.getElementById("map3d").classList.add("hidden");
+  btn2d.classList.add("active");
+  btn3d.classList.remove("active");
+  modeReadout.textContent = "Mode: 2D";
 };
 
 btn3d.onclick = () => {
-  document.getElementById('map3d').classList.remove('hidden');
-  map2d.getTargetElement().classList.add('hidden');
-  btn3d.classList.add('active');
-  btn2d.classList.remove('active');
-  modeReadout.textContent = 'Mode: 3D';
+  document.getElementById("map3d").classList.remove("hidden");
+  map2d.getTargetElement().classList.add("hidden");
+  btn3d.classList.add("active");
+  btn2d.classList.remove("active");
+  modeReadout.textContent = "Mode: 3D";
 
   setTimeout(() => viewer3d.resize(), 100);
 };

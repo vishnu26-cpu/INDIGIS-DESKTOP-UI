@@ -59,6 +59,11 @@ body { font-family: "Segoe UI", sans-serif; }
   position: relative;
 }
 
+.dropdown.open .menu {
+  display: block;
+}
+
+
 .menu {
   display: none;
   position: absolute;
@@ -101,9 +106,9 @@ body { font-family: "Segoe UI", sans-serif; }
   color: #ff6b6b;
 }
 
-.dropdown .menu {
+/* .dropdown .menu {
   display: block;
-}
+} */
 
 /* ===== TOGGLE ===== */
 .toggle {
