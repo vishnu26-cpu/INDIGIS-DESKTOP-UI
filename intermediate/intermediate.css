@@ -97,7 +97,7 @@ body {
   border-right: 1px solid #1f2630;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* ✅ IMPORTANT */
+  overflow: hidden; /* keep */
 }
 
 .lp-header {
@@ -124,10 +124,18 @@ body {
   cursor: pointer;
 }
 
+/* COLLAPSIBLE TOOL LIST (FIX) */
+.lp-tools {
+  max-height: 0;                /* 🔴 CLOSED BY DEFAULT */
+  overflow: hidden;
+  padding: 0;
+  transition: max-height 0.25s ease;
+}
 
 /* OPEN STATE */
 .lp-section.open .lp-tools {
-  max-height: 420px;           /* enough for tools */
+  max-height: 800px;            /* enough for any section */
+  padding: 6px 0 10px 0;
 }
 
 /* TOOL */
@@ -138,8 +146,7 @@ body {
   border: none;
   color: #e4e7ff;
   text-align: left;
-  cursor: pointer;              /* ✅ CLOSED BY DEFAULT */
-
+  cursor: pointer;
 }
 
 .lp-tool:hover {
