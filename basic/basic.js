@@ -1,23 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".dropdown > button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      const dropdown = btn.parentElement;
-
-      document.querySelectorAll(".dropdown.open").forEach((d) => {
-        if (d !== dropdown) d.classList.remove("open");
-      });
-
-      dropdown.classList.toggle("open");
-    });
-  });
-
-  document.addEventListener("click", () => {
-    document
-      .querySelectorAll(".dropdown.open")
-      .forEach((d) => d.classList.remove("open"));
-  });
   /* THEME */
   const themeBtn = document.getElementById("themeToggle");
   let theme = localStorage.getItem("theme") || "dark";
@@ -45,13 +26,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* MODE SWITCH */
 function switchMode(mode) {
-  location.href = `../${mode}/${mode}.html`; //test
+  location.href = `../${mode}/${mode}.html`;//test
   // location.href = mode + ".html";
 }
 
 /* =============================
    DROPDOWN CLICK TOGGLE
 ============================= */
+
+document.querySelectorAll(".dropdown > button").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const dropdown = btn.parentElement;
+
+    // Close other open dropdowns
+    document.querySelectorAll(".dropdown.open").forEach((d) => {
+      if (d !== dropdown) d.classList.remove("open");
+    });
+
+    // Toggle current
+    dropdown.classList.toggle("open");
+  });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".dropdown.open")
+    .forEach((d) => d.classList.remove("open"));
+});
 
 /* =============================
    LEFT PANEL
