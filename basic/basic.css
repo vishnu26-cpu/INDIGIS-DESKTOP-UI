@@ -370,3 +370,22 @@ body { font-family: "Segoe UI", sans-serif; }
   color: #cfd8ff;
   z-index: 10;
 }
+
+
+.menu {
+  display: none;
+}
+
+.dropdown.open .menu {
+  display: block;
+}
+
+/* completely disable hover */
+.dropdown:hover .menu {
+  display: none !important;
+}
+
+/* trigger styling */
+.dropdown-trigger {
+  user-select: none;
+}
