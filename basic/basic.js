@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* MODE SWITCH */
 function switchMode(mode) {
-  // location.href = `../${mode}/${mode}.html`;
-  location.href = mode + ".html";
+  location.href = `../${mode}/${mode}.html`;
+  // location.href = mode + ".html";
 }
 
 /* =============================
