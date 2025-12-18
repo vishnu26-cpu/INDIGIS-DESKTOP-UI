@@ -198,7 +198,27 @@
 
 <!-- ========== MAP AREA (UNCHANGED) ========== -->
 <main class="main">
-  <div class="map-placeholder">INTERMEDIATE GIS MAP AREA</div>
+
+  <!-- 2D MAP -->
+  <iframe
+    id="map2d"
+    src="https://www.openstreetmap.org/export/embed.html"
+    class="map-frame">
+  </iframe>
+
+  <!-- 3D MAP -->
+  <iframe
+    id="map3d"
+    src="https://sandcastle.cesium.com/"
+    class="map-frame hidden">
+  </iframe>
+
+  <div class="map-status-bar">
+    <span id="modeReadout">Mode: 2D</span>
+  </div>
+
+</main>
+
 
   <div class="map-status-bar">
     <span id="coordReadout">Lat: --, Lon: --</span>

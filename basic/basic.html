@@ -125,11 +125,32 @@
   </aside>
 
   <!-- ========== MAP AREA ========== -->
-  <main class="main">
-    <div class="map-placeholder">
-      BASIC GIS MAP AREA
-    </div>
-  </main>
+ <main class="main">
+
+  <!-- 2D MAP -->
+  <iframe
+    id="map2d"
+    src="https://www.openstreetmap.org/export/embed.html"
+    class="map-frame">
+  </iframe>
+
+  <!-- 3D MAP -->
+  <iframe
+    id="map3d"
+    src="https://sandcastle.cesium.com/"
+    class="map-frame hidden">
+  </iframe>
+
+  <div class="map-status-bar">
+    <span id="modeReadout">Mode: 2D</span>
+  </div>
+<div class="map-status-bar">
+    <span id="coordReadout">Lat: -- , Lon: --</span>
+    <span id="zoomReadout">Zoom: --</span>
+    <span id="modeReadout">Mode: Basic</span>
+  </div>
+</main>
+
 
   <!-- ========== RIGHT PANEL ========== -->
   <aside class="right-panel">

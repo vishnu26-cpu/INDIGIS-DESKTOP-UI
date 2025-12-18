@@ -3,15 +3,18 @@
 // =============================
 const themeBtn = document.getElementById("themeToggle");
 let theme = localStorage.getItem("theme") || "dark";
+
 applyTheme(theme);
 
-themeBtn.onclick = () => {
+themeBtn.addEventListener("click", () => {
   theme = theme === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", theme);
   applyTheme(theme);
-};
+});
 
 function applyTheme(t) {
-  document.body.className = "theme-" + t;
+  document.body.classList.remove("theme-dark", "theme-light");
+  document.body.classList.add("theme-" + t);
   themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
 }
 

@@ -10,21 +10,22 @@ const AppState = {
    THEME HANDLING
 ===================================================== */
 const themeBtn = document.getElementById("themeToggle");
+let theme = localStorage.getItem("theme") || "dark";
 
-function applyTheme(theme) {
-  document.body.classList.remove("theme-dark", "theme-light");
-  document.body.classList.add(`theme-${theme}`);
-  themeBtn.textContent = theme === "dark" ? "🌙" : "🌞";
+applyTheme(theme);
+
+themeBtn.addEventListener("click", () => {
+  theme = theme === "dark" ? "light" : "dark";
   localStorage.setItem("theme", theme);
-}
-
-themeBtn?.addEventListener("click", () => {
-  AppState.theme = AppState.theme === "dark" ? "light" : "dark";
-  applyTheme(AppState.theme);
+  applyTheme(theme);
 });
 
-// Init theme
-applyTheme(AppState.theme);
+function applyTheme(t) {
+  document.body.classList.remove("theme-dark", "theme-light");
+  document.body.classList.add("theme-" + t);
+  themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
+}
+
 
 /* =====================================================
    MODE SWITCH

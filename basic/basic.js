@@ -1,20 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* THEME */
-  const btn = document.getElementById("themeToggle");
-  let theme = localStorage.getItem("theme") || "dark";
+const themeBtn = document.getElementById("themeToggle");
+let theme = localStorage.getItem("theme") || "dark";
+
+applyTheme(theme);
+
+themeBtn.addEventListener("click", () => {
+  theme = theme === "dark" ? "light" : "dark";
+  localStorage.setItem("theme", theme);
   applyTheme(theme);
+});
 
-  btn.onclick = () => {
-    theme = theme === "dark" ? "light" : "dark";
-    applyTheme(theme);
-  };
+function applyTheme(t) {
+  document.body.classList.remove("theme-dark", "theme-light");
+  document.body.classList.add("theme-" + t);
+  themeBtn.textContent = t === "dark" ? "🌙" : "🌞";
+}
 
-  function applyTheme(t) {
-    document.body.className = "theme-" + t;
-    btn.textContent = t === "dark" ? "🌙" : "🌞";
-    localStorage.setItem("theme", t);
-  }
 
   /* LOGOUT */
   document.getElementById("logoutBtn").onclick = () => {
