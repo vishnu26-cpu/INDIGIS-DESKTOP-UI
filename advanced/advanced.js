@@ -29,44 +29,18 @@ function switchMode(mode) {
 // ADVANCED TOOL DEFINITIONS
 // =============================
 const advancedTools = {
-  terrain: [
-    "Viewshed",
-    "Line of Sight",
-    "Terrain Profile",
-    "Radar Dome"
-  ],
+  terrain: ["Viewshed", "Line of Sight", "Terrain Profile", "Radar Dome"],
   raster: [
     "NDVI / NDWI",
     "Supervised Classification",
     "Unsupervised Classification",
-    "Change Detection"
+    "Change Detection",
   ],
-  lidar: [
-    "LAS Import",
-    "DEM / DSM",
-    "Contours",
-    "Canopy Height Model"
-  ],
-  sar: [
-    "Speckle Filter",
-    "Terrain Correction",
-    "Flood Mapping"
-  ],
-  analysis: [
-    "Network Analysis",
-    "Hotspot Analysis",
-    "Spatial Statistics"
-  ],
-  python: [
-    "Run Python Script",
-    "Batch Processing",
-    "Model Builder"
-  ],
-  ai: [
-    "Object Detection",
-    "Smart Change Detection",
-    "Auto Feature Extraction"
-  ]
+  lidar: ["LAS Import", "DEM / DSM", "Contours", "Canopy Height Model"],
+  sar: ["Speckle Filter", "Terrain Correction", "Flood Mapping"],
+  analysis: ["Network Analysis", "Hotspot Analysis", "Spatial Statistics"],
+  python: ["Run Python Script", "Batch Processing", "Model Builder"],
+  ai: ["Object Detection", "Smart Change Detection", "Auto Feature Extraction"],
 };
 
 // =============================
@@ -75,15 +49,15 @@ const advancedTools = {
 const domainButtons = document.querySelectorAll(".adv-domain");
 const panel = document.getElementById("advancedToolPanel");
 
-domainButtons.forEach(btn => {
+domainButtons.forEach((btn) => {
   btn.onclick = () => {
-    domainButtons.forEach(b => b.classList.remove("active"));
+    domainButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
 
     const domain = btn.dataset.domain;
     panel.innerHTML = `<h4>${btn.textContent}</h4>`;
 
-    advancedTools[domain].forEach(tool => {
+    advancedTools[domain].forEach((tool) => {
       const t = document.createElement("button");
       t.className = "adv-tool";
       t.textContent = tool;
@@ -96,23 +70,50 @@ domainButtons.forEach(btn => {
   };
 });
 
+document.querySelectorAll(".dropdown > button").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const dropdown = btn.parentElement;
+
+    // Close other open dropdowns
+    document.querySelectorAll(".dropdown.open").forEach((d) => {
+      if (d !== dropdown) d.classList.remove("open");
+    });
+
+    // Toggle current
+    dropdown.classList.toggle("open");
+  });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".dropdown.open")
+    .forEach((d) => d.classList.remove("open"));
+});
+
 // =============================
 // RIGHT PANEL TABS
 // =============================
-document.querySelectorAll(".rp-tab").forEach(tab => {
+document.querySelectorAll(".rp-tab").forEach((tab) => {
   tab.onclick = () => {
-    document.querySelectorAll(".rp-tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".rp-view").forEach(v => v.classList.remove("active"));
+    document
+      .querySelectorAll(".rp-tab")
+      .forEach((t) => t.classList.remove("active"));
+    document
+      .querySelectorAll(".rp-view")
+      .forEach((v) => v.classList.remove("active"));
     tab.classList.add("active");
     document.getElementById("rp-" + tab.dataset.tab).classList.add("active");
   };
 });
-document.querySelectorAll(".lp-domain-title").forEach(btn => {
+document.querySelectorAll(".lp-domain-title").forEach((btn) => {
   btn.addEventListener("click", () => {
     const domain = btn.parentElement;
 
     // close others (optional but pro)
-    document.querySelectorAll(".lp-domain").forEach(d => {
+    document.querySelectorAll(".lp-domain").forEach((d) => {
       if (d !== domain) d.classList.remove("open");
     });
 
@@ -121,7 +122,7 @@ document.querySelectorAll(".lp-domain-title").forEach(btn => {
 });
 
 // tool click placeholder
-document.querySelectorAll(".lp-tool").forEach(tool => {
+document.querySelectorAll(".lp-tool").forEach((tool) => {
   tool.addEventListener("click", () => {
     console.log("[ADVANCED TOOL]", tool.textContent);
   });
