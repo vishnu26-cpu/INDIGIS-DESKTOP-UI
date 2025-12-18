@@ -126,3 +126,29 @@ document.querySelectorAll(".lp-tool").forEach(tool => {
     console.log("[ADVANCED TOOL]", tool.textContent);
   });
 });
+const btn2d = document.getElementById("btn2d");
+const btn3d = document.getElementById("btn3d");
+
+const map2d = document.getElementById("map2d");
+const map3d = document.getElementById("map3d");
+const modeReadout = document.getElementById("modeReadout");
+
+btn2d.addEventListener("click", () => {
+  map2d.classList.remove("hidden");
+  map3d.classList.add("hidden");
+
+  btn2d.classList.add("active");
+  btn3d.classList.remove("active");
+
+  modeReadout.textContent = "Mode: 2D";
+});
+
+btn3d.addEventListener("click", () => {
+  map3d.classList.remove("hidden");
+  map2d.classList.add("hidden");
+
+  btn3d.classList.add("active");
+  btn2d.classList.remove("active");
+
+  modeReadout.textContent = "Mode: 3D";
+});
