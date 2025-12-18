@@ -92,8 +92,8 @@ const map2d = new ol.Map({
     new ol.layer.Tile({ source: new ol.source.OSM() })
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([78.9629, 20.5937]),
-    zoom: 4
+    center: ol.proj.fromLonLat([78.9629, 20.5937]), // INDIA
+    zoom: 5,   
   })
 });
 
